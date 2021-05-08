@@ -15,3 +15,8 @@ Required:
 Start:
 
     docker compose up --build -d
+
+
+Architecture:
+
+![](architecture.png)

@@ -17,7 +17,6 @@ services:
     environment:
       - REDIS_URL=redis
     networks:
-      - frontend-network
       - backend-network
   proxy:
     build: proxy
@@ -28,6 +27,15 @@ services:
     networks:
       - frontend-network
       - backend-network
+  mobile:
+    build: mobile
+    ports:
+      - 19000:19000
+      - 19001:19001
+      - 19002:19002
+      - 19006:19006
+    networks:
+      - frontend-network
 networks:
   frontend-network:
   backend-network:
