@@ -2,8 +2,12 @@ version: "3.8"
 services:
   redis:
     image: redislabs/redismod
+    volumes:
+      - redis_data:/data
     expose:
       - 6379
+  networks:
+    - backend-network
   app:
     build: app
     ports:
@@ -12,9 +16,20 @@ services:
       - redis
     environment:
       - REDIS_URL=redis
+    networks:
+      - frontend-network
+      - backend-network
   proxy:
     build: proxy
     ports:
       - 8080:8080
     links:
       - app
+    networks:
+      - frontend-network
+      - backend-network
+networks:
+  frontend-network:
+  backend-network:
+volumes:
+  redis_data:
