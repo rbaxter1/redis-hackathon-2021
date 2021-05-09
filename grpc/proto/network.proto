@@ -1,0 +1,183 @@
+syntax = "proto3";
+
+package protobuf;
+
+// User
+message UserDetails {
+    string Email = 1;
+    string FirstName = 2;
+    string LastName = 3;
+    repeated string NetworkIDs = 4;
+    repeated string FriendIDs = 5;
+}
+
+message UserFriendship {
+    string User1 = 1;
+    string User2 = 2;
+}
+
+message NewUserRequest {
+    UserDetails User = 1;
+    string Pwd = 2; // already hashed?
+}
+
+message NewUserResponse {
+    bool success = 1;
+    string UserID = 2;
+}
+
+message GetUserDetailsRequest {
+    string UserID = 1;
+}
+
+message GetUserDetailsResponse {
+    UserDetails User = 1;
+}
+
+message SearchUserRequest {
+    string FirstName = 1;
+    string LastName = 2;
+}
+
+message SearchUserResponse {
+    repeated UserDetails Users = 1;
+}
+
+message CreateFriendshipRequest {
+    UserFriendship Friendship = 1;
+}
+
+message CreateFriendshipResponse {
+    bool Success = 1;
+}
+
+message FriendshipReplyRequest {
+    string User1 = 1;
+    string User2 = 2;
+    bool Accepted = 3;
+}
+
+message FriendshipReplyResponse {
+    bool Success = 1;
+}
+
+service User {
+    rpc CreateUser(NewUserRequest) returns (NewUserResponse);
+    rpc GetUser(GetUserDetailsRequest) returns (GetUserDetailsResponse);
+    rpc SearchForUser(SearchUserRequest) returns (SearchUserResponse);
+    rpc CreateFriendship(CreateFriendshipRequest) returns (CreateFriendshipResponse);
+    rpc ReplyToFriendship(FriendshipReplyRequest) returns (FriendshipReplyResponse);
+}
+
+
+// Item
+
+message ItemDetails {
+    string Title = 1;
+    string Description = 2;
+    enum PriceType {
+        AUCTION = 0;
+        OFFER = 1;
+    }
+    PriceType Type = 3; // switch to offer-counteroffer
+    double AskingPrice = 4;
+    repeated string NetworkIDs = 5; // Switch to single-network
+    // To-do: posting photos
+    // Questions: include auction end time? uction vs. buy-it-now/offer system?
+}
+
+message NewItemRequest {
+    ItemDetails Item = 1;
+}
+
+message NewItemResponse {
+    string ItemID = 1;
+}
+
+message ItemOffer {
+    string ItemID = 1;
+    double Offer = 2;
+}
+
+message SubmitItemRequest {
+    ItemDetails NewItem = 1;
+}
+
+message SubmitItemResponse {
+    string ItemID = 1;
+}
+
+message ItemOfferRequest {
+    ItemOffer Bid = 1;
+}
+
+message ItemOfferResponse {
+    bool Success = 1;
+}
+
+service Item {
+    rpc SubmitItem(SubmitItemRequest) returns (SubmitItemResponse);
+    rpc SubmitItemOffer(ItemOfferRequest) returns (ItemOfferResponse);
+}
+
+
+// Network
+
+message NetworkDetails {
+    string Name = 1;
+    string OwnerID = 2;
+    string Description = 3;
+    bool PublicPosting = 4; // This decides whether all users or just owner can post items for sale.
+    // Question: Should networks be public/private/invite-only?
+}
+
+message NewNetworkRequest {
+    NetworkDetails Network = 1;
+}
+
+message NewNetworkResponse {
+    string NetworkID = 1;
+}
+
+message NetworksForUserRequest {
+    string UserID = 1;
+}
+
+message NetworksForUserResponse {
+    repeated NetworkDetails Networks = 1;
+}
+
+message SearchForNetworksRequest {
+    string NetworkName = 1;
+}
+
+message SearchForNetworksResponse {
+    repeated NetworkDetails Networks = 1;
+}
+
+message InviteUserToNetworkRequest {
+    string NetworkID = 1;
+    string UserID = 2;
+}
+
+message InviteUserToNetworkResponse {
+    bool Success = 1;
+}
+
+message NetworkInviteReplyRequest {
+    string NetworkID = 1;
+    string UserID = 2;
+    bool Accepted = 3;
+}
+
+message NetworkInviteReplyResponse {
+    bool Success = 1;
+}
+
+service Network {
+    rpc CreateNetwork(NewNetworkRequest) returns (NewNetworkResponse);
+    rpc GetNetworksForUser(NetworksForUserRequest) returns (NetworksForUserResponse);
+    rpc SearchForNetworks(SearchForNetworksRequest) returns (SearchForNetworksResponse);
+    rpc InviteUserToNetwork(InviteUserToNetworkRequest) returns (InviteUserToNetworkResponse);
+    rpc ReplyToNetworkInvite(NetworkInviteReplyRequest) returns (NetworkInviteReplyResponse);
+}
