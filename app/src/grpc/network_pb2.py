@@ -19,35 +19,10 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rnetwork.proto\x12\x08protobuf\"h\n\x0bUserDetails\x12\r\n\x05\x45mail\x18\x01 \x01(\t\x12\x11\n\tFirstName\x18\x02 \x01(\t\x12\x10\n\x08LastName\x18\x03 \x01(\t\x12\x12\n\nNetworkIDs\x18\x04 \x03(\t\x12\x11\n\tFriendIDs\x18\x05 \x03(\t\".\n\x0eUserFriendship\x12\r\n\x05User1\x18\x01 \x01(\t\x12\r\n\x05User2\x18\x02 \x01(\t\"B\n\x0eNewUserRequest\x12#\n\x04User\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\x12\x0b\n\x03Pwd\x18\x02 \x01(\t\"2\n\x0fNewUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0e\n\x06UserID\x18\x02 \x01(\t\"\'\n\x15GetUserDetailsRequest\x12\x0e\n\x06UserID\x18\x01 \x01(\t\"=\n\x16GetUserDetailsResponse\x12#\n\x04User\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"8\n\x11SearchUserRequest\x12\x11\n\tFirstName\x18\x01 \x01(\t\x12\x10\n\x08LastName\x18\x02 \x01(\t\":\n\x12SearchUserResponse\x12$\n\x05Users\x18\x01 \x03(\x0b\x32\x15.protobuf.UserDetails\"G\n\x17\x43reateFriendshipRequest\x12,\n\nFriendship\x18\x01 \x01(\x0b\x32\x18.protobuf.UserFriendship\"+\n\x18\x43reateFriendshipResponse\x12\x0f\n\x07Success\x18\x01 \x01(\x08\"H\n\x16\x46riendshipReplyRequest\x12\r\n\x05User1\x18\x01 \x01(\t\x12\r\n\x05User2\x18\x02 \x01(\t\x12\x10\n\x08\x41\x63\x63\x65pted\x18\x03 \x01(\x08\"*\n\x17\x46riendshipReplyResponse\x12\x0f\n\x07Success\x18\x01 \x01(\x08\"\xae\x01\n\x0bItemDetails\x12\r\n\x05Title\x18\x01 \x01(\t\x12\x13\n\x0b\x44\x65scription\x18\x02 \x01(\t\x12-\n\x04Type\x18\x03 \x01(\x0e\x32\x1f.protobuf.ItemDetails.PriceType\x12\x13\n\x0b\x41skingPrice\x18\x04 \x01(\x01\x12\x12\n\nNetworkIDs\x18\x05 \x03(\t\"#\n\tPriceType\x12\x0b\n\x07\x41UCTION\x10\x00\x12\t\n\x05OFFER\x10\x01\"5\n\x0eNewItemRequest\x12#\n\x04Item\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\"!\n\x0fNewItemResponse\x12\x0e\n\x06ItemID\x18\x01 \x01(\t\"*\n\tItemOffer\x12\x0e\n\x06ItemID\x18\x01 \x01(\t\x12\r\n\x05Offer\x18\x02 \x01(\x01\";\n\x11SubmitItemRequest\x12&\n\x07NewItem\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\"$\n\x12SubmitItemResponse\x12\x0e\n\x06ItemID\x18\x01 \x01(\t\"4\n\x10ItemOfferRequest\x12 \n\x03\x42id\x18\x01 \x01(\x0b\x32\x13.protobuf.ItemOffer\"$\n\x11ItemOfferResponse\x12\x0f\n\x07Success\x18\x01 \x01(\x08\"[\n\x0eNetworkDetails\x12\x0c\n\x04Name\x18\x01 \x01(\t\x12\x0f\n\x07OwnerID\x18\x02 \x01(\t\x12\x13\n\x0b\x44\x65scription\x18\x03 \x01(\t\x12\x15\n\rPublicPosting\x18\x04 \x01(\x08\">\n\x11NewNetworkRequest\x12)\n\x07Network\x18\x01 \x01(\x0b\x32\x18.protobuf.NetworkDetails\"\'\n\x12NewNetworkResponse\x12\x11\n\tNetworkID\x18\x01 \x01(\t\"(\n\x16NetworksForUserRequest\x12\x0e\n\x06UserID\x18\x01 \x01(\t\"E\n\x17NetworksForUserResponse\x12*\n\x08Networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"/\n\x18SearchForNetworksRequest\x12\x13\n\x0bNetworkName\x18\x01 \x01(\t\"G\n\x19SearchForNetworksResponse\x12*\n\x08Networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"?\n\x1aInviteUserToNetworkRequest\x12\x11\n\tNetworkID\x18\x01 \x01(\t\x12\x0e\n\x06UserID\x18\x02 \x01(\t\".\n\x1bInviteUserToNetworkResponse\x12\x0f\n\x07Success\x18\x01 \x01(\x08\"P\n\x19NetworkInviteReplyRequest\x12\x11\n\tNetworkID\x18\x01 \x01(\t\x12\x0e\n\x06UserID\x18\x02 \x01(\t\x12\x10\n\x08\x41\x63\x63\x65pted\x18\x03 \x01(\x08\"-\n\x1aNetworkInviteReplyResponse\x12\x0f\n\x07Success\x18\x01 \x01(\x08\x32\x98\x03\n\x04User\x12\x41\n\nCreateUser\x12\x18.protobuf.NewUserRequest\x1a\x19.protobuf.NewUserResponse\x12L\n\x07GetUser\x12\x1f.protobuf.GetUserDetailsRequest\x1a .protobuf.GetUserDetailsResponse\x12J\n\rSearchForUser\x12\x1b.protobuf.SearchUserRequest\x1a\x1c.protobuf.SearchUserResponse\x12Y\n\x10\x43reateFriendship\x12!.protobuf.CreateFriendshipRequest\x1a\".protobuf.CreateFriendshipResponse\x12X\n\x11ReplyToFriendship\x12 .protobuf.FriendshipReplyRequest\x1a!.protobuf.FriendshipReplyResponse2\x9b\x01\n\x04Item\x12G\n\nSubmitItem\x12\x1b.protobuf.SubmitItemRequest\x1a\x1c.protobuf.SubmitItemResponse\x12J\n\x0fSubmitItemOffer\x12\x1a.protobuf.ItemOfferRequest\x1a\x1b.protobuf.ItemOfferResponse2\xd5\x03\n\x07Network\x12J\n\rCreateNetwork\x12\x1b.protobuf.NewNetworkRequest\x1a\x1c.protobuf.NewNetworkResponse\x12Y\n\x12GetNetworksForUser\x12 .protobuf.NetworksForUserRequest\x1a!.protobuf.NetworksForUserResponse\x12\\\n\x11SearchForNetworks\x12\".protobuf.SearchForNetworksRequest\x1a#.protobuf.SearchForNetworksResponse\x12\x62\n\x13InviteUserToNetwork\x12$.protobuf.InviteUserToNetworkRequest\x1a%.protobuf.InviteUserToNetworkResponse\x12\x61\n\x14ReplyToNetworkInvite\x12#.protobuf.NetworkInviteReplyRequest\x1a$.protobuf.NetworkInviteReplyResponseb\x06proto3'
+  serialized_pb=b'\n\rnetwork.proto\x12\x08protobuf\"l\n\x0bUserDetails\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x13\n\x0bnetwork_ids\x18\x04 \x03(\t\x12\x12\n\nfriend_ids\x18\x05 \x03(\t\".\n\x0eUserFriendship\x12\r\n\x05user1\x18\x01 \x01(\t\x12\r\n\x05user2\x18\x02 \x01(\t\"B\n\x0eNewUserRequest\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\x12\x0b\n\x03pwd\x18\x02 \x01(\t\"3\n\x0fNewUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07user_id\x18\x02 \x01(\t\"(\n\x15GetUserDetailsRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"=\n\x16GetUserDetailsResponse\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\":\n\x11SearchUserRequest\x12\x12\n\nfirst_name\x18\x01 \x01(\t\x12\x11\n\tlast_name\x18\x02 \x01(\t\":\n\x12SearchUserResponse\x12$\n\x05users\x18\x01 \x03(\x0b\x32\x15.protobuf.UserDetails\"G\n\x17\x43reateFriendshipRequest\x12,\n\nfriendship\x18\x01 \x01(\x0b\x32\x18.protobuf.UserFriendship\"+\n\x18\x43reateFriendshipResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"H\n\x16\x46riendshipReplyRequest\x12\r\n\x05user1\x18\x01 \x01(\t\x12\r\n\x05user2\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\"*\n\x17\x46riendshipReplyResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"[\n\x0bItemDetails\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x14\n\x0c\x61sking_price\x18\x03 \x01(\x01\x12\x12\n\nnetwork_id\x18\x04 \x01(\t\"5\n\x0eNewItemRequest\x12#\n\x04item\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\"\"\n\x0fNewItemResponse\x12\x0f\n\x07item_id\x18\x01 \x01(\t\"+\n\tItemOffer\x12\x0f\n\x07item_id\x18\x01 \x01(\t\x12\r\n\x05offer\x18\x02 \x01(\x01\"<\n\x11SubmitItemRequest\x12\'\n\x08new_item\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\"%\n\x12SubmitItemResponse\x12\x0f\n\x07item_id\x18\x01 \x01(\t\"4\n\x10ItemOfferRequest\x12 \n\x03\x62id\x18\x01 \x01(\x0b\x32\x13.protobuf.ItemOffer\"$\n\x11ItemOfferResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"]\n\x0eNetworkDetails\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08owner_id\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x16\n\x0epublic_posting\x18\x04 \x01(\x08\">\n\x11NewNetworkRequest\x12)\n\x07network\x18\x01 \x01(\x0b\x32\x18.protobuf.NetworkDetails\"(\n\x12NewNetworkResponse\x12\x12\n\nnetwork_id\x18\x01 \x01(\t\")\n\x16NetworksForUserRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"E\n\x17NetworksForUserResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"0\n\x18SearchForNetworksRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"G\n\x19SearchForNetworksResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"A\n\x1aInviteUserToNetworkRequest\x12\x12\n\nnetwork_id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\".\n\x1bInviteUserToNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"R\n\x19NetworkInviteReplyRequest\x12\x12\n\nnetwork_id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\"-\n\x1aNetworkInviteReplyResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\x98\x03\n\x04User\x12\x41\n\nCreateUser\x12\x18.protobuf.NewUserRequest\x1a\x19.protobuf.NewUserResponse\x12L\n\x07GetUser\x12\x1f.protobuf.GetUserDetailsRequest\x1a .protobuf.GetUserDetailsResponse\x12J\n\rSearchForUser\x12\x1b.protobuf.SearchUserRequest\x1a\x1c.protobuf.SearchUserResponse\x12Y\n\x10\x43reateFriendship\x12!.protobuf.CreateFriendshipRequest\x1a\".protobuf.CreateFriendshipResponse\x12X\n\x11ReplyToFriendship\x12 .protobuf.FriendshipReplyRequest\x1a!.protobuf.FriendshipReplyResponse2\x9b\x01\n\x04Item\x12G\n\nSubmitItem\x12\x1b.protobuf.SubmitItemRequest\x1a\x1c.protobuf.SubmitItemResponse\x12J\n\x0fSubmitItemOffer\x12\x1a.protobuf.ItemOfferRequest\x1a\x1b.protobuf.ItemOfferResponse2\xd5\x03\n\x07Network\x12J\n\rCreateNetwork\x12\x1b.protobuf.NewNetworkRequest\x1a\x1c.protobuf.NewNetworkResponse\x12Y\n\x12GetNetworksForUser\x12 .protobuf.NetworksForUserRequest\x1a!.protobuf.NetworksForUserResponse\x12\\\n\x11SearchForNetworks\x12\".protobuf.SearchForNetworksRequest\x1a#.protobuf.SearchForNetworksResponse\x12\x62\n\x13InviteUserToNetwork\x12$.protobuf.InviteUserToNetworkRequest\x1a%.protobuf.InviteUserToNetworkResponse\x12\x61\n\x14ReplyToNetworkInvite\x12#.protobuf.NetworkInviteReplyRequest\x1a$.protobuf.NetworkInviteReplyResponseb\x06proto3'
 )
 
 
-
-_ITEMDETAILS_PRICETYPE = _descriptor.EnumDescriptor(
-  name='PriceType',
-  full_name='protobuf.ItemDetails.PriceType',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='AUCTION', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='OFFER', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=899,
-  serialized_end=934,
-)
-_sym_db.RegisterEnumDescriptor(_ITEMDETAILS_PRICETYPE)
 
 
 _USERDETAILS = _descriptor.Descriptor(
@@ -59,35 +34,35 @@ _USERDETAILS = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Email', full_name='protobuf.UserDetails.Email', index=0,
+      name='email', full_name='protobuf.UserDetails.email', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='FirstName', full_name='protobuf.UserDetails.FirstName', index=1,
+      name='first_name', full_name='protobuf.UserDetails.first_name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='LastName', full_name='protobuf.UserDetails.LastName', index=2,
+      name='last_name', full_name='protobuf.UserDetails.last_name', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='NetworkIDs', full_name='protobuf.UserDetails.NetworkIDs', index=3,
+      name='network_ids', full_name='protobuf.UserDetails.network_ids', index=3,
       number=4, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='FriendIDs', full_name='protobuf.UserDetails.FriendIDs', index=4,
+      name='friend_ids', full_name='protobuf.UserDetails.friend_ids', index=4,
       number=5, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -106,7 +81,7 @@ _USERDETAILS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=27,
-  serialized_end=131,
+  serialized_end=135,
 )
 
 
@@ -119,14 +94,14 @@ _USERFRIENDSHIP = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='User1', full_name='protobuf.UserFriendship.User1', index=0,
+      name='user1', full_name='protobuf.UserFriendship.user1', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='User2', full_name='protobuf.UserFriendship.User2', index=1,
+      name='user2', full_name='protobuf.UserFriendship.user2', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -144,8 +119,8 @@ _USERFRIENDSHIP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=133,
-  serialized_end=179,
+  serialized_start=137,
+  serialized_end=183,
 )
 
 
@@ -158,14 +133,14 @@ _NEWUSERREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='User', full_name='protobuf.NewUserRequest.User', index=0,
+      name='user', full_name='protobuf.NewUserRequest.user', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='Pwd', full_name='protobuf.NewUserRequest.Pwd', index=1,
+      name='pwd', full_name='protobuf.NewUserRequest.pwd', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -183,8 +158,8 @@ _NEWUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=181,
-  serialized_end=247,
+  serialized_start=185,
+  serialized_end=251,
 )
 
 
@@ -204,7 +179,7 @@ _NEWUSERRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='UserID', full_name='protobuf.NewUserResponse.UserID', index=1,
+      name='user_id', full_name='protobuf.NewUserResponse.user_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -222,8 +197,8 @@ _NEWUSERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=249,
-  serialized_end=299,
+  serialized_start=253,
+  serialized_end=304,
 )
 
 
@@ -236,7 +211,7 @@ _GETUSERDETAILSREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='UserID', full_name='protobuf.GetUserDetailsRequest.UserID', index=0,
+      name='user_id', full_name='protobuf.GetUserDetailsRequest.user_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -254,8 +229,8 @@ _GETUSERDETAILSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=301,
-  serialized_end=340,
+  serialized_start=306,
+  serialized_end=346,
 )
 
 
@@ -268,7 +243,7 @@ _GETUSERDETAILSRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='User', full_name='protobuf.GetUserDetailsResponse.User', index=0,
+      name='user', full_name='protobuf.GetUserDetailsResponse.user', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -286,8 +261,8 @@ _GETUSERDETAILSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=342,
-  serialized_end=403,
+  serialized_start=348,
+  serialized_end=409,
 )
 
 
@@ -300,14 +275,14 @@ _SEARCHUSERREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='FirstName', full_name='protobuf.SearchUserRequest.FirstName', index=0,
+      name='first_name', full_name='protobuf.SearchUserRequest.first_name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='LastName', full_name='protobuf.SearchUserRequest.LastName', index=1,
+      name='last_name', full_name='protobuf.SearchUserRequest.last_name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -325,8 +300,8 @@ _SEARCHUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=405,
-  serialized_end=461,
+  serialized_start=411,
+  serialized_end=469,
 )
 
 
@@ -339,7 +314,7 @@ _SEARCHUSERRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Users', full_name='protobuf.SearchUserResponse.Users', index=0,
+      name='users', full_name='protobuf.SearchUserResponse.users', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -357,8 +332,8 @@ _SEARCHUSERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=463,
-  serialized_end=521,
+  serialized_start=471,
+  serialized_end=529,
 )
 
 
@@ -371,7 +346,7 @@ _CREATEFRIENDSHIPREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Friendship', full_name='protobuf.CreateFriendshipRequest.Friendship', index=0,
+      name='friendship', full_name='protobuf.CreateFriendshipRequest.friendship', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -389,8 +364,8 @@ _CREATEFRIENDSHIPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=523,
-  serialized_end=594,
+  serialized_start=531,
+  serialized_end=602,
 )
 
 
@@ -403,7 +378,7 @@ _CREATEFRIENDSHIPRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Success', full_name='protobuf.CreateFriendshipResponse.Success', index=0,
+      name='success', full_name='protobuf.CreateFriendshipResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -421,8 +396,8 @@ _CREATEFRIENDSHIPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=596,
-  serialized_end=639,
+  serialized_start=604,
+  serialized_end=647,
 )
 
 
@@ -435,21 +410,21 @@ _FRIENDSHIPREPLYREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='User1', full_name='protobuf.FriendshipReplyRequest.User1', index=0,
+      name='user1', full_name='protobuf.FriendshipReplyRequest.user1', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='User2', full_name='protobuf.FriendshipReplyRequest.User2', index=1,
+      name='user2', full_name='protobuf.FriendshipReplyRequest.user2', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='Accepted', full_name='protobuf.FriendshipReplyRequest.Accepted', index=2,
+      name='accepted', full_name='protobuf.FriendshipReplyRequest.accepted', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -467,8 +442,8 @@ _FRIENDSHIPREPLYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=641,
-  serialized_end=713,
+  serialized_start=649,
+  serialized_end=721,
 )
 
 
@@ -481,7 +456,7 @@ _FRIENDSHIPREPLYRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Success', full_name='protobuf.FriendshipReplyResponse.Success', index=0,
+      name='success', full_name='protobuf.FriendshipReplyResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -499,8 +474,8 @@ _FRIENDSHIPREPLYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=715,
-  serialized_end=757,
+  serialized_start=723,
+  serialized_end=765,
 )
 
 
@@ -513,37 +488,30 @@ _ITEMDETAILS = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Title', full_name='protobuf.ItemDetails.Title', index=0,
+      name='title', full_name='protobuf.ItemDetails.title', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='Description', full_name='protobuf.ItemDetails.Description', index=1,
+      name='description', full_name='protobuf.ItemDetails.description', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='Type', full_name='protobuf.ItemDetails.Type', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='AskingPrice', full_name='protobuf.ItemDetails.AskingPrice', index=3,
-      number=4, type=1, cpp_type=5, label=1,
+      name='asking_price', full_name='protobuf.ItemDetails.asking_price', index=2,
+      number=3, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='NetworkIDs', full_name='protobuf.ItemDetails.NetworkIDs', index=4,
-      number=5, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      name='network_id', full_name='protobuf.ItemDetails.network_id', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -552,7 +520,6 @@ _ITEMDETAILS = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _ITEMDETAILS_PRICETYPE,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -560,8 +527,8 @@ _ITEMDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=760,
-  serialized_end=934,
+  serialized_start=767,
+  serialized_end=858,
 )
 
 
@@ -574,7 +541,7 @@ _NEWITEMREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Item', full_name='protobuf.NewItemRequest.Item', index=0,
+      name='item', full_name='protobuf.NewItemRequest.item', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -592,8 +559,8 @@ _NEWITEMREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=936,
-  serialized_end=989,
+  serialized_start=860,
+  serialized_end=913,
 )
 
 
@@ -606,7 +573,7 @@ _NEWITEMRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ItemID', full_name='protobuf.NewItemResponse.ItemID', index=0,
+      name='item_id', full_name='protobuf.NewItemResponse.item_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -624,8 +591,8 @@ _NEWITEMRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=991,
-  serialized_end=1024,
+  serialized_start=915,
+  serialized_end=949,
 )
 
 
@@ -638,14 +605,14 @@ _ITEMOFFER = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ItemID', full_name='protobuf.ItemOffer.ItemID', index=0,
+      name='item_id', full_name='protobuf.ItemOffer.item_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='Offer', full_name='protobuf.ItemOffer.Offer', index=1,
+      name='offer', full_name='protobuf.ItemOffer.offer', index=1,
       number=2, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -663,8 +630,8 @@ _ITEMOFFER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1026,
-  serialized_end=1068,
+  serialized_start=951,
+  serialized_end=994,
 )
 
 
@@ -677,7 +644,7 @@ _SUBMITITEMREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='NewItem', full_name='protobuf.SubmitItemRequest.NewItem', index=0,
+      name='new_item', full_name='protobuf.SubmitItemRequest.new_item', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -695,8 +662,8 @@ _SUBMITITEMREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1070,
-  serialized_end=1129,
+  serialized_start=996,
+  serialized_end=1056,
 )
 
 
@@ -709,7 +676,7 @@ _SUBMITITEMRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ItemID', full_name='protobuf.SubmitItemResponse.ItemID', index=0,
+      name='item_id', full_name='protobuf.SubmitItemResponse.item_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -727,8 +694,8 @@ _SUBMITITEMRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1131,
-  serialized_end=1167,
+  serialized_start=1058,
+  serialized_end=1095,
 )
 
 
@@ -741,7 +708,7 @@ _ITEMOFFERREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Bid', full_name='protobuf.ItemOfferRequest.Bid', index=0,
+      name='bid', full_name='protobuf.ItemOfferRequest.bid', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -759,8 +726,8 @@ _ITEMOFFERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1169,
-  serialized_end=1221,
+  serialized_start=1097,
+  serialized_end=1149,
 )
 
 
@@ -773,7 +740,7 @@ _ITEMOFFERRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Success', full_name='protobuf.ItemOfferResponse.Success', index=0,
+      name='success', full_name='protobuf.ItemOfferResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -791,8 +758,8 @@ _ITEMOFFERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1223,
-  serialized_end=1259,
+  serialized_start=1151,
+  serialized_end=1187,
 )
 
 
@@ -805,28 +772,28 @@ _NETWORKDETAILS = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Name', full_name='protobuf.NetworkDetails.Name', index=0,
+      name='name', full_name='protobuf.NetworkDetails.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='OwnerID', full_name='protobuf.NetworkDetails.OwnerID', index=1,
+      name='owner_id', full_name='protobuf.NetworkDetails.owner_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='Description', full_name='protobuf.NetworkDetails.Description', index=2,
+      name='description', full_name='protobuf.NetworkDetails.description', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='PublicPosting', full_name='protobuf.NetworkDetails.PublicPosting', index=3,
+      name='public_posting', full_name='protobuf.NetworkDetails.public_posting', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -844,8 +811,8 @@ _NETWORKDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1261,
-  serialized_end=1352,
+  serialized_start=1189,
+  serialized_end=1282,
 )
 
 
@@ -858,7 +825,7 @@ _NEWNETWORKREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Network', full_name='protobuf.NewNetworkRequest.Network', index=0,
+      name='network', full_name='protobuf.NewNetworkRequest.network', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -876,8 +843,8 @@ _NEWNETWORKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1354,
-  serialized_end=1416,
+  serialized_start=1284,
+  serialized_end=1346,
 )
 
 
@@ -890,7 +857,7 @@ _NEWNETWORKRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='NetworkID', full_name='protobuf.NewNetworkResponse.NetworkID', index=0,
+      name='network_id', full_name='protobuf.NewNetworkResponse.network_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -908,8 +875,8 @@ _NEWNETWORKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1418,
-  serialized_end=1457,
+  serialized_start=1348,
+  serialized_end=1388,
 )
 
 
@@ -922,7 +889,7 @@ _NETWORKSFORUSERREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='UserID', full_name='protobuf.NetworksForUserRequest.UserID', index=0,
+      name='user_id', full_name='protobuf.NetworksForUserRequest.user_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -940,8 +907,8 @@ _NETWORKSFORUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1459,
-  serialized_end=1499,
+  serialized_start=1390,
+  serialized_end=1431,
 )
 
 
@@ -954,7 +921,7 @@ _NETWORKSFORUSERRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Networks', full_name='protobuf.NetworksForUserResponse.Networks', index=0,
+      name='networks', full_name='protobuf.NetworksForUserResponse.networks', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -972,8 +939,8 @@ _NETWORKSFORUSERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1501,
-  serialized_end=1570,
+  serialized_start=1433,
+  serialized_end=1502,
 )
 
 
@@ -986,7 +953,7 @@ _SEARCHFORNETWORKSREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='NetworkName', full_name='protobuf.SearchForNetworksRequest.NetworkName', index=0,
+      name='network_name', full_name='protobuf.SearchForNetworksRequest.network_name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1004,8 +971,8 @@ _SEARCHFORNETWORKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1572,
-  serialized_end=1619,
+  serialized_start=1504,
+  serialized_end=1552,
 )
 
 
@@ -1018,7 +985,7 @@ _SEARCHFORNETWORKSRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Networks', full_name='protobuf.SearchForNetworksResponse.Networks', index=0,
+      name='networks', full_name='protobuf.SearchForNetworksResponse.networks', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1036,8 +1003,8 @@ _SEARCHFORNETWORKSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1621,
-  serialized_end=1692,
+  serialized_start=1554,
+  serialized_end=1625,
 )
 
 
@@ -1050,14 +1017,14 @@ _INVITEUSERTONETWORKREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='NetworkID', full_name='protobuf.InviteUserToNetworkRequest.NetworkID', index=0,
+      name='network_id', full_name='protobuf.InviteUserToNetworkRequest.network_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='UserID', full_name='protobuf.InviteUserToNetworkRequest.UserID', index=1,
+      name='user_id', full_name='protobuf.InviteUserToNetworkRequest.user_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1075,8 +1042,8 @@ _INVITEUSERTONETWORKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1694,
-  serialized_end=1757,
+  serialized_start=1627,
+  serialized_end=1692,
 )
 
 
@@ -1089,7 +1056,7 @@ _INVITEUSERTONETWORKRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Success', full_name='protobuf.InviteUserToNetworkResponse.Success', index=0,
+      name='success', full_name='protobuf.InviteUserToNetworkResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -1107,8 +1074,8 @@ _INVITEUSERTONETWORKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1759,
-  serialized_end=1805,
+  serialized_start=1694,
+  serialized_end=1740,
 )
 
 
@@ -1121,21 +1088,21 @@ _NETWORKINVITEREPLYREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='NetworkID', full_name='protobuf.NetworkInviteReplyRequest.NetworkID', index=0,
+      name='network_id', full_name='protobuf.NetworkInviteReplyRequest.network_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='UserID', full_name='protobuf.NetworkInviteReplyRequest.UserID', index=1,
+      name='user_id', full_name='protobuf.NetworkInviteReplyRequest.user_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='Accepted', full_name='protobuf.NetworkInviteReplyRequest.Accepted', index=2,
+      name='accepted', full_name='protobuf.NetworkInviteReplyRequest.accepted', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -1153,8 +1120,8 @@ _NETWORKINVITEREPLYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1807,
-  serialized_end=1887,
+  serialized_start=1742,
+  serialized_end=1824,
 )
 
 
@@ -1167,7 +1134,7 @@ _NETWORKINVITEREPLYRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Success', full_name='protobuf.NetworkInviteReplyResponse.Success', index=0,
+      name='success', full_name='protobuf.NetworkInviteReplyResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -1185,22 +1152,20 @@ _NETWORKINVITEREPLYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1889,
-  serialized_end=1934,
+  serialized_start=1826,
+  serialized_end=1871,
 )
 
-_NEWUSERREQUEST.fields_by_name['User'].message_type = _USERDETAILS
-_GETUSERDETAILSRESPONSE.fields_by_name['User'].message_type = _USERDETAILS
-_SEARCHUSERRESPONSE.fields_by_name['Users'].message_type = _USERDETAILS
-_CREATEFRIENDSHIPREQUEST.fields_by_name['Friendship'].message_type = _USERFRIENDSHIP
-_ITEMDETAILS.fields_by_name['Type'].enum_type = _ITEMDETAILS_PRICETYPE
-_ITEMDETAILS_PRICETYPE.containing_type = _ITEMDETAILS
-_NEWITEMREQUEST.fields_by_name['Item'].message_type = _ITEMDETAILS
-_SUBMITITEMREQUEST.fields_by_name['NewItem'].message_type = _ITEMDETAILS
-_ITEMOFFERREQUEST.fields_by_name['Bid'].message_type = _ITEMOFFER
-_NEWNETWORKREQUEST.fields_by_name['Network'].message_type = _NETWORKDETAILS
-_NETWORKSFORUSERRESPONSE.fields_by_name['Networks'].message_type = _NETWORKDETAILS
-_SEARCHFORNETWORKSRESPONSE.fields_by_name['Networks'].message_type = _NETWORKDETAILS
+_NEWUSERREQUEST.fields_by_name['user'].message_type = _USERDETAILS
+_GETUSERDETAILSRESPONSE.fields_by_name['user'].message_type = _USERDETAILS
+_SEARCHUSERRESPONSE.fields_by_name['users'].message_type = _USERDETAILS
+_CREATEFRIENDSHIPREQUEST.fields_by_name['friendship'].message_type = _USERFRIENDSHIP
+_NEWITEMREQUEST.fields_by_name['item'].message_type = _ITEMDETAILS
+_SUBMITITEMREQUEST.fields_by_name['new_item'].message_type = _ITEMDETAILS
+_ITEMOFFERREQUEST.fields_by_name['bid'].message_type = _ITEMOFFER
+_NEWNETWORKREQUEST.fields_by_name['network'].message_type = _NETWORKDETAILS
+_NETWORKSFORUSERRESPONSE.fields_by_name['networks'].message_type = _NETWORKDETAILS
+_SEARCHFORNETWORKSRESPONSE.fields_by_name['networks'].message_type = _NETWORKDETAILS
 DESCRIPTOR.message_types_by_name['UserDetails'] = _USERDETAILS
 DESCRIPTOR.message_types_by_name['UserFriendship'] = _USERFRIENDSHIP
 DESCRIPTOR.message_types_by_name['NewUserRequest'] = _NEWUSERREQUEST
@@ -1460,8 +1425,8 @@ _USER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1937,
-  serialized_end=2345,
+  serialized_start=1874,
+  serialized_end=2282,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateUser',
@@ -1526,8 +1491,8 @@ _ITEM = _descriptor.ServiceDescriptor(
   index=1,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=2348,
-  serialized_end=2503,
+  serialized_start=2285,
+  serialized_end=2440,
   methods=[
   _descriptor.MethodDescriptor(
     name='SubmitItem',
@@ -1562,8 +1527,8 @@ _NETWORK = _descriptor.ServiceDescriptor(
   index=2,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=2506,
-  serialized_end=2975,
+  serialized_start=2443,
+  serialized_end=2912,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateNetwork',

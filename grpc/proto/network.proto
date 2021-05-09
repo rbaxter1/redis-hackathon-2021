@@ -4,180 +4,173 @@ package protobuf;
 
 // User
 message UserDetails {
-    string Email = 1;
-    string FirstName = 2;
-    string LastName = 3;
-    repeated string NetworkIDs = 4;
-    repeated string FriendIDs = 5;
+  string email = 1;
+  string first_name = 2;
+  string last_name = 3;
+  repeated string network_ids = 4;
+  repeated string friend_ids = 5;
 }
 
 message UserFriendship {
-    string User1 = 1;
-    string User2 = 2;
+  string user1 = 1;
+  string user2 = 2;
 }
 
 message NewUserRequest {
-    UserDetails User = 1;
-    string Pwd = 2; // already hashed?
+  UserDetails user = 1;
+  string pwd = 2;
 }
 
 message NewUserResponse {
-    bool success = 1;
-    string UserID = 2;
+  bool success = 1;
+  string user_id = 2;
 }
 
 message GetUserDetailsRequest {
-    string UserID = 1;
+  string user_id = 1;
 }
 
 message GetUserDetailsResponse {
-    UserDetails User = 1;
+  UserDetails user = 1;
 }
 
 message SearchUserRequest {
-    string FirstName = 1;
-    string LastName = 2;
+  string first_name = 1;
+  string last_name = 2;
 }
 
 message SearchUserResponse {
-    repeated UserDetails Users = 1;
+  repeated UserDetails users = 1;
 }
 
 message CreateFriendshipRequest {
-    UserFriendship Friendship = 1;
+  UserFriendship friendship = 1;
 }
 
 message CreateFriendshipResponse {
-    bool Success = 1;
+  bool success = 1;
 }
 
 message FriendshipReplyRequest {
-    string User1 = 1;
-    string User2 = 2;
-    bool Accepted = 3;
+  string user1 = 1;
+  string user2 = 2;
+  bool accepted = 3;
 }
 
 message FriendshipReplyResponse {
-    bool Success = 1;
+  bool success = 1;
 }
 
 service User {
-    rpc CreateUser(NewUserRequest) returns (NewUserResponse);
-    rpc GetUser(GetUserDetailsRequest) returns (GetUserDetailsResponse);
-    rpc SearchForUser(SearchUserRequest) returns (SearchUserResponse);
-    rpc CreateFriendship(CreateFriendshipRequest) returns (CreateFriendshipResponse);
-    rpc ReplyToFriendship(FriendshipReplyRequest) returns (FriendshipReplyResponse);
+  rpc CreateUser(NewUserRequest) returns (NewUserResponse);
+  rpc GetUser(GetUserDetailsRequest) returns (GetUserDetailsResponse);
+  rpc SearchForUser(SearchUserRequest) returns (SearchUserResponse);
+  rpc CreateFriendship(CreateFriendshipRequest) returns (CreateFriendshipResponse);
+  rpc ReplyToFriendship(FriendshipReplyRequest) returns (FriendshipReplyResponse);
 }
 
 
 // Item
 
 message ItemDetails {
-    string Title = 1;
-    string Description = 2;
-    enum PriceType {
-        AUCTION = 0;
-        OFFER = 1;
-    }
-    PriceType Type = 3; // switch to offer-counteroffer
-    double AskingPrice = 4;
-    repeated string NetworkIDs = 5; // Switch to single-network
-    // To-do: posting photos
-    // Questions: include auction end time? uction vs. buy-it-now/offer system?
+  string title = 1;
+  string description = 2;
+  double asking_price = 3;
+  string network_id = 4;
+  // To-do: posting photos
 }
 
 message NewItemRequest {
-    ItemDetails Item = 1;
+  ItemDetails item = 1;
 }
 
 message NewItemResponse {
-    string ItemID = 1;
+  string item_id = 1;
 }
 
 message ItemOffer {
-    string ItemID = 1;
-    double Offer = 2;
+  string item_id = 1;
+  double offer = 2;
 }
 
 message SubmitItemRequest {
-    ItemDetails NewItem = 1;
+  ItemDetails new_item = 1;
 }
 
 message SubmitItemResponse {
-    string ItemID = 1;
+  string item_id = 1;
 }
 
 message ItemOfferRequest {
-    ItemOffer Bid = 1;
+  ItemOffer bid = 1;
 }
 
 message ItemOfferResponse {
-    bool Success = 1;
+  bool success = 1;
 }
 
 service Item {
-    rpc SubmitItem(SubmitItemRequest) returns (SubmitItemResponse);
-    rpc SubmitItemOffer(ItemOfferRequest) returns (ItemOfferResponse);
+  rpc SubmitItem(SubmitItemRequest) returns (SubmitItemResponse);
+  rpc SubmitItemOffer(ItemOfferRequest) returns (ItemOfferResponse);
 }
 
 
 // Network
 
 message NetworkDetails {
-    string Name = 1;
-    string OwnerID = 2;
-    string Description = 3;
-    bool PublicPosting = 4; // This decides whether all users or just owner can post items for sale.
-    // Question: Should networks be public/private/invite-only?
+  string name = 1;
+  string owner_id = 2;
+  string description = 3;
+  bool public_posting = 4;
 }
 
 message NewNetworkRequest {
-    NetworkDetails Network = 1;
+  NetworkDetails network = 1;
 }
 
 message NewNetworkResponse {
-    string NetworkID = 1;
+  string network_id = 1;
 }
 
 message NetworksForUserRequest {
-    string UserID = 1;
+  string user_id = 1;
 }
 
 message NetworksForUserResponse {
-    repeated NetworkDetails Networks = 1;
+  repeated NetworkDetails networks = 1;
 }
 
 message SearchForNetworksRequest {
-    string NetworkName = 1;
+  string network_name = 1;
 }
 
 message SearchForNetworksResponse {
-    repeated NetworkDetails Networks = 1;
+  repeated NetworkDetails networks = 1;
 }
 
 message InviteUserToNetworkRequest {
-    string NetworkID = 1;
-    string UserID = 2;
+  string network_id = 1;
+  string user_id = 2;
 }
 
 message InviteUserToNetworkResponse {
-    bool Success = 1;
+  bool success = 1;
 }
 
 message NetworkInviteReplyRequest {
-    string NetworkID = 1;
-    string UserID = 2;
-    bool Accepted = 3;
+  string network_id = 1;
+  string user_id = 2;
+  bool accepted = 3;
 }
 
 message NetworkInviteReplyResponse {
-    bool Success = 1;
+  bool success = 1;
 }
 
 service Network {
-    rpc CreateNetwork(NewNetworkRequest) returns (NewNetworkResponse);
-    rpc GetNetworksForUser(NetworksForUserRequest) returns (NetworksForUserResponse);
-    rpc SearchForNetworks(SearchForNetworksRequest) returns (SearchForNetworksResponse);
-    rpc InviteUserToNetwork(InviteUserToNetworkRequest) returns (InviteUserToNetworkResponse);
-    rpc ReplyToNetworkInvite(NetworkInviteReplyRequest) returns (NetworkInviteReplyResponse);
+  rpc CreateNetwork(NewNetworkRequest) returns (NewNetworkResponse);
+  rpc GetNetworksForUser(NetworksForUserRequest) returns (NetworksForUserResponse);
+  rpc SearchForNetworks(SearchForNetworksRequest) returns (SearchForNetworksResponse);
+  rpc InviteUserToNetwork(InviteUserToNetworkRequest) returns (InviteUserToNetworkResponse);
+  rpc ReplyToNetworkInvite(NetworkInviteReplyRequest) returns (NetworkInviteReplyResponse);
 }
