@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package protobuf;
 
-// User
 message UserDetails {
   string email = 1;
   string first_name = 2;
@@ -16,30 +15,30 @@ message UserFriendship {
   string user2 = 2;
 }
 
-message NewUserRequest {
+message CreateUserRequest {
   UserDetails user = 1;
   string pwd = 2;
 }
 
-message NewUserResponse {
+message CreateUserResponse {
   bool success = 1;
   string user_id = 2;
 }
 
-message GetUserDetailsRequest {
+message GetUserRequest {
   string user_id = 1;
 }
 
-message GetUserDetailsResponse {
+message GetUserResponse {
   UserDetails user = 1;
 }
 
-message SearchUserRequest {
+message SearchForUserRequest {
   string first_name = 1;
   string last_name = 2;
 }
 
-message SearchUserResponse {
+message SearchForUserResponse {
   repeated UserDetails users = 1;
 }
 
@@ -51,26 +50,15 @@ message CreateFriendshipResponse {
   bool success = 1;
 }
 
-message FriendshipReplyRequest {
+message ReplyToFriendshipRequest {
   string user1 = 1;
   string user2 = 2;
   bool accepted = 3;
 }
 
-message FriendshipReplyResponse {
+message ReplyToFriendshipResponse {
   bool success = 1;
 }
-
-service User {
-  rpc CreateUser(NewUserRequest) returns (NewUserResponse);
-  rpc GetUser(GetUserDetailsRequest) returns (GetUserDetailsResponse);
-  rpc SearchForUser(SearchUserRequest) returns (SearchUserResponse);
-  rpc CreateFriendship(CreateFriendshipRequest) returns (CreateFriendshipResponse);
-  rpc ReplyToFriendship(FriendshipReplyRequest) returns (FriendshipReplyResponse);
-}
-
-
-// Item
 
 message ItemDetails {
   string title = 1;
@@ -80,11 +68,11 @@ message ItemDetails {
   // To-do: posting photos
 }
 
-message NewItemRequest {
-  ItemDetails item = 1;
+message SubmitItemRequest {
+  ItemDetails item_details = 1;
 }
 
-message NewItemResponse {
+message SubmitItemResponse {
   string item_id = 1;
 }
 
@@ -93,29 +81,13 @@ message ItemOffer {
   double offer = 2;
 }
 
-message SubmitItemRequest {
-  ItemDetails new_item = 1;
+message SubmitItemOfferRequest {
+  ItemOffer item_offer = 1;
 }
 
-message SubmitItemResponse {
-  string item_id = 1;
+message SubmitItemOfferResponse {
+  bool response = 1;
 }
-
-message ItemOfferRequest {
-  ItemOffer bid = 1;
-}
-
-message ItemOfferResponse {
-  bool success = 1;
-}
-
-service Item {
-  rpc SubmitItem(SubmitItemRequest) returns (SubmitItemResponse);
-  rpc SubmitItemOffer(ItemOfferRequest) returns (ItemOfferResponse);
-}
-
-
-// Network
 
 message NetworkDetails {
   string name = 1;
@@ -124,19 +96,19 @@ message NetworkDetails {
   bool public_posting = 4;
 }
 
-message NewNetworkRequest {
+message CreateNetworkRequest {
   NetworkDetails network = 1;
 }
 
-message NewNetworkResponse {
+message CreateNetworkResponse {
   string network_id = 1;
 }
 
-message NetworksForUserRequest {
+message GetNetworksForUserRequest {
   string user_id = 1;
 }
 
-message NetworksForUserResponse {
+message GetNetworksForUserResponse {
   repeated NetworkDetails networks = 1;
 }
 
@@ -157,20 +129,27 @@ message InviteUserToNetworkResponse {
   bool success = 1;
 }
 
-message NetworkInviteReplyRequest {
+message ReplyToNetworkInviteRequest {
   string network_id = 1;
   string user_id = 2;
   bool accepted = 3;
 }
 
-message NetworkInviteReplyResponse {
+message ReplyToNetworkInviteResponse {
   bool success = 1;
 }
 
 service Network {
-  rpc CreateNetwork(NewNetworkRequest) returns (NewNetworkResponse);
-  rpc GetNetworksForUser(NetworksForUserRequest) returns (NetworksForUserResponse);
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc SearchForUser(SearchForUserRequest) returns (SearchForUserResponse);
+  rpc CreateFriendship(CreateFriendshipRequest) returns (CreateFriendshipResponse);
+  rpc ReplyToFriendship(ReplyToFriendshipRequest) returns (ReplyToFriendshipResponse);
+  rpc SubmitItem(SubmitItemRequest) returns (SubmitItemResponse);
+  rpc SubmitItemOffer(SubmitItemOfferRequest) returns (SubmitItemOfferResponse);
+  rpc CreateNetwork(CreateNetworkRequest) returns (CreateNetworkResponse);
+  rpc GetNetworksForUser(GetNetworksForUserRequest) returns (GetNetworksForUserResponse);
   rpc SearchForNetworks(SearchForNetworksRequest) returns (SearchForNetworksResponse);
   rpc InviteUserToNetwork(InviteUserToNetworkRequest) returns (InviteUserToNetworkResponse);
-  rpc ReplyToNetworkInvite(NetworkInviteReplyRequest) returns (NetworkInviteReplyResponse);
+  rpc ReplyToNetworkInvite(ReplyToNetworkInviteRequest) returns (ReplyToNetworkInviteResponse);
 }

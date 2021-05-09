@@ -6,7 +6,7 @@ services:
       - redis_data:/data
     expose:
       - 6379
-  networks:
+    networks:
     - backend-network
   app:
     build: app
