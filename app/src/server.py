@@ -1,4 +1,5 @@
 import redis
+import os
 import sys
 import logging
 import grpc
@@ -8,9 +9,9 @@ import network_pb2
 import network_pb2_grpc
 
 
-class Network(event_pb2_grpc.NetworkServicer):
+class Network(network_pb2_grpc.NetworkServicer):
     def __init__(self):
-        redis_address = os.environ['REDIS_ADDRESS']
+        redis_address = os.environ['REDIS_URL']
         self.redis_pool = redis.ConnectionPool(host=redis_address)
 
     def CreateUser(self, request, context):
@@ -76,7 +77,7 @@ if __name__ == '__main__':
 
     # setup gRPC server
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    event_pb2_grpc.add_EventServicer_to_server(Network(), server)
+    network_pb2_grpc.add_NetworkServicer_to_server(Network(), server)
     server.add_insecure_port('[::]:9700')
     server.start()
     server.wait_for_termination()
