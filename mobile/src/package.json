@@ -10,6 +10,8 @@
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.9.4",
+    "@react-navigation/drawer": "^5.9.4",
     "expo": "~41.0.1",
     "expo-status-bar": "~1.0.4",
     "glamorous-native": "^2.0.0",
