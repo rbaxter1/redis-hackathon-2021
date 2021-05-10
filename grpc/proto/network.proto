@@ -158,8 +158,8 @@ message GetImageResponse {
 }
 
 service Network {
-  rpc SaveImage(SaveImageRequest) return (SaveImageResponse)
-  rpc GetImage(GetImageRequest) return (GetImageResponse)
+  rpc SaveImage(SaveImageRequest) returns (SaveImageResponse);
+  rpc GetImage(GetImageRequest) returns (GetImageResponse);
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
   rpc GetUser(GetUserRequest) returns (GetUserResponse);
   rpc SearchForUser(SearchForUserRequest) returns (SearchForUserResponse);

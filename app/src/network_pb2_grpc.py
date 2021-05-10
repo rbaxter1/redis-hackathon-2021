@@ -14,6 +14,16 @@ class NetworkStub(object):
     Args:
       channel: A grpc.Channel.
     """
+    self.SaveImage = channel.unary_unary(
+        '/protobuf.Network/SaveImage',
+        request_serializer=network__pb2.SaveImageRequest.SerializeToString,
+        response_deserializer=network__pb2.SaveImageResponse.FromString,
+        )
+    self.GetImage = channel.unary_unary(
+        '/protobuf.Network/GetImage',
+        request_serializer=network__pb2.GetImageRequest.SerializeToString,
+        response_deserializer=network__pb2.GetImageResponse.FromString,
+        )
     self.CreateUser = channel.unary_unary(
         '/protobuf.Network/CreateUser',
         request_serializer=network__pb2.CreateUserRequest.SerializeToString,
@@ -79,6 +89,20 @@ class NetworkStub(object):
 class NetworkServicer(object):
   # missing associated documentation comment in .proto file
   pass
+
+  def SaveImage(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetImage(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
 
   def CreateUser(self, request, context):
     # missing associated documentation comment in .proto file
@@ -167,6 +191,16 @@ class NetworkServicer(object):
 
 def add_NetworkServicer_to_server(servicer, server):
   rpc_method_handlers = {
+      'SaveImage': grpc.unary_unary_rpc_method_handler(
+          servicer.SaveImage,
+          request_deserializer=network__pb2.SaveImageRequest.FromString,
+          response_serializer=network__pb2.SaveImageResponse.SerializeToString,
+      ),
+      'GetImage': grpc.unary_unary_rpc_method_handler(
+          servicer.GetImage,
+          request_deserializer=network__pb2.GetImageRequest.FromString,
+          response_serializer=network__pb2.GetImageResponse.SerializeToString,
+      ),
       'CreateUser': grpc.unary_unary_rpc_method_handler(
           servicer.CreateUser,
           request_deserializer=network__pb2.CreateUserRequest.FromString,

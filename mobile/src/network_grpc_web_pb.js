@@ -73,6 +73,166 @@ proto.protobuf.NetworkPromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.protobuf.SaveImageRequest,
+ *   !proto.protobuf.SaveImageResponse>}
+ */
+const methodDescriptor_Network_SaveImage = new grpc.web.MethodDescriptor(
+  '/protobuf.Network/SaveImage',
+  grpc.web.MethodType.UNARY,
+  proto.protobuf.SaveImageRequest,
+  proto.protobuf.SaveImageResponse,
+  /**
+   * @param {!proto.protobuf.SaveImageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.SaveImageResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.protobuf.SaveImageRequest,
+ *   !proto.protobuf.SaveImageResponse>}
+ */
+const methodInfo_Network_SaveImage = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.protobuf.SaveImageResponse,
+  /**
+   * @param {!proto.protobuf.SaveImageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.SaveImageResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.protobuf.SaveImageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.protobuf.SaveImageResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.protobuf.SaveImageResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.protobuf.NetworkClient.prototype.saveImage =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/protobuf.Network/SaveImage',
+      request,
+      metadata || {},
+      methodDescriptor_Network_SaveImage,
+      callback);
+};
+
+
+/**
+ * @param {!proto.protobuf.SaveImageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.protobuf.SaveImageResponse>}
+ *     Promise that resolves to the response
+ */
+proto.protobuf.NetworkPromiseClient.prototype.saveImage =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/protobuf.Network/SaveImage',
+      request,
+      metadata || {},
+      methodDescriptor_Network_SaveImage);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.protobuf.GetImageRequest,
+ *   !proto.protobuf.GetImageResponse>}
+ */
+const methodDescriptor_Network_GetImage = new grpc.web.MethodDescriptor(
+  '/protobuf.Network/GetImage',
+  grpc.web.MethodType.UNARY,
+  proto.protobuf.GetImageRequest,
+  proto.protobuf.GetImageResponse,
+  /**
+   * @param {!proto.protobuf.GetImageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetImageResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.protobuf.GetImageRequest,
+ *   !proto.protobuf.GetImageResponse>}
+ */
+const methodInfo_Network_GetImage = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.protobuf.GetImageResponse,
+  /**
+   * @param {!proto.protobuf.GetImageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetImageResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.protobuf.GetImageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.protobuf.GetImageResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.protobuf.GetImageResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.protobuf.NetworkClient.prototype.getImage =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/protobuf.Network/GetImage',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetImage,
+      callback);
+};
+
+
+/**
+ * @param {!proto.protobuf.GetImageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.protobuf.GetImageResponse>}
+ *     Promise that resolves to the response
+ */
+proto.protobuf.NetworkPromiseClient.prototype.getImage =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/protobuf.Network/GetImage',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetImage);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.protobuf.CreateUserRequest,
  *   !proto.protobuf.CreateUserResponse>}
  */

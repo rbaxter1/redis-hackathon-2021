@@ -16,6 +16,14 @@ class Network(network_pb2_grpc.NetworkServicer):
             redis_address = 'redis'
         self.redis_pool = redis.ConnectionPool(host=redis_address)
 
+    def SaveImage(self, request, context):
+        response = network_pb2.SaveImageResponse()
+        return response
+    
+    def GetImage(self, request, context):
+        response = network_pb2.GetImageResponse()
+        return response
+    
     def CreateUser(self, request, context):
         response = network_pb2.CreateUserResponse()
         return response
