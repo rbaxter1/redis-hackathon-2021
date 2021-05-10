@@ -139,7 +139,27 @@ message ReplyToNetworkInviteResponse {
   bool success = 1;
 }
 
+message SaveImageRequest {
+  bytes image = 1;
+}
+
+message SaveImageResponse {
+  bool success = 1;
+  string image_id = 2;
+}
+
+message GetImageRequest {
+  string image_id = 1;
+}
+
+message GetImageResponse {
+  bool success = 1;
+  bytes image = 2;
+}
+
 service Network {
+  rpc SaveImage(SaveImageRequest) return (SaveImageResponse)
+  rpc GetImage(GetImageRequest) return (GetImageResponse)
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
   rpc GetUser(GetUserRequest) returns (GetUserResponse);
   rpc SearchForUser(SearchForUserRequest) returns (SearchForUserResponse);
