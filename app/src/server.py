@@ -8,10 +8,12 @@ from google.protobuf.json_format import MessageToJson, Parse
 import network_pb2
 import network_pb2_grpc
 
-
 class Network(network_pb2_grpc.NetworkServicer):
     def __init__(self):
-        redis_address = os.environ['REDIS_URL']
+        try:
+            redis_address = os.environ['REDIS_URL']
+        except: 
+            redis_address = 'redis'
         self.redis_pool = redis.ConnectionPool(host=redis_address)
 
     def CreateUser(self, request, context):

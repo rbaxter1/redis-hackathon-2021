@@ -17,7 +17,7 @@ export default function App() {
 
             server.createUser(request, {}, (err, response) => {
               if (err) {
-                console.log(`Unexpected error for submitEvent: code = ${err.code}` +
+                console.log(`Unexpected error for createUser: code = ${err.code}` +
                             `, message = "${err.message}"`);
               } else {
                 if (response) {
