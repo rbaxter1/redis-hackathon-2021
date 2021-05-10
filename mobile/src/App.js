@@ -1,42 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-const {CreateUserRequest, CreateUserResponse} = require('./network_pb.js');
-const {NetworkClient} = require('./network_grpc_web_pb.js');
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer'
 
+import UserPage from './UserPage'
+import ItemListScreen from './ItemListScreen'
 
-export default function App() {
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function RootScreen() {
   return (
-    <View style={styles.container}>
-    <Button
-          title="Create User"
-          onPress={() => {
-
-            var request = new CreateUserRequest()
-            var server = new NetworkClient('http://localhost:8080');
-
-            server.createUser(request, {}, (err, response) => {
-              if (err) {
-                console.log(`Unexpected error for createUser: code = ${err.code}` +
-                            `, message = "${err.message}"`);
-              } else {
-                if (response) {
-                  console.log(response)
-                }
-              }
-            });
-          }}
-        />
-      <StatusBar style="auto" />
-    </View>
+      <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'My home' }} />
+      </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function HomeScreen () {
+  return (
+    <ItemListScreen></ItemListScreen>
+  );
+}
+
+function UserScreen () {
+  return (
+    <UserPage></UserPage>
+  );
+}
+
+export default function App() {
+  return (
+      <NavigationContainer>
+          <Drawer.Navigator initialRouteName="Home">
+              <Drawer.Screen name="Root" component={RootScreen} />
+              <Drawer.Screen name="User" component={UserScreen} />
+          </Drawer.Navigator>
+      </NavigationContainer>
+  );
+}
