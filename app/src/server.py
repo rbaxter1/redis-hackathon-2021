@@ -2,7 +2,9 @@ import redis
 import os
 import sys
 import logging
+import uuid
 import grpc
+import base64
 from concurrent import futures
 from google.protobuf.json_format import MessageToJson, Parse
 import network_pb2
@@ -11,20 +13,44 @@ import network_pb2_grpc
 class Network(network_pb2_grpc.NetworkServicer):
     def __init__(self):
         try:
-            redis_address = os.environ['REDIS_URL']
+            redis_url = os.environ['REDIS_URL']
         except: 
-            redis_address = 'redis'
-        self.redis_pool = redis.ConnectionPool(host=redis_address)
+            redis_url = 'redis'
+        '''
+        try:
+            redis_port = os.environ['REDIS_PORT']
+        except: 
+            redis_port = 6379
+
+        try:
+            redis_password = os.environ['REDIS_PASSWORD']
+        except: 
+            redis_password = ''
+        '''
+        self.redis_pool = redis.ConnectionPool(host=redis_url)
 
     def SaveImage(self, request, context):
+        r = redis.Redis(connection_pool=self.redis_pool)
+        image_id = 'image:{0}'.format(str(uuid.uuid4()))
+        log.info('image id: {0}'.format(image_id))
+        image = open('/src/gandalf.jpg', 'rb').read()
+        log.info('image: {0}'.format(base64.b64encode(image)))
+        r.set(image_id, image)
         response = network_pb2.SaveImageResponse()
+        response.success = True
+        response.image_id = image_id
         return response
     
     def GetImage(self, request, context):
         response = network_pb2.GetImageResponse()
+        r = redis.Redis(connection_pool=self.redis_pool)
+        log.info('get image id: {0}'.format(request.image_id))
+        response.image = r.get(request.image_id)
+        response.success = True
         return response
     
     def CreateUser(self, request, context):
+        log.info("Enter")
         response = network_pb2.CreateUserResponse()
         return response
 
