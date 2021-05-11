@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 import UserPage from './UserPage'
 import ItemListScreen from './ItemListScreen'
@@ -9,10 +11,24 @@ import ItemListScreen from './ItemListScreen'
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function RootScreen() {
+function drawerToggleButton(navigation) {
   return (
-      <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'My home' }} />
+    <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+      <Icon name="menu" style={{color: 'black', padding: 10, marginLeft: 10, fontSize: 20}}/>
+    </TouchableOpacity>
+  );
+}
+
+function RootStack() {
+  return (
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={({navigation}) => ({
+          headerLeft: () => (
+            drawerToggleButton(navigation)
+          ),
+        })}>
+          <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
   );
 }
@@ -20,6 +36,20 @@ function RootScreen() {
 function HomeScreen () {
   return (
     <ItemListScreen></ItemListScreen>
+  );
+}
+
+function UserStack () {
+  return (
+    <Stack.Navigator
+        initialRouteName="User"
+        screenOptions={({navigation}) => ({
+          headerLeft: () => (
+            drawerToggleButton(navigation)
+          ),
+        })}>
+          <Stack.Screen name="User" component={UserScreen} />
+      </Stack.Navigator>
   );
 }
 
@@ -32,9 +62,11 @@ function UserScreen () {
 export default function App() {
   return (
       <NavigationContainer>
-          <Drawer.Navigator initialRouteName="Home">
-              <Drawer.Screen name="Root" component={RootScreen} />
-              <Drawer.Screen name="User" component={UserScreen} />
+          <Drawer.Navigator 
+            initialRouteName="Root"
+          >
+              <Drawer.Screen name="Root" component={RootStack} />
+              <Drawer.Screen name="User" component={UserStack} />
           </Drawer.Navigator>
       </NavigationContainer>
   );
