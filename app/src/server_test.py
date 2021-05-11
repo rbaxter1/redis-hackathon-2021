@@ -8,24 +8,7 @@ from server import Network
 
 
 class TestNetwork(unittest.TestCase):
-    '''
-    @classmethod
-    def setUpClass(cls):
-        cls.env_patcher = mock.patch.dict(os.environ, {
-            'REDIS_URL': 'redis-12472.c266.us-east-1-3.ec2.cloud.redislabs.com',
-            'REDIS_PORT': '12472',
-            'REDIS_PASSWORD': 'M64VxjO0Uyf00zZZOoLSbasl8e84dB7z'})
-        cls.env_patcher.start()
-        super().setUpClass()
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
-        cls.env_patcher.stop()
-    '''
-    @mock.patch.dict(os.environ, {'REDIS_URL': 'redis-12472.c266.us-east-1-3.ec2.cloud.redislabs.com',
-                                  'REDIS_PORT': '12472',
-                                  'REDIS_PASSWORD': 'M64VxjO0Uyf00zZZOoLSbasl8e84dB7z'})
+    
     def setUp(self):
         servicers = {
             network_pb2.DESCRIPTOR.services_by_name['Network']: Network()
