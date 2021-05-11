@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements';
 
 import UserPage from './UserPage'
 import ItemListScreen from './ItemListScreen'
+import CreateScreen from './CreateScreen'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -19,21 +20,79 @@ function drawerToggleButton(navigation) {
   );
 }
 
-function RootStack() {
+function createButton(navigation) {
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+      <Icon name="add" style={{color: 'black', padding: 10, marginLeft: 10, fontSize: 20}}/>
+    </TouchableOpacity>
+  );
+}
+
+function NetworksStack() {
   return (
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Networks"
+        screenOptions={({navigation}) => ({
+          headerLeft: () => (
+            drawerToggleButton(navigation)
+          ),
+          headerRight: () => (
+            createButton(navigation)
+          ),
+        })}>
+          <Stack.Screen name="Networks" component={NetworksScreen} />
+          <Stack.Screen name="Create" component={NewNetworkScreen} />
+      </Stack.Navigator>
+  );
+}
+
+function NetworksScreen () {
+  return (
+    <ItemListScreen></ItemListScreen>
+  );
+}
+
+function NewNetworkScreen () {
+  return (
+    <CreateScreen ></CreateScreen>
+  );
+}
+
+function MyNetworksStack() {
+  return (
+      <Stack.Navigator
+        initialRouteName="My Networks"
         screenOptions={({navigation}) => ({
           headerLeft: () => (
             drawerToggleButton(navigation)
           ),
         })}>
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="My Networks" component={MyNetworksScreen} />
       </Stack.Navigator>
   );
 }
 
-function HomeScreen () {
+function MyNetworksScreen () {
+  return (
+    <ItemListScreen></ItemListScreen>
+  );
+}
+
+function MyItemsStack() {
+  return (
+      <Stack.Navigator
+        initialRouteName="My Items"
+        screenOptions={({navigation}) => ({
+          headerLeft: () => (
+            drawerToggleButton(navigation)
+          ),
+        })}>
+          <Stack.Screen name="My Items" component={MyItemsScreen} />
+      </Stack.Navigator>
+  );
+}
+
+function MyItemsScreen () {
   return (
     <ItemListScreen></ItemListScreen>
   );
@@ -63,9 +122,10 @@ export default function App() {
   return (
       <NavigationContainer>
           <Drawer.Navigator 
-            initialRouteName="Root"
-          >
-              <Drawer.Screen name="Root" component={RootStack} />
+            initialRouteName="All Networks" >
+              <Drawer.Screen name="All Networks" component={NetworksStack} />
+              <Drawer.Screen name="My Networks" component={MyNetworksStack} />
+              <Drawer.Screen name="My Items" component={MyItemsStack} />
               <Drawer.Screen name="User" component={UserStack} />
           </Drawer.Navigator>
       </NavigationContainer>
