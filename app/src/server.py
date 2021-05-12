@@ -1,4 +1,5 @@
 import redis
+from redisgraph import Node, Edge, Graph, Path
 import os
 import sys
 import logging
@@ -51,6 +52,28 @@ class Network(network_pb2_grpc.NetworkServicer):
     
     def CreateUser(self, request, context):
         log.info("Enter")
+
+        # this is just testing redisgraph
+        r = redis.Redis(connection_pool=self.redis_pool)
+        redis_graph = Graph('social', r)
+        john = Node(label='person', properties={'name': 'John Doe', 'age': 33, 'gender': 'male', 'status': 'single'})
+        redis_graph.add_node(john)
+
+        japan = Node(label='country', properties={'name': 'Japan'})
+        redis_graph.add_node(japan)
+
+        edge = Edge(john, 'visited', japan, properties={'purpose': 'pleasure'})
+        redis_graph.add_edge(edge)
+
+        redis_graph.commit()
+
+        query = """MATCH (p:person)-[v:visited {purpose:"pleasure"}]->(c:country)
+                RETURN p.name, p.age, v.purpose, c.name"""
+
+        result = redis_graph.query(query)
+
+        log.info(result.pretty_print())
+
         response = network_pb2.CreateUserResponse()
         return response
 
