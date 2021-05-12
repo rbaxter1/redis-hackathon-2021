@@ -121,6 +121,14 @@ class Network(network_pb2_grpc.NetworkServicer):
         response = network_pb2.ReplyToNetworkInviteResponse()
         return response
 
+    def GetItemsForUser(self, request, context):
+        response = network_pb2.GetItemsForUserResponse()
+        return response
+
+    def GetItemsForNetwork(self, request, context):
+        response = network_pb2.GetItemsForNetworkResponse()
+        return response
+
 if __name__ == '__main__':
     log = logging.getLogger('')
     log.setLevel(logging.DEBUG)
