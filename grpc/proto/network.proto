@@ -17,7 +17,6 @@ message UserFriendship {
 
 message CreateUserRequest {
   UserDetails user = 1;
-  string pwd = 2;
 }
 
 message CreateUserResponse {
@@ -66,7 +65,6 @@ message ItemDetails {
   double asking_price = 3;
   string network_name = 4;
   bytes image = 5;
-  // To-do: posting photos
 }
 
 message SubmitItemRequest {

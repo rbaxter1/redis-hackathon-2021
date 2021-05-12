@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='protobuf',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\rnetwork.proto\x12\x08protobuf\"l\n\x0bUserDetails\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x13\n\x0bnetwork_ids\x18\x04 \x03(\t\x12\x12\n\nfriend_ids\x18\x05 \x03(\t\".\n\x0eUserFriendship\x12\r\n\x05user1\x18\x01 \x01(\t\x12\r\n\x05user2\x18\x02 \x01(\t\"E\n\x11\x43reateUserRequest\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\x12\x0b\n\x03pwd\x18\x02 \x01(\t\"6\n\x12\x43reateUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07user_id\x18\x02 \x01(\t\"!\n\x0eGetUserRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"6\n\x0fGetUserResponse\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"=\n\x14SearchForUserRequest\x12\x12\n\nfirst_name\x18\x01 \x01(\t\x12\x11\n\tlast_name\x18\x02 \x01(\t\"=\n\x15SearchForUserResponse\x12$\n\x05users\x18\x01 \x03(\x0b\x32\x15.protobuf.UserDetails\"G\n\x17\x43reateFriendshipRequest\x12,\n\nfriendship\x18\x01 \x01(\x0b\x32\x18.protobuf.UserFriendship\"+\n\x18\x43reateFriendshipResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"J\n\x18ReplyToFriendshipRequest\x12\r\n\x05user1\x18\x01 \x01(\t\x12\r\n\x05user2\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\",\n\x19ReplyToFriendshipResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"[\n\x0bItemDetails\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x14\n\x0c\x61sking_price\x18\x03 \x01(\x01\x12\x12\n\nnetwork_id\x18\x04 \x01(\t\"@\n\x11SubmitItemRequest\x12+\n\x0citem_details\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\"%\n\x12SubmitItemResponse\x12\x0f\n\x07item_id\x18\x01 \x01(\t\"+\n\tItemOffer\x12\x0f\n\x07item_id\x18\x01 \x01(\t\x12\r\n\x05offer\x18\x02 \x01(\x01\"A\n\x16SubmitItemOfferRequest\x12\'\n\nitem_offer\x18\x01 \x01(\x0b\x32\x13.protobuf.ItemOffer\"+\n\x17SubmitItemOfferResponse\x12\x10\n\x08response\x18\x01 \x01(\x08\"]\n\x0eNetworkDetails\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08owner_id\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x16\n\x0epublic_posting\x18\x04 \x01(\x08\"A\n\x14\x43reateNetworkRequest\x12)\n\x07network\x18\x01 \x01(\x0b\x32\x18.protobuf.NetworkDetails\"+\n\x15\x43reateNetworkResponse\x12\x12\n\nnetwork_id\x18\x01 \x01(\t\",\n\x19GetNetworksForUserRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"H\n\x1aGetNetworksForUserResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"0\n\x18SearchForNetworksRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"G\n\x19SearchForNetworksResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"A\n\x1aInviteUserToNetworkRequest\x12\x12\n\nnetwork_id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\".\n\x1bInviteUserToNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"T\n\x1bReplyToNetworkInviteRequest\x12\x12\n\nnetwork_id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\"/\n\x1cReplyToNetworkInviteResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"!\n\x10SaveImageRequest\x12\r\n\x05image\x18\x01 \x01(\x0c\"6\n\x11SaveImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x10\n\x08image_id\x18\x02 \x01(\t\"#\n\x0fGetImageRequest\x12\x10\n\x08image_id\x18\x01 \x01(\t\"2\n\x10GetImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05image\x18\x02 \x01(\x0c\x32\xa3\t\n\x07Network\x12\x44\n\tSaveImage\x12\x1a.protobuf.SaveImageRequest\x1a\x1b.protobuf.SaveImageResponse\x12\x41\n\x08GetImage\x12\x19.protobuf.GetImageRequest\x1a\x1a.protobuf.GetImageResponse\x12G\n\nCreateUser\x12\x1b.protobuf.CreateUserRequest\x1a\x1c.protobuf.CreateUserResponse\x12>\n\x07GetUser\x12\x18.protobuf.GetUserRequest\x1a\x19.protobuf.GetUserResponse\x12P\n\rSearchForUser\x12\x1e.protobuf.SearchForUserRequest\x1a\x1f.protobuf.SearchForUserResponse\x12Y\n\x10\x43reateFriendship\x12!.protobuf.CreateFriendshipRequest\x1a\".protobuf.CreateFriendshipResponse\x12\\\n\x11ReplyToFriendship\x12\".protobuf.ReplyToFriendshipRequest\x1a#.protobuf.ReplyToFriendshipResponse\x12G\n\nSubmitItem\x12\x1b.protobuf.SubmitItemRequest\x1a\x1c.protobuf.SubmitItemResponse\x12V\n\x0fSubmitItemOffer\x12 .protobuf.SubmitItemOfferRequest\x1a!.protobuf.SubmitItemOfferResponse\x12P\n\rCreateNetwork\x12\x1e.protobuf.CreateNetworkRequest\x1a\x1f.protobuf.CreateNetworkResponse\x12_\n\x12GetNetworksForUser\x12#.protobuf.GetNetworksForUserRequest\x1a$.protobuf.GetNetworksForUserResponse\x12\\\n\x11SearchForNetworks\x12\".protobuf.SearchForNetworksRequest\x1a#.protobuf.SearchForNetworksResponse\x12\x62\n\x13InviteUserToNetwork\x12$.protobuf.InviteUserToNetworkRequest\x1a%.protobuf.InviteUserToNetworkResponse\x12\x65\n\x14ReplyToNetworkInvite\x12%.protobuf.ReplyToNetworkInviteRequest\x1a&.protobuf.ReplyToNetworkInviteResponseb\x06proto3')
+  serialized_pb=_b('\n\rnetwork.proto\x12\x08protobuf\"n\n\x0bUserDetails\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x15\n\rnetwork_names\x18\x04 \x03(\t\x12\x12\n\nfriend_ids\x18\x05 \x03(\t\".\n\x0eUserFriendship\x12\r\n\x05user1\x18\x01 \x01(\t\x12\r\n\x05user2\x18\x02 \x01(\t\"8\n\x11\x43reateUserRequest\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"4\n\x12\x43reateUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"\x1f\n\x0eGetUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"6\n\x0fGetUserResponse\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"=\n\x14SearchForUserRequest\x12\x12\n\nfirst_name\x18\x01 \x01(\t\x12\x11\n\tlast_name\x18\x02 \x01(\t\"=\n\x15SearchForUserResponse\x12$\n\x05users\x18\x01 \x03(\x0b\x32\x15.protobuf.UserDetails\"G\n\x17\x43reateFriendshipRequest\x12,\n\nfriendship\x18\x01 \x01(\x0b\x32\x18.protobuf.UserFriendship\"+\n\x18\x43reateFriendshipResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"N\n\x18ReplyToFriendshipRequest\x12\x0f\n\x07\x65mail_1\x18\x01 \x01(\t\x12\x0f\n\x07\x65mail_2\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\",\n\x19ReplyToFriendshipResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"l\n\x0bItemDetails\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x14\n\x0c\x61sking_price\x18\x03 \x01(\x01\x12\x14\n\x0cnetwork_name\x18\x04 \x01(\t\x12\r\n\x05image\x18\x05 \x01(\x0c\"@\n\x11SubmitItemRequest\x12+\n\x0citem_details\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\"%\n\x12SubmitItemResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\")\n\tItemOffer\x12\r\n\x05title\x18\x01 \x01(\t\x12\r\n\x05offer\x18\x02 \x01(\x01\"A\n\x16SubmitItemOfferRequest\x12\'\n\nitem_offer\x18\x01 \x01(\x0b\x32\x13.protobuf.ItemOffer\"*\n\x17SubmitItemOfferResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"E\n\x0eNetworkDetails\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08owner_id\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"A\n\x14\x43reateNetworkRequest\x12)\n\x07network\x18\x01 \x01(\x0b\x32\x18.protobuf.NetworkDetails\"-\n\x15\x43reateNetworkResponse\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"*\n\x19GetNetworksForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"H\n\x1aGetNetworksForUserResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"0\n\x18SearchForNetworksRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"G\n\x19SearchForNetworksResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"A\n\x1aInviteUserToNetworkRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\".\n\x1bInviteUserToNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"T\n\x1bReplyToNetworkInviteRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\"/\n\x1cReplyToNetworkInviteResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"!\n\x10SaveImageRequest\x12\r\n\x05image\x18\x01 \x01(\x0c\"6\n\x11SaveImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x10\n\x08image_id\x18\x02 \x01(\t\"#\n\x0fGetImageRequest\x12\x10\n\x08image_id\x18\x01 \x01(\t\"2\n\x10GetImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05image\x18\x02 \x01(\x0c\"\'\n\x16GetItemsForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"P\n\x17GetItemsForUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails\"1\n\x19GetItemsForNetworkRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"S\n\x1aGetItemsForNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails2\xdc\n\n\x07Network\x12\x44\n\tSaveImage\x12\x1a.protobuf.SaveImageRequest\x1a\x1b.protobuf.SaveImageResponse\x12\x41\n\x08GetImage\x12\x19.protobuf.GetImageRequest\x1a\x1a.protobuf.GetImageResponse\x12G\n\nCreateUser\x12\x1b.protobuf.CreateUserRequest\x1a\x1c.protobuf.CreateUserResponse\x12>\n\x07GetUser\x12\x18.protobuf.GetUserRequest\x1a\x19.protobuf.GetUserResponse\x12P\n\rSearchForUser\x12\x1e.protobuf.SearchForUserRequest\x1a\x1f.protobuf.SearchForUserResponse\x12Y\n\x10\x43reateFriendship\x12!.protobuf.CreateFriendshipRequest\x1a\".protobuf.CreateFriendshipResponse\x12\\\n\x11ReplyToFriendship\x12\".protobuf.ReplyToFriendshipRequest\x1a#.protobuf.ReplyToFriendshipResponse\x12G\n\nSubmitItem\x12\x1b.protobuf.SubmitItemRequest\x1a\x1c.protobuf.SubmitItemResponse\x12V\n\x0fSubmitItemOffer\x12 .protobuf.SubmitItemOfferRequest\x1a!.protobuf.SubmitItemOfferResponse\x12P\n\rCreateNetwork\x12\x1e.protobuf.CreateNetworkRequest\x1a\x1f.protobuf.CreateNetworkResponse\x12_\n\x12GetNetworksForUser\x12#.protobuf.GetNetworksForUserRequest\x1a$.protobuf.GetNetworksForUserResponse\x12V\n\x0fGetItemsForUser\x12 .protobuf.GetItemsForUserRequest\x1a!.protobuf.GetItemsForUserResponse\x12_\n\x12GetItemsForNetwork\x12#.protobuf.GetItemsForNetworkRequest\x1a$.protobuf.GetItemsForNetworkResponse\x12\\\n\x11SearchForNetworks\x12\".protobuf.SearchForNetworksRequest\x1a#.protobuf.SearchForNetworksResponse\x12\x62\n\x13InviteUserToNetwork\x12$.protobuf.InviteUserToNetworkRequest\x1a%.protobuf.InviteUserToNetworkResponse\x12\x65\n\x14ReplyToNetworkInvite\x12%.protobuf.ReplyToNetworkInviteRequest\x1a&.protobuf.ReplyToNetworkInviteResponseb\x06proto3')
 )
 
 
@@ -54,7 +54,7 @@ _USERDETAILS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='network_ids', full_name='protobuf.UserDetails.network_ids', index=3,
+      name='network_names', full_name='protobuf.UserDetails.network_names', index=3,
       number=4, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -80,7 +80,7 @@ _USERDETAILS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=27,
-  serialized_end=135,
+  serialized_end=137,
 )
 
 
@@ -117,8 +117,8 @@ _USERFRIENDSHIP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=137,
-  serialized_end=183,
+  serialized_start=139,
+  serialized_end=185,
 )
 
 
@@ -136,13 +136,6 @@ _CREATEUSERREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='pwd', full_name='protobuf.CreateUserRequest.pwd', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -155,8 +148,8 @@ _CREATEUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=185,
-  serialized_end=254,
+  serialized_start=187,
+  serialized_end=243,
 )
 
 
@@ -175,7 +168,7 @@ _CREATEUSERRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='user_id', full_name='protobuf.CreateUserResponse.user_id', index=1,
+      name='email', full_name='protobuf.CreateUserResponse.email', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -193,8 +186,8 @@ _CREATEUSERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=256,
-  serialized_end=310,
+  serialized_start=245,
+  serialized_end=297,
 )
 
 
@@ -206,7 +199,7 @@ _GETUSERREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='user_id', full_name='protobuf.GetUserRequest.user_id', index=0,
+      name='email', full_name='protobuf.GetUserRequest.email', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -224,8 +217,8 @@ _GETUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=312,
-  serialized_end=345,
+  serialized_start=299,
+  serialized_end=330,
 )
 
 
@@ -255,8 +248,8 @@ _GETUSERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=347,
-  serialized_end=401,
+  serialized_start=332,
+  serialized_end=386,
 )
 
 
@@ -293,8 +286,8 @@ _SEARCHFORUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=403,
-  serialized_end=464,
+  serialized_start=388,
+  serialized_end=449,
 )
 
 
@@ -324,8 +317,8 @@ _SEARCHFORUSERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=466,
-  serialized_end=527,
+  serialized_start=451,
+  serialized_end=512,
 )
 
 
@@ -355,8 +348,8 @@ _CREATEFRIENDSHIPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=529,
-  serialized_end=600,
+  serialized_start=514,
+  serialized_end=585,
 )
 
 
@@ -386,8 +379,8 @@ _CREATEFRIENDSHIPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=602,
-  serialized_end=645,
+  serialized_start=587,
+  serialized_end=630,
 )
 
 
@@ -399,14 +392,14 @@ _REPLYTOFRIENDSHIPREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='user1', full_name='protobuf.ReplyToFriendshipRequest.user1', index=0,
+      name='email_1', full_name='protobuf.ReplyToFriendshipRequest.email_1', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='user2', full_name='protobuf.ReplyToFriendshipRequest.user2', index=1,
+      name='email_2', full_name='protobuf.ReplyToFriendshipRequest.email_2', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -431,8 +424,8 @@ _REPLYTOFRIENDSHIPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=647,
-  serialized_end=721,
+  serialized_start=632,
+  serialized_end=710,
 )
 
 
@@ -462,8 +455,8 @@ _REPLYTOFRIENDSHIPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=723,
-  serialized_end=767,
+  serialized_start=712,
+  serialized_end=756,
 )
 
 
@@ -496,9 +489,16 @@ _ITEMDETAILS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='network_id', full_name='protobuf.ItemDetails.network_id', index=3,
+      name='network_name', full_name='protobuf.ItemDetails.network_name', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='image', full_name='protobuf.ItemDetails.image', index=4,
+      number=5, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -514,8 +514,8 @@ _ITEMDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=769,
-  serialized_end=860,
+  serialized_start=758,
+  serialized_end=866,
 )
 
 
@@ -545,8 +545,8 @@ _SUBMITITEMREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=862,
-  serialized_end=926,
+  serialized_start=868,
+  serialized_end=932,
 )
 
 
@@ -558,9 +558,9 @@ _SUBMITITEMRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='item_id', full_name='protobuf.SubmitItemResponse.item_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='success', full_name='protobuf.SubmitItemResponse.success', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -576,8 +576,8 @@ _SUBMITITEMRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=928,
-  serialized_end=965,
+  serialized_start=934,
+  serialized_end=971,
 )
 
 
@@ -589,7 +589,7 @@ _ITEMOFFER = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='item_id', full_name='protobuf.ItemOffer.item_id', index=0,
+      name='title', full_name='protobuf.ItemOffer.title', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -614,8 +614,8 @@ _ITEMOFFER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=967,
-  serialized_end=1010,
+  serialized_start=973,
+  serialized_end=1014,
 )
 
 
@@ -645,8 +645,8 @@ _SUBMITITEMOFFERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1012,
-  serialized_end=1077,
+  serialized_start=1016,
+  serialized_end=1081,
 )
 
 
@@ -658,7 +658,7 @@ _SUBMITITEMOFFERRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='response', full_name='protobuf.SubmitItemOfferResponse.response', index=0,
+      name='success', full_name='protobuf.SubmitItemOfferResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -676,8 +676,8 @@ _SUBMITITEMOFFERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1079,
-  serialized_end=1122,
+  serialized_start=1083,
+  serialized_end=1125,
 )
 
 
@@ -709,13 +709,6 @@ _NETWORKDETAILS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='public_posting', full_name='protobuf.NetworkDetails.public_posting', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -728,8 +721,8 @@ _NETWORKDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1124,
-  serialized_end=1217,
+  serialized_start=1127,
+  serialized_end=1196,
 )
 
 
@@ -759,8 +752,8 @@ _CREATENETWORKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1219,
-  serialized_end=1284,
+  serialized_start=1198,
+  serialized_end=1263,
 )
 
 
@@ -772,7 +765,7 @@ _CREATENETWORKRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='network_id', full_name='protobuf.CreateNetworkResponse.network_id', index=0,
+      name='network_name', full_name='protobuf.CreateNetworkResponse.network_name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -790,8 +783,8 @@ _CREATENETWORKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1286,
-  serialized_end=1329,
+  serialized_start=1265,
+  serialized_end=1310,
 )
 
 
@@ -803,7 +796,7 @@ _GETNETWORKSFORUSERREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='user_id', full_name='protobuf.GetNetworksForUserRequest.user_id', index=0,
+      name='email', full_name='protobuf.GetNetworksForUserRequest.email', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -821,8 +814,8 @@ _GETNETWORKSFORUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1331,
-  serialized_end=1375,
+  serialized_start=1312,
+  serialized_end=1354,
 )
 
 
@@ -852,8 +845,8 @@ _GETNETWORKSFORUSERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1377,
-  serialized_end=1449,
+  serialized_start=1356,
+  serialized_end=1428,
 )
 
 
@@ -883,8 +876,8 @@ _SEARCHFORNETWORKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1451,
-  serialized_end=1499,
+  serialized_start=1430,
+  serialized_end=1478,
 )
 
 
@@ -914,8 +907,8 @@ _SEARCHFORNETWORKSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1501,
-  serialized_end=1572,
+  serialized_start=1480,
+  serialized_end=1551,
 )
 
 
@@ -927,14 +920,14 @@ _INVITEUSERTONETWORKREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='network_id', full_name='protobuf.InviteUserToNetworkRequest.network_id', index=0,
+      name='network_name', full_name='protobuf.InviteUserToNetworkRequest.network_name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='user_id', full_name='protobuf.InviteUserToNetworkRequest.user_id', index=1,
+      name='email', full_name='protobuf.InviteUserToNetworkRequest.email', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -952,8 +945,8 @@ _INVITEUSERTONETWORKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1574,
-  serialized_end=1639,
+  serialized_start=1553,
+  serialized_end=1618,
 )
 
 
@@ -983,8 +976,8 @@ _INVITEUSERTONETWORKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1641,
-  serialized_end=1687,
+  serialized_start=1620,
+  serialized_end=1666,
 )
 
 
@@ -996,14 +989,14 @@ _REPLYTONETWORKINVITEREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='network_id', full_name='protobuf.ReplyToNetworkInviteRequest.network_id', index=0,
+      name='network_name', full_name='protobuf.ReplyToNetworkInviteRequest.network_name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='user_id', full_name='protobuf.ReplyToNetworkInviteRequest.user_id', index=1,
+      name='email', full_name='protobuf.ReplyToNetworkInviteRequest.email', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1028,8 +1021,8 @@ _REPLYTONETWORKINVITEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1689,
-  serialized_end=1773,
+  serialized_start=1668,
+  serialized_end=1752,
 )
 
 
@@ -1059,8 +1052,8 @@ _REPLYTONETWORKINVITERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1775,
-  serialized_end=1822,
+  serialized_start=1754,
+  serialized_end=1801,
 )
 
 
@@ -1090,8 +1083,8 @@ _SAVEIMAGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1824,
-  serialized_end=1857,
+  serialized_start=1803,
+  serialized_end=1836,
 )
 
 
@@ -1128,8 +1121,8 @@ _SAVEIMAGERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1859,
-  serialized_end=1913,
+  serialized_start=1838,
+  serialized_end=1892,
 )
 
 
@@ -1159,8 +1152,8 @@ _GETIMAGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1915,
-  serialized_end=1950,
+  serialized_start=1894,
+  serialized_end=1929,
 )
 
 
@@ -1197,8 +1190,146 @@ _GETIMAGERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1952,
-  serialized_end=2002,
+  serialized_start=1931,
+  serialized_end=1981,
+)
+
+
+_GETITEMSFORUSERREQUEST = _descriptor.Descriptor(
+  name='GetItemsForUserRequest',
+  full_name='protobuf.GetItemsForUserRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='email', full_name='protobuf.GetItemsForUserRequest.email', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1983,
+  serialized_end=2022,
+)
+
+
+_GETITEMSFORUSERRESPONSE = _descriptor.Descriptor(
+  name='GetItemsForUserResponse',
+  full_name='protobuf.GetItemsForUserResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='success', full_name='protobuf.GetItemsForUserResponse.success', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='items', full_name='protobuf.GetItemsForUserResponse.items', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2024,
+  serialized_end=2104,
+)
+
+
+_GETITEMSFORNETWORKREQUEST = _descriptor.Descriptor(
+  name='GetItemsForNetworkRequest',
+  full_name='protobuf.GetItemsForNetworkRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='network_name', full_name='protobuf.GetItemsForNetworkRequest.network_name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2106,
+  serialized_end=2155,
+)
+
+
+_GETITEMSFORNETWORKRESPONSE = _descriptor.Descriptor(
+  name='GetItemsForNetworkResponse',
+  full_name='protobuf.GetItemsForNetworkResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='success', full_name='protobuf.GetItemsForNetworkResponse.success', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='items', full_name='protobuf.GetItemsForNetworkResponse.items', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2157,
+  serialized_end=2240,
 )
 
 _CREATEUSERREQUEST.fields_by_name['user'].message_type = _USERDETAILS
@@ -1210,6 +1341,8 @@ _SUBMITITEMOFFERREQUEST.fields_by_name['item_offer'].message_type = _ITEMOFFER
 _CREATENETWORKREQUEST.fields_by_name['network'].message_type = _NETWORKDETAILS
 _GETNETWORKSFORUSERRESPONSE.fields_by_name['networks'].message_type = _NETWORKDETAILS
 _SEARCHFORNETWORKSRESPONSE.fields_by_name['networks'].message_type = _NETWORKDETAILS
+_GETITEMSFORUSERRESPONSE.fields_by_name['items'].message_type = _ITEMDETAILS
+_GETITEMSFORNETWORKRESPONSE.fields_by_name['items'].message_type = _ITEMDETAILS
 DESCRIPTOR.message_types_by_name['UserDetails'] = _USERDETAILS
 DESCRIPTOR.message_types_by_name['UserFriendship'] = _USERFRIENDSHIP
 DESCRIPTOR.message_types_by_name['CreateUserRequest'] = _CREATEUSERREQUEST
@@ -1243,6 +1376,10 @@ DESCRIPTOR.message_types_by_name['SaveImageRequest'] = _SAVEIMAGEREQUEST
 DESCRIPTOR.message_types_by_name['SaveImageResponse'] = _SAVEIMAGERESPONSE
 DESCRIPTOR.message_types_by_name['GetImageRequest'] = _GETIMAGEREQUEST
 DESCRIPTOR.message_types_by_name['GetImageResponse'] = _GETIMAGERESPONSE
+DESCRIPTOR.message_types_by_name['GetItemsForUserRequest'] = _GETITEMSFORUSERREQUEST
+DESCRIPTOR.message_types_by_name['GetItemsForUserResponse'] = _GETITEMSFORUSERRESPONSE
+DESCRIPTOR.message_types_by_name['GetItemsForNetworkRequest'] = _GETITEMSFORNETWORKREQUEST
+DESCRIPTOR.message_types_by_name['GetItemsForNetworkResponse'] = _GETITEMSFORNETWORKRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 UserDetails = _reflection.GeneratedProtocolMessageType('UserDetails', (_message.Message,), dict(
@@ -1476,6 +1613,34 @@ GetImageResponse = _reflection.GeneratedProtocolMessageType('GetImageResponse', 
   ))
 _sym_db.RegisterMessage(GetImageResponse)
 
+GetItemsForUserRequest = _reflection.GeneratedProtocolMessageType('GetItemsForUserRequest', (_message.Message,), dict(
+  DESCRIPTOR = _GETITEMSFORUSERREQUEST,
+  __module__ = 'network_pb2'
+  # @@protoc_insertion_point(class_scope:protobuf.GetItemsForUserRequest)
+  ))
+_sym_db.RegisterMessage(GetItemsForUserRequest)
+
+GetItemsForUserResponse = _reflection.GeneratedProtocolMessageType('GetItemsForUserResponse', (_message.Message,), dict(
+  DESCRIPTOR = _GETITEMSFORUSERRESPONSE,
+  __module__ = 'network_pb2'
+  # @@protoc_insertion_point(class_scope:protobuf.GetItemsForUserResponse)
+  ))
+_sym_db.RegisterMessage(GetItemsForUserResponse)
+
+GetItemsForNetworkRequest = _reflection.GeneratedProtocolMessageType('GetItemsForNetworkRequest', (_message.Message,), dict(
+  DESCRIPTOR = _GETITEMSFORNETWORKREQUEST,
+  __module__ = 'network_pb2'
+  # @@protoc_insertion_point(class_scope:protobuf.GetItemsForNetworkRequest)
+  ))
+_sym_db.RegisterMessage(GetItemsForNetworkRequest)
+
+GetItemsForNetworkResponse = _reflection.GeneratedProtocolMessageType('GetItemsForNetworkResponse', (_message.Message,), dict(
+  DESCRIPTOR = _GETITEMSFORNETWORKRESPONSE,
+  __module__ = 'network_pb2'
+  # @@protoc_insertion_point(class_scope:protobuf.GetItemsForNetworkResponse)
+  ))
+_sym_db.RegisterMessage(GetItemsForNetworkResponse)
+
 
 
 _NETWORK = _descriptor.ServiceDescriptor(
@@ -1484,8 +1649,8 @@ _NETWORK = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=2005,
-  serialized_end=3192,
+  serialized_start=2243,
+  serialized_end=3615,
   methods=[
   _descriptor.MethodDescriptor(
     name='SaveImage',
@@ -1587,9 +1752,27 @@ _NETWORK = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
+    name='GetItemsForUser',
+    full_name='protobuf.Network.GetItemsForUser',
+    index=11,
+    containing_service=None,
+    input_type=_GETITEMSFORUSERREQUEST,
+    output_type=_GETITEMSFORUSERRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetItemsForNetwork',
+    full_name='protobuf.Network.GetItemsForNetwork',
+    index=12,
+    containing_service=None,
+    input_type=_GETITEMSFORNETWORKREQUEST,
+    output_type=_GETITEMSFORNETWORKRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
     name='SearchForNetworks',
     full_name='protobuf.Network.SearchForNetworks',
-    index=11,
+    index=13,
     containing_service=None,
     input_type=_SEARCHFORNETWORKSREQUEST,
     output_type=_SEARCHFORNETWORKSRESPONSE,
@@ -1598,7 +1781,7 @@ _NETWORK = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='InviteUserToNetwork',
     full_name='protobuf.Network.InviteUserToNetwork',
-    index=12,
+    index=14,
     containing_service=None,
     input_type=_INVITEUSERTONETWORKREQUEST,
     output_type=_INVITEUSERTONETWORKRESPONSE,
@@ -1607,7 +1790,7 @@ _NETWORK = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ReplyToNetworkInvite',
     full_name='protobuf.Network.ReplyToNetworkInvite',
-    index=13,
+    index=15,
     containing_service=None,
     input_type=_REPLYTONETWORKINVITEREQUEST,
     output_type=_REPLYTONETWORKINVITERESPONSE,

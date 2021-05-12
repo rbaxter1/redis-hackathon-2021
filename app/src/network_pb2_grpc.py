@@ -69,6 +69,16 @@ class NetworkStub(object):
         request_serializer=network__pb2.GetNetworksForUserRequest.SerializeToString,
         response_deserializer=network__pb2.GetNetworksForUserResponse.FromString,
         )
+    self.GetItemsForUser = channel.unary_unary(
+        '/protobuf.Network/GetItemsForUser',
+        request_serializer=network__pb2.GetItemsForUserRequest.SerializeToString,
+        response_deserializer=network__pb2.GetItemsForUserResponse.FromString,
+        )
+    self.GetItemsForNetwork = channel.unary_unary(
+        '/protobuf.Network/GetItemsForNetwork',
+        request_serializer=network__pb2.GetItemsForNetworkRequest.SerializeToString,
+        response_deserializer=network__pb2.GetItemsForNetworkResponse.FromString,
+        )
     self.SearchForNetworks = channel.unary_unary(
         '/protobuf.Network/SearchForNetworks',
         request_serializer=network__pb2.SearchForNetworksRequest.SerializeToString,
@@ -167,6 +177,20 @@ class NetworkServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetItemsForUser(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetItemsForNetwork(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def SearchForNetworks(self, request, context):
     # missing associated documentation comment in .proto file
     pass
@@ -245,6 +269,16 @@ def add_NetworkServicer_to_server(servicer, server):
           servicer.GetNetworksForUser,
           request_deserializer=network__pb2.GetNetworksForUserRequest.FromString,
           response_serializer=network__pb2.GetNetworksForUserResponse.SerializeToString,
+      ),
+      'GetItemsForUser': grpc.unary_unary_rpc_method_handler(
+          servicer.GetItemsForUser,
+          request_deserializer=network__pb2.GetItemsForUserRequest.FromString,
+          response_serializer=network__pb2.GetItemsForUserResponse.SerializeToString,
+      ),
+      'GetItemsForNetwork': grpc.unary_unary_rpc_method_handler(
+          servicer.GetItemsForNetwork,
+          request_deserializer=network__pb2.GetItemsForNetworkRequest.FromString,
+          response_serializer=network__pb2.GetItemsForNetworkResponse.SerializeToString,
       ),
       'SearchForNetworks': grpc.unary_unary_rpc_method_handler(
           servicer.SearchForNetworks,
