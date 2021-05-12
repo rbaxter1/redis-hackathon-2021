@@ -6,7 +6,7 @@ message UserDetails {
   string email = 1;
   string first_name = 2;
   string last_name = 3;
-  repeated string network_ids = 4;
+  repeated string network_names = 4;
   repeated string friend_ids = 5;
 }
 
@@ -22,11 +22,11 @@ message CreateUserRequest {
 
 message CreateUserResponse {
   bool success = 1;
-  string user_id = 2;
+  string email = 2;
 }
 
 message GetUserRequest {
-  string user_id = 1;
+  string email = 1;
 }
 
 message GetUserResponse {
@@ -51,8 +51,8 @@ message CreateFriendshipResponse {
 }
 
 message ReplyToFriendshipRequest {
-  string user1 = 1;
-  string user2 = 2;
+  string email_1 = 1;
+  string email_2 = 2;
   bool accepted = 3;
 }
 
@@ -64,7 +64,8 @@ message ItemDetails {
   string title = 1;
   string description = 2;
   double asking_price = 3;
-  string network_id = 4;
+  string network_name = 4;
+  bytes image = 5;
   // To-do: posting photos
 }
 
@@ -73,11 +74,11 @@ message SubmitItemRequest {
 }
 
 message SubmitItemResponse {
-  string item_id = 1;
+  bool success = 1;
 }
 
 message ItemOffer {
-  string item_id = 1;
+  string title = 1;
   double offer = 2;
 }
 
@@ -86,14 +87,13 @@ message SubmitItemOfferRequest {
 }
 
 message SubmitItemOfferResponse {
-  bool response = 1;
+  bool success = 1;
 }
 
 message NetworkDetails {
   string name = 1;
   string owner_id = 2;
   string description = 3;
-  bool public_posting = 4;
 }
 
 message CreateNetworkRequest {
@@ -101,11 +101,11 @@ message CreateNetworkRequest {
 }
 
 message CreateNetworkResponse {
-  string network_id = 1;
+  string network_name = 1;
 }
 
 message GetNetworksForUserRequest {
-  string user_id = 1;
+  string email = 1;
 }
 
 message GetNetworksForUserResponse {
@@ -121,8 +121,8 @@ message SearchForNetworksResponse {
 }
 
 message InviteUserToNetworkRequest {
-  string network_id = 1;
-  string user_id = 2;
+  string network_name = 1;
+  string email = 2;
 }
 
 message InviteUserToNetworkResponse {
@@ -130,8 +130,8 @@ message InviteUserToNetworkResponse {
 }
 
 message ReplyToNetworkInviteRequest {
-  string network_id = 1;
-  string user_id = 2;
+  string network_name = 1;
+  string email = 2;
   bool accepted = 3;
 }
 
@@ -157,6 +157,24 @@ message GetImageResponse {
   bytes image = 2;
 }
 
+message GetItemsForUserRequest {
+  string email = 1;
+}
+
+message GetItemsForUserResponse {
+  bool success = 1;
+  repeated ItemDetails items = 2; 
+}
+
+message GetItemsForNetworkRequest {
+  string network_name = 1;
+}
+
+message GetItemsForNetworkResponse {
+  bool success = 1;
+  repeated ItemDetails items = 2;
+}
+
 service Network {
   rpc SaveImage(SaveImageRequest) returns (SaveImageResponse);
   rpc GetImage(GetImageRequest) returns (GetImageResponse);
@@ -169,6 +187,8 @@ service Network {
   rpc SubmitItemOffer(SubmitItemOfferRequest) returns (SubmitItemOfferResponse);
   rpc CreateNetwork(CreateNetworkRequest) returns (CreateNetworkResponse);
   rpc GetNetworksForUser(GetNetworksForUserRequest) returns (GetNetworksForUserResponse);
+  rpc GetItemsForUser(GetItemsForUserRequest) returns (GetItemsForUserResponse);
+  rpc GetItemsForNetwork(GetItemsForNetworkRequest) returns (GetItemsForNetworkResponse);
   rpc SearchForNetworks(SearchForNetworksRequest) returns (SearchForNetworksResponse);
   rpc InviteUserToNetwork(InviteUserToNetworkRequest) returns (InviteUserToNetworkResponse);
   rpc ReplyToNetworkInvite(ReplyToNetworkInviteRequest) returns (ReplyToNetworkInviteResponse);
