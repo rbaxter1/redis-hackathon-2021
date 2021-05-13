@@ -85,8 +85,11 @@ TODO: Command Details
 
 ## UX and DX
 
-TODO: screenshot
-
+|Page |iPhone | Android|
+--- | --- | --- 
+|Main Menu|![](menu_iphone.jpg)|![](menu_android.jpg)|
+|Networks|![](networks_iphone.jpg)|![](networks_android.jpg)|
+|My Listed Items|![](items_iphone.jpg)|![](items_android.jpg)|
 
 
 ## Installation
