@@ -28,29 +28,33 @@ TODO: screenshot
 
 
 
-## Instructions
+## Installation
 
-Prerequisites:
+### Prerequisites:
 
-Must have Docker (and docker compose) (Windows: https://docs.docker.com/docker-for-windows/install/)
+- Must have Docker ([Windows](https://docs.docker.com/docker-for-windows/install/) |  [Ubuntu](https://docs.docker.com/engine/install/ubuntu/))
 
-Must have Node 14 (https://nodejs.org/en/download/)
+- Must have [Node 14+](https://nodejs.org/en/download/)
 
-Must have expo (https://docs.expo.io/)
+- Must have [Expo](https://docs.expo.io/) 
 
+After installing Node, install Expo:
+    
     npm i -g expo-cli
 
-Get the repo
+### Local Install
+
+Get the repo:
 
     git clone https://github.com/rbaxter1/redis-hackathon-2021.git
 
     cd redis-hackathon-2021
 
-Start-up the containers for Redis, Python gRPC server, and Envoy proxy. 
+Build and start the containers for Redis, RedisInsight, the backend Python gRPC server, and the Envoy proxy:
 
     docker compose up -d
 
-TIP: *if you get a firewall warning on Windows, click "Allow access"
+Run the mobile application using Expo in a local web browser. This application can be run on your mobile phone by installing [Expo Go](https://expo.io/client). However, we recommend starting with the web browser since you may encounter into connectivity issues that require custom configuration, depending on your local network setup.
 
     cd mobile/src
 
@@ -58,9 +62,13 @@ TIP: *if you get a firewall warning on Windows, click "Allow access"
 
 	expo start
 	
-At this point, if you have expo installed on your mobile device, you can open it and scan the QR code. You may need to change the connection type to Tunnel. If you do not have expo installed on your Android or iPhone, then simply type w to launch the app in your browser.
+After running `expo start` you will be presented with the following choices:
 
-> **Tip**: If you want to see debug output from the react native app, open your browser's developer tools window.
+![](expo_start.png)
+
+ In the command window type `w` to open the mobile application in your default web browser.
+
+> **Tip**: When running in the browser, you can to see debugger output from the React Native app by opening your browser's developer tools window ([Firefox](https://developer.mozilla.org/en-US/docs/Tools) | [Chrome](https://developer.chrome.com/docs/devtools/open/))
 
 
 
@@ -90,3 +98,5 @@ from grpc dir:
     python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/network.proto
 
     
+
+At this point, if you have expo installed on your mobile device, you can open it and scan the QR code. You may need to change the connection type to Tunnel. If you do not have expo installed on your Android or iPhone, then simply type w to launch the app in your browser.
