@@ -17,7 +17,68 @@
 
 ### How the data is stored
 
+All data for The Network is stored in a graph. Users, Networks, and Items are nodes. Edges between nodes represent relationships. For example, an edge between two users can indicate friendship (or ignore status). An edge between a user and an item can indicate a listing for sale. An edge between a user and a network can indicate membership.
+
+#### Overview of graph structure:
+
+Nodes:
+- Users, Networks, Items
+
+Edges:
+- User-User - friend | ignore | transaction
+- User-Item - listing | transaction | viewed
+- User-Network - membership
+
+TODO: Screenshot of a graph from RedisInsight
+
+#### Creating Users
+
+When a person signs up for The Network, a node is created for that user. Properties are set on the node for each user detail, such as email.
+
+TODO: Command Details
+
+#### Creating Networks
+
+When a user creates a network, a node is created for the network and an owner edge is created between the user and the network. 
+
+TODO: Command Details
+
+#### Joining Networks
+
+When a user joins a network, a member edge is created between the user and the network.
+
+TODO: Command Details
+
+#### Listing Items
+
+When a user lists an item for sale in a network, a node is created for the item and selling edge is created between the user and the item.
+
+When an item is created, the image associated with the item is stored its own key. In the graph, the key is stored as a property on the item.
+
+TODO: Command Details
+
+#### Making an Offer
+
+When a user makes an offer for a listed item, an offer edge is created between the user and the item.
+
+TODO: Command Details
+
+#### Accepting an Offer
+
+When a user accepts an offer on a listed item, an edge is created between the user who made the offer and the item. An edge is also created between the two users indicating they have transacted.
+
+TODO: Command Details
+
 ### How the data is accessed
+
+#### Find Items for Sale in All a User's Networks
+
+The My Home screen shows the user all items for sale in all networks the user is a member. The following query finds all items for the My Home screen.
+
+TODO: Command Details
+
+
+
 
 ## Utility & Usefulness
 
@@ -62,11 +123,11 @@ Run the mobile application using Expo in a local web browser. This application c
 
 	expo start
 	
-After running `expo start` you will be presented with the following choices:
+After running `expo start`, you are presented with the following options:
 
 ![](expo_start.png)
 
- In the command window type `w` to open the mobile application in your default web browser.
+ In the command window, type `w` to open the mobile application in your default web browser.
 
 > **Tip**: When running in the browser, you can to see debugger output from the React Native app by opening your browser's developer tools window ([Firefox](https://developer.mozilla.org/en-US/docs/Tools) | [Chrome](https://developer.chrome.com/docs/devtools/open/))
 
