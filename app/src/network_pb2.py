@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='protobuf',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\rnetwork.proto\x12\x08protobuf\"n\n\x0bUserDetails\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x15\n\rnetwork_names\x18\x04 \x03(\t\x12\x12\n\nfriend_ids\x18\x05 \x03(\t\".\n\x0eUserFriendship\x12\r\n\x05user1\x18\x01 \x01(\t\x12\r\n\x05user2\x18\x02 \x01(\t\"8\n\x11\x43reateUserRequest\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"4\n\x12\x43reateUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"\x1f\n\x0eGetUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"6\n\x0fGetUserResponse\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"=\n\x14SearchForUserRequest\x12\x12\n\nfirst_name\x18\x01 \x01(\t\x12\x11\n\tlast_name\x18\x02 \x01(\t\"=\n\x15SearchForUserResponse\x12$\n\x05users\x18\x01 \x03(\x0b\x32\x15.protobuf.UserDetails\"G\n\x17\x43reateFriendshipRequest\x12,\n\nfriendship\x18\x01 \x01(\x0b\x32\x18.protobuf.UserFriendship\"+\n\x18\x43reateFriendshipResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"N\n\x18ReplyToFriendshipRequest\x12\x0f\n\x07\x65mail_1\x18\x01 \x01(\t\x12\x0f\n\x07\x65mail_2\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\",\n\x19ReplyToFriendshipResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"l\n\x0bItemDetails\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x14\n\x0c\x61sking_price\x18\x03 \x01(\x01\x12\x14\n\x0cnetwork_name\x18\x04 \x01(\t\x12\r\n\x05image\x18\x05 \x01(\x0c\"@\n\x11SubmitItemRequest\x12+\n\x0citem_details\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\"%\n\x12SubmitItemResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\")\n\tItemOffer\x12\r\n\x05title\x18\x01 \x01(\t\x12\r\n\x05offer\x18\x02 \x01(\x01\"A\n\x16SubmitItemOfferRequest\x12\'\n\nitem_offer\x18\x01 \x01(\x0b\x32\x13.protobuf.ItemOffer\"*\n\x17SubmitItemOfferResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"E\n\x0eNetworkDetails\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08owner_id\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"A\n\x14\x43reateNetworkRequest\x12)\n\x07network\x18\x01 \x01(\x0b\x32\x18.protobuf.NetworkDetails\"-\n\x15\x43reateNetworkResponse\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"*\n\x19GetNetworksForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"H\n\x1aGetNetworksForUserResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"0\n\x18SearchForNetworksRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"G\n\x19SearchForNetworksResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"A\n\x1aInviteUserToNetworkRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\".\n\x1bInviteUserToNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"T\n\x1bReplyToNetworkInviteRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\"/\n\x1cReplyToNetworkInviteResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"!\n\x10SaveImageRequest\x12\r\n\x05image\x18\x01 \x01(\x0c\"6\n\x11SaveImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x10\n\x08image_id\x18\x02 \x01(\t\"#\n\x0fGetImageRequest\x12\x10\n\x08image_id\x18\x01 \x01(\t\"2\n\x10GetImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05image\x18\x02 \x01(\x0c\"\'\n\x16GetItemsForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"P\n\x17GetItemsForUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails\"1\n\x19GetItemsForNetworkRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"S\n\x1aGetItemsForNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails2\xdc\n\n\x07Network\x12\x44\n\tSaveImage\x12\x1a.protobuf.SaveImageRequest\x1a\x1b.protobuf.SaveImageResponse\x12\x41\n\x08GetImage\x12\x19.protobuf.GetImageRequest\x1a\x1a.protobuf.GetImageResponse\x12G\n\nCreateUser\x12\x1b.protobuf.CreateUserRequest\x1a\x1c.protobuf.CreateUserResponse\x12>\n\x07GetUser\x12\x18.protobuf.GetUserRequest\x1a\x19.protobuf.GetUserResponse\x12P\n\rSearchForUser\x12\x1e.protobuf.SearchForUserRequest\x1a\x1f.protobuf.SearchForUserResponse\x12Y\n\x10\x43reateFriendship\x12!.protobuf.CreateFriendshipRequest\x1a\".protobuf.CreateFriendshipResponse\x12\\\n\x11ReplyToFriendship\x12\".protobuf.ReplyToFriendshipRequest\x1a#.protobuf.ReplyToFriendshipResponse\x12G\n\nSubmitItem\x12\x1b.protobuf.SubmitItemRequest\x1a\x1c.protobuf.SubmitItemResponse\x12V\n\x0fSubmitItemOffer\x12 .protobuf.SubmitItemOfferRequest\x1a!.protobuf.SubmitItemOfferResponse\x12P\n\rCreateNetwork\x12\x1e.protobuf.CreateNetworkRequest\x1a\x1f.protobuf.CreateNetworkResponse\x12_\n\x12GetNetworksForUser\x12#.protobuf.GetNetworksForUserRequest\x1a$.protobuf.GetNetworksForUserResponse\x12V\n\x0fGetItemsForUser\x12 .protobuf.GetItemsForUserRequest\x1a!.protobuf.GetItemsForUserResponse\x12_\n\x12GetItemsForNetwork\x12#.protobuf.GetItemsForNetworkRequest\x1a$.protobuf.GetItemsForNetworkResponse\x12\\\n\x11SearchForNetworks\x12\".protobuf.SearchForNetworksRequest\x1a#.protobuf.SearchForNetworksResponse\x12\x62\n\x13InviteUserToNetwork\x12$.protobuf.InviteUserToNetworkRequest\x1a%.protobuf.InviteUserToNetworkResponse\x12\x65\n\x14ReplyToNetworkInvite\x12%.protobuf.ReplyToNetworkInviteRequest\x1a&.protobuf.ReplyToNetworkInviteResponseb\x06proto3')
+  serialized_pb=_b('\n\rnetwork.proto\x12\x08protobuf\"n\n\x0bUserDetails\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x15\n\rnetwork_names\x18\x04 \x03(\t\x12\x12\n\nfriend_ids\x18\x05 \x03(\t\".\n\x0eUserFriendship\x12\r\n\x05user1\x18\x01 \x01(\t\x12\r\n\x05user2\x18\x02 \x01(\t\"8\n\x11\x43reateUserRequest\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"4\n\x12\x43reateUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"\x1f\n\x0eGetUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"6\n\x0fGetUserResponse\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"=\n\x14SearchForUserRequest\x12\x12\n\nfirst_name\x18\x01 \x01(\t\x12\x11\n\tlast_name\x18\x02 \x01(\t\"=\n\x15SearchForUserResponse\x12$\n\x05users\x18\x01 \x03(\x0b\x32\x15.protobuf.UserDetails\"G\n\x17\x43reateFriendshipRequest\x12,\n\nfriendship\x18\x01 \x01(\x0b\x32\x18.protobuf.UserFriendship\"+\n\x18\x43reateFriendshipResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"N\n\x18ReplyToFriendshipRequest\x12\x0f\n\x07\x65mail_1\x18\x01 \x01(\t\x12\x0f\n\x07\x65mail_2\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\",\n\x19ReplyToFriendshipResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"l\n\x0bItemDetails\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x14\n\x0c\x61sking_price\x18\x03 \x01(\x01\x12\x14\n\x0cnetwork_name\x18\x04 \x01(\t\x12\r\n\x05image\x18\x05 \x01(\x0c\"@\n\x11SubmitItemRequest\x12+\n\x0citem_details\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\"%\n\x12SubmitItemResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\")\n\tItemOffer\x12\r\n\x05title\x18\x01 \x01(\t\x12\r\n\x05offer\x18\x02 \x01(\x01\"A\n\x16SubmitItemOfferRequest\x12\'\n\nitem_offer\x18\x01 \x01(\x0b\x32\x13.protobuf.ItemOffer\"*\n\x17SubmitItemOfferResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"E\n\x0eNetworkDetails\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08owner_id\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"A\n\x14\x43reateNetworkRequest\x12)\n\x07network\x18\x01 \x01(\x0b\x32\x18.protobuf.NetworkDetails\"-\n\x15\x43reateNetworkResponse\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"*\n\x19GetNetworksForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"H\n\x1aGetNetworksForUserResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"0\n\x18SearchForNetworksRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"G\n\x19SearchForNetworksResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"A\n\x1aInviteUserToNetworkRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\".\n\x1bInviteUserToNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"T\n\x1bReplyToNetworkInviteRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x03 \x01(\x08\"/\n\x1cReplyToNetworkInviteResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"!\n\x10SaveImageRequest\x12\r\n\x05image\x18\x01 \x01(\x0c\"6\n\x11SaveImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x10\n\x08image_id\x18\x02 \x01(\t\"#\n\x0fGetImageRequest\x12\x10\n\x08image_id\x18\x01 \x01(\t\"2\n\x10GetImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05image\x18\x02 \x01(\x0c\"\'\n\x16GetItemsForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"P\n\x17GetItemsForUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails\"1\n\x19GetItemsForNetworkRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"S\n\x1aGetItemsForNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails\"9\n\x12JoinNetworkRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x14\n\x0cnetwork_name\x18\x02 \x01(\t\"&\n\x13JoinNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\xa8\x0b\n\x07Network\x12\x44\n\tSaveImage\x12\x1a.protobuf.SaveImageRequest\x1a\x1b.protobuf.SaveImageResponse\x12\x41\n\x08GetImage\x12\x19.protobuf.GetImageRequest\x1a\x1a.protobuf.GetImageResponse\x12G\n\nCreateUser\x12\x1b.protobuf.CreateUserRequest\x1a\x1c.protobuf.CreateUserResponse\x12>\n\x07GetUser\x12\x18.protobuf.GetUserRequest\x1a\x19.protobuf.GetUserResponse\x12P\n\rSearchForUser\x12\x1e.protobuf.SearchForUserRequest\x1a\x1f.protobuf.SearchForUserResponse\x12Y\n\x10\x43reateFriendship\x12!.protobuf.CreateFriendshipRequest\x1a\".protobuf.CreateFriendshipResponse\x12\\\n\x11ReplyToFriendship\x12\".protobuf.ReplyToFriendshipRequest\x1a#.protobuf.ReplyToFriendshipResponse\x12G\n\nSubmitItem\x12\x1b.protobuf.SubmitItemRequest\x1a\x1c.protobuf.SubmitItemResponse\x12V\n\x0fSubmitItemOffer\x12 .protobuf.SubmitItemOfferRequest\x1a!.protobuf.SubmitItemOfferResponse\x12P\n\rCreateNetwork\x12\x1e.protobuf.CreateNetworkRequest\x1a\x1f.protobuf.CreateNetworkResponse\x12_\n\x12GetNetworksForUser\x12#.protobuf.GetNetworksForUserRequest\x1a$.protobuf.GetNetworksForUserResponse\x12V\n\x0fGetItemsForUser\x12 .protobuf.GetItemsForUserRequest\x1a!.protobuf.GetItemsForUserResponse\x12_\n\x12GetItemsForNetwork\x12#.protobuf.GetItemsForNetworkRequest\x1a$.protobuf.GetItemsForNetworkResponse\x12\\\n\x11SearchForNetworks\x12\".protobuf.SearchForNetworksRequest\x1a#.protobuf.SearchForNetworksResponse\x12\x62\n\x13InviteUserToNetwork\x12$.protobuf.InviteUserToNetworkRequest\x1a%.protobuf.InviteUserToNetworkResponse\x12\x65\n\x14ReplyToNetworkInvite\x12%.protobuf.ReplyToNetworkInviteRequest\x1a&.protobuf.ReplyToNetworkInviteResponse\x12J\n\x0bJoinNetwork\x12\x1c.protobuf.JoinNetworkRequest\x1a\x1d.protobuf.JoinNetworkResponseb\x06proto3')
 )
 
 
@@ -1332,6 +1332,75 @@ _GETITEMSFORNETWORKRESPONSE = _descriptor.Descriptor(
   serialized_end=2240,
 )
 
+
+_JOINNETWORKREQUEST = _descriptor.Descriptor(
+  name='JoinNetworkRequest',
+  full_name='protobuf.JoinNetworkRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='email', full_name='protobuf.JoinNetworkRequest.email', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='network_name', full_name='protobuf.JoinNetworkRequest.network_name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2242,
+  serialized_end=2299,
+)
+
+
+_JOINNETWORKRESPONSE = _descriptor.Descriptor(
+  name='JoinNetworkResponse',
+  full_name='protobuf.JoinNetworkResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='success', full_name='protobuf.JoinNetworkResponse.success', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2301,
+  serialized_end=2339,
+)
+
 _CREATEUSERREQUEST.fields_by_name['user'].message_type = _USERDETAILS
 _GETUSERRESPONSE.fields_by_name['user'].message_type = _USERDETAILS
 _SEARCHFORUSERRESPONSE.fields_by_name['users'].message_type = _USERDETAILS
@@ -1380,6 +1449,8 @@ DESCRIPTOR.message_types_by_name['GetItemsForUserRequest'] = _GETITEMSFORUSERREQ
 DESCRIPTOR.message_types_by_name['GetItemsForUserResponse'] = _GETITEMSFORUSERRESPONSE
 DESCRIPTOR.message_types_by_name['GetItemsForNetworkRequest'] = _GETITEMSFORNETWORKREQUEST
 DESCRIPTOR.message_types_by_name['GetItemsForNetworkResponse'] = _GETITEMSFORNETWORKRESPONSE
+DESCRIPTOR.message_types_by_name['JoinNetworkRequest'] = _JOINNETWORKREQUEST
+DESCRIPTOR.message_types_by_name['JoinNetworkResponse'] = _JOINNETWORKRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 UserDetails = _reflection.GeneratedProtocolMessageType('UserDetails', (_message.Message,), dict(
@@ -1641,6 +1712,20 @@ GetItemsForNetworkResponse = _reflection.GeneratedProtocolMessageType('GetItemsF
   ))
 _sym_db.RegisterMessage(GetItemsForNetworkResponse)
 
+JoinNetworkRequest = _reflection.GeneratedProtocolMessageType('JoinNetworkRequest', (_message.Message,), dict(
+  DESCRIPTOR = _JOINNETWORKREQUEST,
+  __module__ = 'network_pb2'
+  # @@protoc_insertion_point(class_scope:protobuf.JoinNetworkRequest)
+  ))
+_sym_db.RegisterMessage(JoinNetworkRequest)
+
+JoinNetworkResponse = _reflection.GeneratedProtocolMessageType('JoinNetworkResponse', (_message.Message,), dict(
+  DESCRIPTOR = _JOINNETWORKRESPONSE,
+  __module__ = 'network_pb2'
+  # @@protoc_insertion_point(class_scope:protobuf.JoinNetworkResponse)
+  ))
+_sym_db.RegisterMessage(JoinNetworkResponse)
+
 
 
 _NETWORK = _descriptor.ServiceDescriptor(
@@ -1649,8 +1734,8 @@ _NETWORK = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=2243,
-  serialized_end=3615,
+  serialized_start=2342,
+  serialized_end=3790,
   methods=[
   _descriptor.MethodDescriptor(
     name='SaveImage',
@@ -1794,6 +1879,15 @@ _NETWORK = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_REPLYTONETWORKINVITEREQUEST,
     output_type=_REPLYTONETWORKINVITERESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='JoinNetwork',
+    full_name='protobuf.Network.JoinNetwork',
+    index=16,
+    containing_service=None,
+    input_type=_JOINNETWORKREQUEST,
+    output_type=_JOINNETWORKRESPONSE,
     serialized_options=None,
   ),
 ])

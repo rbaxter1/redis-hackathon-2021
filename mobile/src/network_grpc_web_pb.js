@@ -1350,5 +1350,85 @@ proto.protobuf.NetworkPromiseClient.prototype.replyToNetworkInvite =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.protobuf.JoinNetworkRequest,
+ *   !proto.protobuf.JoinNetworkResponse>}
+ */
+const methodDescriptor_Network_JoinNetwork = new grpc.web.MethodDescriptor(
+  '/protobuf.Network/JoinNetwork',
+  grpc.web.MethodType.UNARY,
+  proto.protobuf.JoinNetworkRequest,
+  proto.protobuf.JoinNetworkResponse,
+  /**
+   * @param {!proto.protobuf.JoinNetworkRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.JoinNetworkResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.protobuf.JoinNetworkRequest,
+ *   !proto.protobuf.JoinNetworkResponse>}
+ */
+const methodInfo_Network_JoinNetwork = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.protobuf.JoinNetworkResponse,
+  /**
+   * @param {!proto.protobuf.JoinNetworkRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.JoinNetworkResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.protobuf.JoinNetworkRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.protobuf.JoinNetworkResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.protobuf.JoinNetworkResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.protobuf.NetworkClient.prototype.joinNetwork =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/protobuf.Network/JoinNetwork',
+      request,
+      metadata || {},
+      methodDescriptor_Network_JoinNetwork,
+      callback);
+};
+
+
+/**
+ * @param {!proto.protobuf.JoinNetworkRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.protobuf.JoinNetworkResponse>}
+ *     Promise that resolves to the response
+ */
+proto.protobuf.NetworkPromiseClient.prototype.joinNetwork =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/protobuf.Network/JoinNetwork',
+      request,
+      metadata || {},
+      methodDescriptor_Network_JoinNetwork);
+};
+
+
 module.exports = proto.protobuf;
 
