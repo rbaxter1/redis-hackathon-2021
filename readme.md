@@ -32,13 +32,13 @@ Edges:
 TODO: Screenshot of a graph from RedisInsight
 
 #### Creating Users
-
+Startup screen
 When a person signs up for The Network, a node is created for that user. Properties are set on the node for user detail, such as email.
 
     GRAPH.QUERY THE_NETWORK_GRAPH "CREATE (:User {firstName: 'Elon', lastName: 'Musk', email: 'emusk@tesla.com'})"
 
 #### Creating Networks
-
+add image
 When a user creates a network, a node is created for the network and an owner edge is created between the user and the network.
 
     GRAPH.QUERY THE_NETWORK_GRAPH "CREATE (:Network {name: 'Red Sox Tickets', description: 'A network for exchanging Red Sox tickets.'})"
@@ -47,7 +47,7 @@ When a user creates a network, a node is created for the network and an owner ed
     GRAPH.QUERY THE_NETWORK_GRAPH  "Match (p:User {email: 'emusk@tesla.com'} ) MATCH (n:Network {name:'Red Sox Tickets'}) CREATE (p)-[:MEMBER]->(n)"
 
 #### Joining Networks
-
+adding is_member to get networks
 When a user joins a network, a member edge is created between the user and the network.
 
     GRAPH.QUERY THE_NETWORK_GRAPH  "Match (p:User {email: 'emusk@telsa.com'} ) MATCH (n:Network {name:'Red Sox Tickets'}) CREATE (p)-[:MEMBER]->(n)"
@@ -74,6 +74,7 @@ When a user makes an offer for a listed item, an offer edge is created between t
 TODO: Command Details
 
 #### Accepting an Offer
+My Offers Drawer
 
 When a user accepts an offer on a listed item, an edge is created between the user who made the offer and the item. An edge is also created between the two users indicating they have transacted.
 
@@ -91,13 +92,16 @@ The My Home screen shows the user all items for sale in all networks the user is
 
 TODO: Command Details
 
-#### Get All Offers for an Item
+#### Get All Offers for an Item (Manage Offers)
 
 TODO: Command Details
 
-#### All Item Tags that a User Has Made Offers on.
+#### All Item Tags that a User Has Made Offers on (Analytics)
 
 // Show the image from redisinsight
+
+#### 
+
 
 
 ## Utility & Usefulness
@@ -188,3 +192,17 @@ from grpc dir:
     
 
 At this point, if you have expo installed on your mobile device, you can open it and scan the QR code. You may need to change the connection type to Tunnel. If you do not have expo installed on your Android or iPhone, then simply type w to launch the app in your browser.
+
+
+client.py
+Generate a network
+Users - 20 (some cross users)
+Networks - 4 
+Items per Network - randomly select thumbnail... 20+ Items
+
+
+Nice to have list:
+Invite People to a network
+Search user
+Privacy
+

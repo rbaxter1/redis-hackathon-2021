@@ -65,6 +65,7 @@ message ItemDetails {
   double asking_price = 3;
   string network_name = 4;
   bytes image = 5;
+  repeated string labels = 6;
 }
 
 message SubmitItemRequest {
@@ -76,8 +77,10 @@ message SubmitItemResponse {
 }
 
 message ItemOffer {
-  string title = 1;
-  double offer = 2;
+  string email = 1;
+  string title = 2;
+  double offer = 3;
+  string time = 4;
 }
 
 message SubmitItemOfferRequest {
@@ -92,6 +95,8 @@ message NetworkDetails {
   string name = 1;
   string owner_id = 2;
   string description = 3;
+  bytes image = 4;
+  bool is_member = 5;
 }
 
 message CreateNetworkRequest {
@@ -182,6 +187,19 @@ message JoinNetworkResponse {
   bool success = 1;
 }
 
+message GetOffersForUserRequest {
+  string email = 1;
+}
+
+message GetOffersForUserResponse {
+  bool success = 1;
+  repeated ItemOffer offers;
+}
+
+
+
+
+
 service Network {
   rpc SaveImage(SaveImageRequest) returns (SaveImageResponse);
   rpc GetImage(GetImageRequest) returns (GetImageResponse);
@@ -200,4 +218,6 @@ service Network {
   rpc InviteUserToNetwork(InviteUserToNetworkRequest) returns (InviteUserToNetworkResponse);
   rpc ReplyToNetworkInvite(ReplyToNetworkInviteRequest) returns (ReplyToNetworkInviteResponse);
   rpc JoinNetwork(JoinNetworkRequest) returns (JoinNetworkResponse);
+  rpc GetOffersForUser(GetOffersForUserRequest) returns (GetOffersForUserResponse);
+
 }
