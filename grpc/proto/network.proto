@@ -193,11 +193,8 @@ message GetOffersForUserRequest {
 
 message GetOffersForUserResponse {
   bool success = 1;
-  repeated ItemOffer offers;
+  repeated ItemOffer offers = 2;
 }
-
-
-
 
 
 service Network {

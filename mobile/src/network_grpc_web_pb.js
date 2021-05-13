@@ -1430,5 +1430,85 @@ proto.protobuf.NetworkPromiseClient.prototype.joinNetwork =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.protobuf.GetOffersForUserRequest,
+ *   !proto.protobuf.GetOffersForUserResponse>}
+ */
+const methodDescriptor_Network_GetOffersForUser = new grpc.web.MethodDescriptor(
+  '/protobuf.Network/GetOffersForUser',
+  grpc.web.MethodType.UNARY,
+  proto.protobuf.GetOffersForUserRequest,
+  proto.protobuf.GetOffersForUserResponse,
+  /**
+   * @param {!proto.protobuf.GetOffersForUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetOffersForUserResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.protobuf.GetOffersForUserRequest,
+ *   !proto.protobuf.GetOffersForUserResponse>}
+ */
+const methodInfo_Network_GetOffersForUser = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.protobuf.GetOffersForUserResponse,
+  /**
+   * @param {!proto.protobuf.GetOffersForUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetOffersForUserResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.protobuf.GetOffersForUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.protobuf.GetOffersForUserResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.protobuf.GetOffersForUserResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.protobuf.NetworkClient.prototype.getOffersForUser =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/protobuf.Network/GetOffersForUser',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetOffersForUser,
+      callback);
+};
+
+
+/**
+ * @param {!proto.protobuf.GetOffersForUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.protobuf.GetOffersForUserResponse>}
+ *     Promise that resolves to the response
+ */
+proto.protobuf.NetworkPromiseClient.prototype.getOffersForUser =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/protobuf.Network/GetOffersForUser',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetOffersForUser);
+};
+
+
 module.exports = proto.protobuf;
 
