@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Input, CheckBox } from 'react-native-elements';
 import {
     View,
@@ -24,44 +24,75 @@ const styles = StyleSheet.create({
     }
 });
 
-const CreateScreen = (props) => {
-    const [name, setName] = React.useState("");
-    const [description, setDescription] = React.useState("");
-    const [allowPublicPosting, setPublicPosting] = React.useState(true);
+class CreateScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "",
+            description: "",
+            allowPublicPosting: true,
+            askingPrice: ""
+        }
+    }
 
-    const navigation = useNavigation();
+    render () {
+        const {navigation} = this.props;
 
-    return (
-        <View style={styles.container}>
-            <Input
-                style={styles.input}
-                placeholder='Name'
-                onChangeText={setName}
-                value={name}
-            />
-            <Input
-                style={styles.input}
-                multiline
-                numberOfLines={5}
-                placeholder='Description'
-                onChangeText={setDescription}
-                value={description}
-            />
-            <CheckBox
+        const elements = [];
+        elements.push(<Input
+            key="1"
+            style={styles.input}
+            placeholder='Name'
+            onChangeText={text => this.setState({name: text})}
+            value={this.state.name}
+        />);
+        elements.push(<Input
+            key="2"
+            style={styles.input}
+            multiline
+            numberOfLines={5}
+            placeholder='Description'
+            onChangeText={text => this.setState({description: text})}
+            value={this.state.description}
+        />);
+        if (this.props.context === "network") {
+            elements.push(<CheckBox
+                key="3"
                 title='Allow others to post'
-                checked={allowPublicPosting}
-                onPress={() => setPublicPosting(!allowPublicPosting)}
-            />
-            <Button
-                title='Create'
-                onPress={() => {
-                    // submit data to backend
+                checked={this.state.allowPublicPosting}
+                onPress={() => this.setState({allowPublicPosting: !this.state.allowPublicPosting})}
+            />);
+        }
+        if (this.props.context === "item") {
+            elements.push(<Input
+                key="4"
+                style={styles.input}
+                placeholder='Asking Price'
+                value={this.state.askingPrice}
+                onChangeText={text => this.setState({askingPrice: text})}
+                keyboardType="numeric"
+            />);
+        }
 
-                    navigation.goBack();
-                }}
-            />
-        </View>
-    );
+        return (
+            <View style={styles.container}>
+                {elements}
+                <Button
+                    title='Create'
+                    onPress={() => {
+                        //todo: submit data to backend
+    
+                        navigation.goBack();
+                    }}
+                />
+            </View>
+        );
+    }
+    
 };
 
-export default CreateScreen;
+export default function(props) {
+    const navigation = useNavigation();
+
+    return <CreateScreen {...props} navigation={navigation} />;
+}

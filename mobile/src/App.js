@@ -48,13 +48,13 @@ function NetworksStack() {
 
 function NetworksScreen () {
   return (
-    <ItemListScreen></ItemListScreen>
+    <ItemListScreen isNetwork={true}></ItemListScreen>
   );
 }
 
 function NewNetworkScreen () {
   return (
-    <CreateScreen ></CreateScreen>
+    <CreateScreen context="network"></CreateScreen>
   );
 }
 
@@ -86,8 +86,12 @@ function MyItemsStack() {
           headerLeft: () => (
             drawerToggleButton(navigation)
           ),
+          headerRight: () => (
+            createButton(navigation)
+          ),
         })}>
           <Stack.Screen name="My Items" component={MyItemsScreen} />
+          <Stack.Screen name="Create" component={NewItemScreen} />
       </Stack.Navigator>
   );
 }
@@ -95,6 +99,12 @@ function MyItemsStack() {
 function MyItemsScreen () {
   return (
     <ItemListScreen></ItemListScreen>
+  );
+}
+
+function NewItemScreen () {
+  return (
+    <CreateScreen context="item"></CreateScreen>
   );
 }
 
