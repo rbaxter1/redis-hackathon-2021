@@ -48,7 +48,7 @@ function NetworksStack() {
 
 function NetworksScreen () {
   return (
-    <ItemListScreen></ItemListScreen>
+    <ItemListScreen isNetwork={true}></ItemListScreen>
   );
 }
 

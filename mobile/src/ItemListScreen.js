@@ -92,7 +92,7 @@ export default class ItemListScreen extends Component {
             keyExtractor={item => item.id.toString()}
             renderItem={({item}) => (
                 <View style={{marginTop: 25, width: '50%'}}>
-                    <PreviewCard name={item.name} imageUrl={item.image_url} />
+                    <PreviewCard name={item.name} imageUrl={item.image_url} isNetwork={this.props.isNetwork}/>
                 </View>
             )}
             />
