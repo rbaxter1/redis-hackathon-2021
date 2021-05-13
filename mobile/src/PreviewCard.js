@@ -40,6 +40,11 @@ export default class PreviewCard extends Component {
         }
     }
 
+    componentDidMount () {
+        //todo: load state of item from backend
+        //itemId is passed into props
+    }
+
     handleJoinButtonClick() {
         this.setState({joined: true});
 
