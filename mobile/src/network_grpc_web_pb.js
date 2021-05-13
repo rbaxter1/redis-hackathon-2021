@@ -953,6 +953,166 @@ proto.protobuf.NetworkPromiseClient.prototype.getNetworksForUser =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.protobuf.GetItemsForUserRequest,
+ *   !proto.protobuf.GetItemsForUserResponse>}
+ */
+const methodDescriptor_Network_GetItemsForUser = new grpc.web.MethodDescriptor(
+  '/protobuf.Network/GetItemsForUser',
+  grpc.web.MethodType.UNARY,
+  proto.protobuf.GetItemsForUserRequest,
+  proto.protobuf.GetItemsForUserResponse,
+  /**
+   * @param {!proto.protobuf.GetItemsForUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetItemsForUserResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.protobuf.GetItemsForUserRequest,
+ *   !proto.protobuf.GetItemsForUserResponse>}
+ */
+const methodInfo_Network_GetItemsForUser = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.protobuf.GetItemsForUserResponse,
+  /**
+   * @param {!proto.protobuf.GetItemsForUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetItemsForUserResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.protobuf.GetItemsForUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.protobuf.GetItemsForUserResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.protobuf.GetItemsForUserResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.protobuf.NetworkClient.prototype.getItemsForUser =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/protobuf.Network/GetItemsForUser',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetItemsForUser,
+      callback);
+};
+
+
+/**
+ * @param {!proto.protobuf.GetItemsForUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.protobuf.GetItemsForUserResponse>}
+ *     Promise that resolves to the response
+ */
+proto.protobuf.NetworkPromiseClient.prototype.getItemsForUser =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/protobuf.Network/GetItemsForUser',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetItemsForUser);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.protobuf.GetItemsForNetworkRequest,
+ *   !proto.protobuf.GetItemsForNetworkResponse>}
+ */
+const methodDescriptor_Network_GetItemsForNetwork = new grpc.web.MethodDescriptor(
+  '/protobuf.Network/GetItemsForNetwork',
+  grpc.web.MethodType.UNARY,
+  proto.protobuf.GetItemsForNetworkRequest,
+  proto.protobuf.GetItemsForNetworkResponse,
+  /**
+   * @param {!proto.protobuf.GetItemsForNetworkRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetItemsForNetworkResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.protobuf.GetItemsForNetworkRequest,
+ *   !proto.protobuf.GetItemsForNetworkResponse>}
+ */
+const methodInfo_Network_GetItemsForNetwork = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.protobuf.GetItemsForNetworkResponse,
+  /**
+   * @param {!proto.protobuf.GetItemsForNetworkRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetItemsForNetworkResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.protobuf.GetItemsForNetworkRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.protobuf.GetItemsForNetworkResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.protobuf.GetItemsForNetworkResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.protobuf.NetworkClient.prototype.getItemsForNetwork =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/protobuf.Network/GetItemsForNetwork',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetItemsForNetwork,
+      callback);
+};
+
+
+/**
+ * @param {!proto.protobuf.GetItemsForNetworkRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.protobuf.GetItemsForNetworkResponse>}
+ *     Promise that resolves to the response
+ */
+proto.protobuf.NetworkPromiseClient.prototype.getItemsForNetwork =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/protobuf.Network/GetItemsForNetwork',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetItemsForNetwork);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.protobuf.SearchForNetworksRequest,
  *   !proto.protobuf.SearchForNetworksResponse>}
  */
