@@ -1,15 +1,32 @@
 # The Network
-# A 2021 Redis Hackathon Project
+## A 2021 Redis Hackathon Project
+
 
 ## Team:
 
-Rob Baxter
+<ul>
+  <li> Rob Baxter </li>
+  <li> Slattery Donohoe </li>
+  <li> Jonas McGowan-Martin </li>
+  <li> Jon Myers </li>
+</ul>
 
-Slattery Donohoe
 
-Jonas McGowan-Martin
 
-Jon Myers
+## Use of Redis
+
+### How the data is stored
+
+### How the data is accessed
+
+## Utility & Usefulness
+
+
+## UX and DX
+
+TODO: screenshot
+
+
 
 ## Instructions
 
@@ -43,7 +60,8 @@ TIP: *if you get a firewall warning on Windows, click "Allow access"
 	
 At this point, if you have expo installed on your mobile device, you can open it and scan the QR code. You may need to change the connection type to Tunnel. If you do not have expo installed on your Android or iPhone, then simply type w to launch the app in your browser.
 
-TIP: if you want to see debug out from the react native app, open your browser developer tools window.
+> **Tip**: If you want to see debug output from the react native app, open your browser's developer tools window.
+
 
 
 ## Architecture:
