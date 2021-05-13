@@ -173,6 +173,15 @@ message GetItemsForNetworkResponse {
   repeated ItemDetails items = 2;
 }
 
+message JoinNetworkRequest {
+  string email = 1;
+  string network_name = 2;
+}
+
+message JoinNetworkResponse {
+  bool success = 1;
+}
+
 service Network {
   rpc SaveImage(SaveImageRequest) returns (SaveImageResponse);
   rpc GetImage(GetImageRequest) returns (GetImageResponse);
@@ -190,4 +199,5 @@ service Network {
   rpc SearchForNetworks(SearchForNetworksRequest) returns (SearchForNetworksResponse);
   rpc InviteUserToNetwork(InviteUserToNetworkRequest) returns (InviteUserToNetworkResponse);
   rpc ReplyToNetworkInvite(ReplyToNetworkInviteRequest) returns (ReplyToNetworkInviteResponse);
+  rpc JoinNetwork(JoinNetworkRequest) returns (JoinNetworkResponse);
 }

@@ -17,7 +17,7 @@
 
 ### How the data is stored
 
-All data for The Network is stored in a graph. Users, Networks, and Items are nodes. Edges between nodes represent relationships. For example, an edge between two users can indicate friendship (or ignore status). An edge between a user and an item can indicate a listing for sale. An edge between a user and a network can indicate membership.
+All data for The Network is stored in a graph. Users, Networks, and Items are nodes. Edges between nodes represent relationships. For example, an edge between two users can indicate friendship. An edge between a user and an item can indicate listing an items for sale. An edge between a user and a network can indicate membership.
 
 #### Overview of graph structure:
 
@@ -25,7 +25,7 @@ Nodes:
 - Users, Networks, Items
 
 Edges:
-- User-User - friend | ignore | transaction
+- User-User - friend | transaction
 - User-Item - listing | transaction | viewed
 - User-Network - membership
 
@@ -33,39 +33,53 @@ TODO: Screenshot of a graph from RedisInsight
 
 #### Creating Users
 
-When a person signs up for The Network, a node is created for that user. Properties are set on the node for each user detail, such as email.
+When a person signs up for The Network, a node is created for that user. Properties are set on the node for user detail, such as email.
 
-TODO: Command Details
+    GRAPH.QUERY THE_NETWORK_GRAPH "CREATE (:User {firstName: 'Elon', lastName: 'Musk', email: 'emusk@tesla.com'})"
 
 #### Creating Networks
 
-When a user creates a network, a node is created for the network and an owner edge is created between the user and the network. 
+When a user creates a network, a node is created for the network and an owner edge is created between the user and the network.
 
-TODO: Command Details
+    GRAPH.QUERY THE_NETWORK_GRAPH "CREATE (:Network {name: 'Red Sox Tickets', description: 'A network for exchanging Red Sox tickets.'})"
+
+    // TODO: Need this query
+    GRAPH.QUERY THE_NETWORK_GRAPH  "Match (p:User {email: 'emusk@tesla.com'} ) MATCH (n:Network {name:'Red Sox Tickets'}) CREATE (p)-[:MEMBER]->(n)"
 
 #### Joining Networks
 
 When a user joins a network, a member edge is created between the user and the network.
 
-TODO: Command Details
+    GRAPH.QUERY THE_NETWORK_GRAPH  "Match (p:User {email: 'emusk@telsa.com'} ) MATCH (n:Network {name:'Red Sox Tickets'}) CREATE (p)-[:MEMBER]->(n)"
 
 #### Listing Items
 
-When a user lists an item for sale in a network, a node is created for the item and selling edge is created between the user and the item.
+When a user lists an item for sale in a network, a node is created for the item and a `selling` edge is created between the user and the item.
+
+    // TODO: need query for creating the edge
+    GRAPH.QUERY THE_NETWORK_GRAPH "CREATE (:Item {title: 'SOX v LAA Sat 5/15', description: '2 Seats. Awesome Loge Box', askingPrice: '$150', imageKey: 'image:46'})"
 
 When an item is created, the image associated with the item is stored its own key. In the graph, the key is stored as a property on the item.
 
+    SET image:46 ajsdkjashdkjhaskdjhasd
+
 TODO: Command Details
+
+// TODO: add tags description and code
 
 #### Making an Offer
 
-When a user makes an offer for a listed item, an offer edge is created between the user and the item.
+When a user makes an offer for a listed item, an offer edge is created between the user and the item. The edge has a property for offer status which could be one of the following: `active`, `accepted`, `rejected`
 
 TODO: Command Details
 
 #### Accepting an Offer
 
 When a user accepts an offer on a listed item, an edge is created between the user who made the offer and the item. An edge is also created between the two users indicating they have transacted.
+
+TODO: Command Details
+
+#### Rejecting an Offer
 
 TODO: Command Details
 
@@ -77,7 +91,13 @@ The My Home screen shows the user all items for sale in all networks the user is
 
 TODO: Command Details
 
+#### Get All Offers for an Item
 
+TODO: Command Details
+
+#### All Item Tags that a User Has Made Offers on.
+
+// Show the image from redisinsight
 
 
 ## Utility & Usefulness
@@ -92,7 +112,7 @@ TODO: Command Details
 |My Listed Items|![](items_iphone.jpg)|![](items_android.jpg)|
 
 
-## Installation
+## Installation Instructions
 
 ### Prerequisites:
 
@@ -157,9 +177,13 @@ Notes:
 
 from grpc dir:
 
+    // to generate python
+    python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/network.proto
+
+    // to generate grpc-web
     protoc -I=./proto ./proto/network.proto --js_out=import_style=commonjs:. --grpc-web_out=import_style=commonjs,mode=grpcwebtext:.
 
-    python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/network.proto
+    
 
     
 
