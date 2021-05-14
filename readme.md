@@ -173,7 +173,7 @@ Run the mobile application using Expo in a local web browser. This application c
 	
 After running `expo start`, you are presented with the following options:
 
-![](expo_start.png)
+![](./images/expo_start.png)
 
  In the command window, type `w` to open the mobile application in your default web browser.
 
