@@ -13,20 +13,20 @@
 
 ## What is *The Network*?
 
-*The Network* is a mobile application where you can build your own personal network to buy and sell goods. When you meet people you want transact with, tell them to "join my network". Whether your an artist building a distribution network for your creations, or a group of sports fans coordinating ticket sales, *The Network* is the place to be.
+*The Network* is a mobile application that enables you to build your own personal buying and selling network for whatever you like. When you meet people you want transact with, tell them to "join my network". Whether your an artist building a distribution network for your creations, or a group of sports fans coordinating ticket sales, *The Network* is a space that makes transacting easy.
 
 ## Use of Redis
 
-This project uses RedisGraph to store and retrieve data. Redis runs in a Docker container from the [redismod](https://github.com/RedisLabsModules/redismod) image.
+This project uses RedisGraph to store and retrieve data. In the setup described below, Redis runs in a [redismod](https://github.com/RedisLabsModules/redismod) Docker container.
 
 ## How the data is stored
 
-All data for The Network is stored in a graph. Users, Networks, and Items are nodes. Edges between nodes represent relationships. For example, an edge between two users indicates friendship. An edge between a user and an item indicates listing an items for sale. An edge between a user and a network indicates membership.
+All data for *The Network* is stored in a graph. Users, networks, and items are nodes. Edges between nodes represent relationships. For example, an edge between two users indicates friendship. An edge between a user and an item indicates listing an items for sale. An edge between a user and a network indicates membership.
 
 ### Overview of Graph Structure:
 
 **Nodes**:
-- Users, Networks, Items
+- Users, Networks, Items, Tags
 
 **Edges**:
 
@@ -79,7 +79,7 @@ TODO: Command Details
 
 ### Making an Offer
 
-When a user makes an offer for a listed item, an **offer** edge is created between the user and the item. The edge has a property for offer status which could be one of the following: `active`, `accepted`, `rejected`. When an `offer` edge is created, the **status** property is initialized to `active`. Any offer made on a item having an `accepted` offer is initialized to `rejected`.
+When a user makes an offer for a listed item, an **offer** edge is created between the user and the item. The edge has a property for offer status which could be one of the following: `active`, `accepted`, `rejected`. When an **offer** edge is created, the **status** property is initialized to `active`. In the event that an offer is made on a item already having an `accepted` offer, the offer is initialized to `rejected`.
 
 TODO: Command Details
 
@@ -97,13 +97,22 @@ TODO: Command Details
 
 ## How the Data is Accessed
 
-#### Find Items for Sale in All a User's Networks
+### Find All Listed Items in Any Network a User is a Member
 
 The My Home screen shows the user all items for sale in all networks the user is a member. The following query finds all items for the My Home screen.
 
 TODO: Command Details
 
-#### Get All Offers for an Item (Manage Offers)
+### Find a User's Listed Items
+
+The *My Items* screen shows all items a user has for sale. The following query finds all items for the *My Items* screen.
+
+TODO: Command Details
+
+
+### Find All Offers for an Item
+
+
 
 TODO: Command Details
 
@@ -119,6 +128,7 @@ TODO: Command Details
 
 
 ## UX and DX
+The following table shows iPohone and Android screenshots for each page in the mobile application. 
 
 |Page |iPhone | Android|
 --- | --- | --- 
@@ -173,7 +183,35 @@ After running `expo start`, you are presented with the following options:
 
 ## Architecture:
 
-![](architecture.png)
+The following diagram illustrates the architecture.
+
+![](architecture.png) 
+
+## Technology Stack
+
+- [Redis](https://redis.io/) powers the persistence layer. Using the [RedisGraph](https://oss.redislabs.com/redisgraph/) available from [Redis Labs](https://redislabs.com/) and provides fast, sophisticated graph operations making data management and querying easy.
+
+- All backend components are deployed to [Docker](https://www.docker.com/) containers. You can easily launch the entire back-end with a simple `docker compose up` command.
+
+- We use [gRPC](https://grpc.io/) for transport ([HTTP/2](https://http2.github.io/)), serialization ([ProtocolBuffers](https://developers.google.com/protocol-buffers/)), and service endpoint definitions.
+
+- The mobile front-end is built on [React Native](https://reactnative.dev/) which conveniently allows a developer to create both iOS and Android application with a single codebase.
+
+- Using [Expo](https://docs.expo.io/) developers can create an app with a single `expo init` command and debug either in a web browser or on a mobile device.
+
+- [grpc-web](https://github.com/grpc/grpc-web) enables gRPC interface definitions to be compiled into native Javascript.
+
+- We use [Envoy](https://www.envoyproxy.io/) for the proxy layer between the front-end mobile app and the back-end services. Envoy has a built-in `grpc_web` filter to convert HTTP/1.1 traffic to HTTP/2.
+
+//TODO Add Images
+ 
+| | | |
+--- | --- | ---
+|Redis |gRPC | RedisGraph |
+|Expo | Docker | React Native | 
+| gRPC-Web | Envoy | ProtocolBuffers |
+
+
 
 
 
