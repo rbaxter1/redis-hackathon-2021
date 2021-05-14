@@ -99,6 +99,11 @@ class NetworkStub(object):
         request_serializer=network__pb2.JoinNetworkRequest.SerializeToString,
         response_deserializer=network__pb2.JoinNetworkResponse.FromString,
         )
+    self.GetOffersForUser = channel.unary_unary(
+        '/protobuf.Network/GetOffersForUser',
+        request_serializer=network__pb2.GetOffersForUserRequest.SerializeToString,
+        response_deserializer=network__pb2.GetOffersForUserResponse.FromString,
+        )
 
 
 class NetworkServicer(object):
@@ -224,6 +229,13 @@ class NetworkServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetOffersForUser(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NetworkServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -311,6 +323,11 @@ def add_NetworkServicer_to_server(servicer, server):
           servicer.JoinNetwork,
           request_deserializer=network__pb2.JoinNetworkRequest.FromString,
           response_serializer=network__pb2.JoinNetworkResponse.SerializeToString,
+      ),
+      'GetOffersForUser': grpc.unary_unary_rpc_method_handler(
+          servicer.GetOffersForUser,
+          request_deserializer=network__pb2.GetOffersForUserRequest.FromString,
+          response_serializer=network__pb2.GetOffersForUserResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
