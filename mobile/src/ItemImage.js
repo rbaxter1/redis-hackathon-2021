@@ -5,20 +5,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'stretch'
-    },
-    image: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0
     }
 });
 
 const ItemImage = props => {
     return (
         <View style={styles.container}>
-            <Image style={styles.image} resizeMode="contain" {...props} />
+            <Image resizeMode="contain" {...props} />
         </View>
     );
 }

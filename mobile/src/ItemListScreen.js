@@ -66,6 +66,7 @@ export default class ItemListScreen extends Component {
 
     componentDidMount() {
         console.log("item list did mount");
+        console.log("navigation passed in? " + this.props.navigation);
         this.fetchAllItems();
     }
 
@@ -92,7 +93,7 @@ export default class ItemListScreen extends Component {
             keyExtractor={item => item.id.toString()}
             renderItem={({item}) => (
                 <View style={{marginTop: 25, width: '50%'}}>
-                    <PreviewCard name={item.name} itemId={item.id} imageUrl={item.image_url} isNetwork={this.props.isNetwork}/>
+                    <PreviewCard navigation={this.props.navigation} item={item} isNetwork={this.props.isNetwork}/>
                 </View>
             )}
             />
