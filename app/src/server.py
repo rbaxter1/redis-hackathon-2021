@@ -11,21 +11,22 @@ from google.protobuf.json_format import MessageToJson, Parse
 import network_pb2
 import network_pb2_grpc
 
+
 class Network(network_pb2_grpc.NetworkServicer):
     def __init__(self):
         try:
             redis_url = os.environ['REDIS_URL']
-        except: 
+        except:
             redis_url = 'redis'
         '''
         try:
             redis_port = os.environ['REDIS_PORT']
-        except: 
+        except:
             redis_port = 6379
 
         try:
             redis_password = os.environ['REDIS_PASSWORD']
-        except: 
+        except:
             redis_password = ''
         '''
         self.redis_pool = redis.ConnectionPool(host=redis_url)
@@ -41,7 +42,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         response.success = True
         response.image_id = image_id
         return response
-    
+
     def GetImage(self, request, context):
         response = network_pb2.GetImageResponse()
         r = redis.Redis(connection_pool=self.redis_pool)
@@ -49,14 +50,15 @@ class Network(network_pb2_grpc.NetworkServicer):
         response.image = r.get(request.image_id)
         response.success = True
         return response
-    
+
     def CreateUser(self, request, context):
         log.info("Enter")
 
         # this is just testing redisgraph
         r = redis.Redis(connection_pool=self.redis_pool)
         redis_graph = Graph('social', r)
-        john = Node(label='person', properties={'name': 'John Doe', 'age': 33, 'gender': 'male', 'status': 'single'})
+        john = Node(label='person', properties={
+                    'name': 'John Doe', 'age': 33, 'gender': 'male', 'status': 'single'})
         redis_graph.add_node(john)
 
         japan = Node(label='country', properties={'name': 'Japan'})
@@ -102,11 +104,47 @@ class Network(network_pb2_grpc.NetworkServicer):
         return response
 
     def CreateNetwork(self, request, context):
+        r = redis.Redis(connection_pool=self.redis_pool)
+
+        newNetwork = request.network
+        networkName = newNetwork.name
+        desc = newNetwork.description
+        owner = newNetwork.owner_id
+
+        redis_graph = Graph('the_network', r)
+        query = """MATCH (u:user {email:'%s'})
+        MERGE (n:network {name: '%s', description: '%s'})
+        MERGE (u)-[:OWNER]->(n)
+        MERGE (u)-[:MEMBER]->(n)""" % (owner, networkName, desc)
+
+        redis_graph.query(query)
+        redis_graph.commit()
         response = network_pb2.CreateNetworkResponse()
+        response.network_name = networkName
         return response
 
     def GetNetworksForUser(self, request, context):
+        email = request.email
+        r = redis.Redis(connection_pool=self.redis_pool)
+
+        redis_graph = Graph('the_network', r)
+        query = """MATCH (u:user {email:'%s'})
+        MATCH (n:network)
+        MATCH (owner:user)-[:OWNER]->(n)
+        OPTIONAL MATCH (u)-[m:MEMBER]->(n)
+        RETURN n.name, n.description, owner.email, exists(m)""" % email
+
+        result = redis_graph.query(query)
         response = network_pb2.GetNetworksForUserResponse()
+
+        for record in result.result_set:
+            network_data = network_pb2.NetworkDetails()
+            network_data.name = record[0]
+            network_data.description = record[1]
+            network_data.owner_id = record[2]
+            network_data.is_member = record[3]
+            response.networks.append(network_data)
+
         return response
 
     def SearchForNetworks(self, request, context):
@@ -129,18 +167,20 @@ class Network(network_pb2_grpc.NetworkServicer):
         response = network_pb2.GetItemsForNetworkResponse()
         return response
 
+
 if __name__ == '__main__':
     log = logging.getLogger('')
     log.setLevel(logging.DEBUG)
     sh = logging.StreamHandler(sys.stdout)
-    formatter = logging.Formatter('[%(asctime)s] %(levelname)s [%(filename)s.%(funcName)s:%(lineno)d] %(message)s', datefmt='%a, %d %b %Y %H:%M:%S')
+    formatter = logging.Formatter(
+        '[%(asctime)s] %(levelname)s [%(filename)s.%(funcName)s:%(lineno)d] %(message)s', datefmt='%a, %d %b %Y %H:%M:%S')
     sh.setFormatter(formatter)
     log.addHandler(sh)
     # logging usage
-    #log.info("These aren’t the droids you’re looking for.")
-    #log.warning("You take the red pill, you stay in Wonderland and I show you how deep the rabbit-hole goes.")
-    #log.debug("Happy hunger games and may the odds be ever in your favor.")
-    #log.critical("All we have to decide is what to do with the time that is given us.")
+    # log.info("These aren’t the droids you’re looking for.")
+    # log.warning("You take the red pill, you stay in Wonderland and I show you how deep the rabbit-hole goes.")
+    # log.debug("Happy hunger games and may the odds be ever in your favor.")
+    # log.critical("All we have to decide is what to do with the time that is given us.")
 
     # setup gRPC server
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -148,5 +188,3 @@ if __name__ == '__main__':
     server.add_insecure_port('[::]:9700')
     server.start()
     server.wait_for_termination()
-
-    
