@@ -21,7 +21,7 @@ This project uses RedisGraph to store and retrieve data. Redis runs in a Docker 
 
 ## How the data is stored
 
-All data for The Network is stored in a graph. Users, Networks, and Items are nodes. Edges between nodes represent relationships. For example, an edge between two users can indicate friendship. An edge between a user and an item can indicate listing an items for sale. An edge between a user and a network can indicate membership.
+All data for The Network is stored in a graph. Users, Networks, and Items are nodes. Edges between nodes represent relationships. For example, an edge between two users indicates friendship. An edge between a user and an item indicates listing an items for sale. An edge between a user and a network indicates membership.
 
 ### Overview of Graph Structure:
 
