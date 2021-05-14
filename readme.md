@@ -191,6 +191,8 @@ The following diagram illustrates the architecture.
 
 - [Redis](https://redis.io/) powers the persistence layer. Using the [RedisGraph](https://oss.redislabs.com/redisgraph/) available from [Redis Labs](https://redislabs.com/) and provides fast, sophisticated graph operations making data management and querying easy.
 
+- The back-end server is written in [Python](https://www.python.org/). Redis is accessed though the [redis-py module](https://docs.redislabs.com/latest/rs/references/client_references/client_python/). We also use the [redisgraph-py module](https://github.com/RedisGraph/redisgraph-py).
+
 - All backend components are deployed to [Docker](https://www.docker.com/) containers. You can easily launch the entire back-end with a simple `docker compose up` command.
 
 - We use [gRPC](https://grpc.io/) for transport ([HTTP/2](https://http2.github.io/)), serialization ([ProtocolBuffers](https://developers.google.com/protocol-buffers/)), and service endpoint definitions.
@@ -210,46 +212,14 @@ The following diagram illustrates the architecture.
 |![](./images/reactnative_logo.png) | ![](./images/envoy_logo.png) | ![](./images/grpc_logo.png) |
 
 
+## Developer Notes:
 
+To generate the native Javascript and Python classes and RPC endpoints from the gRPC proto file, execute the following commands.
 
+python:
 
-
-## THESE ARE JUST NOTES TODO REMOVE
-
-Required:
-
-    docker pull redislabs/redismod
-    docker pull envoyproxy/envoy-dev:0cdd980286615044b66ee585d56fedd71631c9df
-
-Start:
-    docker compose up --build -d
-
-Notes: 
-
-from grpc dir:
-
-    // to generate python
     python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/network.proto
 
-    // to generate grpc-web
+grpc-web (javascript):
+
     protoc -I=./proto ./proto/network.proto --js_out=import_style=commonjs:. --grpc-web_out=import_style=commonjs,mode=grpcwebtext:.
-
-    
-
-    
-
-At this point, if you have expo installed on your mobile device, you can open it and scan the QR code. You may need to change the connection type to Tunnel. If you do not have expo installed on your Android or iPhone, then simply type w to launch the app in your browser.
-
-
-client.py
-Generate a network
-Users - 20 (some cross users)
-Networks - 4 
-Items per Network - randomly select thumbnail... 20+ Items
-
-
-Nice to have list:
-Invite People to a network
-Search user
-Privacy
-
