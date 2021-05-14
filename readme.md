@@ -132,10 +132,10 @@ The following table shows iPohone and Android screenshots for each page in the m
 
 |Page |iPhone | Android|
 --- | --- | --- 
-|Main Menu|![](menu_iphone.jpg)|![](menu_android.jpg)|
-|Explore Networks|![](networks_iphone.jpg)|![](networks_android.jpg)|
-|My Networks|![](my_networks_iphone.jpg)|![](my_networks_android.jpg)|
-|My Listings|![](items_iphone.jpg)|![](items_android.jpg)|
+|Main Menu|![](./images/menu_iphone.jpg)|![](./images/menu_android.jpg)|
+|Explore Networks|![](./images/networks_iphone.jpg)|![](./images/networks_android.jpg)|
+|My Networks|![](./images/my_networks_iphone.jpg)|![](./images/my_networks_android.jpg)|
+|My Listings|![](./images/items_iphone.jpg)|![](./images/items_android.jpg)|
 
 ## Installation Instructions
 
@@ -185,7 +185,7 @@ After running `expo start`, you are presented with the following options:
 
 The following diagram illustrates the architecture.
 
-![](architecture.png) 
+![](./images/architecture.png) 
 
 ## Technology Stack
 
@@ -203,13 +203,11 @@ The following diagram illustrates the architecture.
 
 - We use [Envoy](https://www.envoyproxy.io/) for the proxy layer between the front-end mobile app and the back-end services. Envoy has a built-in `grpc_web` filter to convert HTTP/1.1 traffic to HTTP/2.
 
-//TODO Add Images
- 
+
 | | | |
 --- | --- | ---
-|Redis |gRPC | RedisGraph |
-|Expo | Docker | React Native | 
-| gRPC-Web | Envoy | ProtocolBuffers |
+|![](./images/redis_enterprise_logo.png) |![](./images/redis_graph_logo.png) | ![](./images/docker_logo.png) |
+|![](./images/reactnative_logo.png) | ![](./images/envoy_logo.png) | ![](./images/grpc_logo.png) |
 
 
 
