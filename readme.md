@@ -133,9 +133,9 @@ The following table shows iPohone and Android screenshots for each page in the m
 |Page |iPhone | Android|
 --- | --- | --- 
 |Main Menu|![](./images/menu_iphone.jpg)|![](./images/menu_android.jpg)|
-|Explore Networks|![](./images/networks_iphone.jpg)|![](./images/networks_android.jpg)|
+|All Networks|![](./images/networks_iphone.jpg)|![](./images/networks_android.jpg)|
 |My Networks|![](./images/my_networks_iphone.jpg)|![](./images/my_networks_android.jpg)|
-|My Listings|![](./images/items_iphone.jpg)|![](./images/items_android.jpg)|
+|My Items|![](./images/items_iphone.jpg)|![](./images/items_android.jpg)|
 
 ## Installation Instructions
 
@@ -179,9 +179,14 @@ After running `expo start`, you are presented with the following options:
 
 > **Tip**: When running in the browser, you can to see debugger output from the React Native app by opening your browser's developer tools window ([Firefox](https://developer.mozilla.org/en-US/docs/Tools) | [Chrome](https://developer.chrome.com/docs/devtools/open/))
 
+Optional:
 
+The `docker compose up` command you ran in a above starts a RedisInsight server. To use RedisInight, open your favorite web browser and go to http://localhost:8001.
 
-## Architecture:
+After accepting the EULA agreement, click the "I already have a database" button. Then "Connect to a Redis Database". In the host field enter `redis`. The port is 6379. Enter anything you like for the name. Click "Add Redis Database"
+
+![](./images/redisinsight_add_db.png)
+## Architecture
 
 The following diagram illustrates the architecture.
 
@@ -192,6 +197,8 @@ The following diagram illustrates the architecture.
 - [Redis](https://redis.io/) powers the persistence layer. Using the [RedisGraph](https://oss.redislabs.com/redisgraph/) available from [Redis Labs](https://redislabs.com/) and provides fast, sophisticated graph operations making data management and querying easy.
 
 - The back-end server is written in [Python](https://www.python.org/). Redis is accessed though the [redis-py module](https://docs.redislabs.com/latest/rs/references/client_references/client_python/). We also use the [redisgraph-py module](https://github.com/RedisGraph/redisgraph-py).
+
+- We use [RedisInsight](https://redislabs.com/redis-enterprise/redis-insight/) to visualize the system graph and run ad hoc queries. 
 
 - All backend components are deployed to [Docker](https://www.docker.com/) containers. You can easily launch the entire back-end with a simple `docker compose up` command.
 
