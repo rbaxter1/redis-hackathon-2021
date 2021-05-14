@@ -207,7 +207,7 @@ The following diagram illustrates the architecture.
 
 
 | | | |
-- | - | -
+--- | --- | ---
 |![](./images/redis_enterprise_logo.png) |![](./images/redis_graph_logo.png) | ![](./images/docker_logo.png) |
 |![](./images/reactnative_logo.png) | ![](./images/envoy_logo.png) | ![](./images/grpc_logo.png) |
 
