@@ -31,6 +31,10 @@ class Network(network_pb2_grpc.NetworkServicer):
         '''
         self.redis_pool = redis.ConnectionPool(host=redis_url)
 
+    def Sanitize(self, str):
+        str = str.replace("'", "\\'")
+        return str
+
     def SaveImage(self, request, context):
         r = redis.Redis(connection_pool=self.redis_pool)
         image_id = 'image:{0}'.format(str(uuid.uuid4()))
@@ -59,8 +63,8 @@ class Network(network_pb2_grpc.NetworkServicer):
         lastName = request.user.last_name
         email = request.user.email
 
-        query = """CREATE (:Person
-         {first_name: '%s', last_name: '%s', email: '%s' })""" % (firstName, lastName, email)
+        query = """CREATE (:user
+         {first_name: '%s', last_name: '%s', email: '%s' })""" % (self.Sanitize(firstName), self.Sanitize(lastName), self.Sanitize(email))
 
         self.ExecuteQueryOnNetwork(query)
 
@@ -73,8 +77,8 @@ class Network(network_pb2_grpc.NetworkServicer):
         log.info("Getting user")
         email = request.email
 
-        query = """MATCH (p:Person ) 
-        where p.email = '%s' return p.first_name, p.last_name, p.email""" % email
+        query = """MATCH (u:user ) 
+        where u.email = '%s' return u.first_name, u.last_name, u.email""" % self.Sanitize(email)
         results = self.ExecuteQueryOnNetwork(query)
 
         userDetails = network_pb2.UserDetails()
@@ -119,8 +123,10 @@ class Network(network_pb2_grpc.NetworkServicer):
         query = """MATCH (u:user {email:'%s'})
         MERGE (n:network {name: '%s', description: '%s'})
         MERGE (u)-[:OWNER]->(n)
-        MERGE (u)-[:MEMBER]->(n)""" % (owner, networkName, desc)
+        MERGE (u)-[:MEMBER]->(n)""" % (self.Sanitize(owner), self.Sanitize(networkName), self.Sanitize(desc))
 
+        log.info("Creating network. Query:")
+        log.info(query)
         if len(img) > 0:
             log.info(img)
             image_id = 'image:{0}'.format(str(uuid.uuid4()))
@@ -139,7 +145,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         MATCH (n:network)
         MATCH (owner:user)-[:OWNER]->(n)
         OPTIONAL MATCH (u)-[m:MEMBER]->(n)
-        RETURN n.name, n.description, owner.email, n.image_id, exists(m)""" % email
+        RETURN n.name, n.description, owner.email, n.image_id, exists(m)""" % self.Sanitize(email)
 
         result = self.ExecuteQueryOnNetwork(query)
 
@@ -166,7 +172,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         networkName = request.network_name
         query = """MATCH (u:user {email:'%s'})
         MATCH (n:network {name:'%s'})
-        MERGE (u)-[:MEMBER]->(n)""" % (userEmail, networkName)
+        MERGE (u)-[:MEMBER]->(n)""" % (self.Sanitize(userEmail), self.Sanitize(networkName))
 
         self.ExecuteQueryOnNetwork(query)
 
