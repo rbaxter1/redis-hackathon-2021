@@ -57,7 +57,7 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         firstName = request.user.first_name
         lastName = request.user.last_name
-        email = request.user.email  
+        email = request.user.email
 
         query = """CREATE (:Person
          {first_name: '%s', last_name: '%s', email: '%s' })""" % (firstName, lastName, email)
@@ -77,9 +77,8 @@ class Network(network_pb2_grpc.NetworkServicer):
         where p.email = '%s' return p.first_name, p.last_name, p.email""" % email
         results = self.ExecuteQueryOnNetwork(query)
 
-        
         userDetails = network_pb2.UserDetails()
-        
+
         for record in results.result_set:
             log.info("processing record")
             userDetails.first_name = record[0]
@@ -115,28 +114,34 @@ class Network(network_pb2_grpc.NetworkServicer):
         networkName = newNetwork.name
         desc = newNetwork.description
         owner = newNetwork.owner_id
-      
+        img = newNetwork.image
+
         query = """MATCH (u:user {email:'%s'})
         MERGE (n:network {name: '%s', description: '%s'})
         MERGE (u)-[:OWNER]->(n)
         MERGE (u)-[:MEMBER]->(n)""" % (owner, networkName, desc)
 
-        self.ExecuteQueryOnNetwork(query)
+        if len(img) > 0:
+            log.info(img)
+            image_id = 'image:{0}'.format(str(uuid.uuid4()))
+            query += ("""SET n.image_id = '%s'""" % image_id)
+            self.GetRedisConnection().set(image_id, img)
 
+        self.ExecuteQueryOnNetwork(query)
         response = network_pb2.CreateNetworkResponse()
         response.network_name = networkName
         return response
 
     def GetNetworksForUser(self, request, context):
         email = request.email
-        
+
         query = """MATCH (u:user {email:'%s'})
         MATCH (n:network)
         MATCH (owner:user)-[:OWNER]->(n)
         OPTIONAL MATCH (u)-[m:MEMBER]->(n)
-        RETURN n.name, n.description, owner.email, exists(m)""" % email
+        RETURN n.name, n.description, owner.email, n.image_id, exists(m)""" % email
 
-        self.ExecuteQueryOnNetwork(query)
+        result = self.ExecuteQueryOnNetwork(query)
 
         response = network_pb2.GetNetworksForUserResponse()
         for record in result.result_set:
@@ -144,7 +149,10 @@ class Network(network_pb2_grpc.NetworkServicer):
             network_data.name = record[0]
             network_data.description = record[1]
             network_data.owner_id = record[2]
-            network_data.is_member = record[3]
+            image_id = record[3]
+            if image_id is not None:
+                network_data.image = self.GetRedisConnection().get(image_id)
+            network_data.is_member = record[4]
             response.networks.append(network_data)
 
         return response
@@ -197,6 +205,7 @@ class Network(network_pb2_grpc.NetworkServicer):
     def ExecuteQueryOnNetwork(self, query):
         redis_graph = self.GetNetworkGraph()
         return redis_graph.query(query)
+
 
 if __name__ == '__main__':
     log = logging.getLogger('')
