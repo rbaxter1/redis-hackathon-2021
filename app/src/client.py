@@ -105,6 +105,16 @@ def run(cmd):
                         random.choice(users)['email'])
                     SubmitItem(stub, item, email)
 
+        # SubmitItemOffer endpoint
+        elif cmd == "SubmitItemOffer":
+            item = network_pb2.ItemOffer()
+            item.email = 'twoods@gmail.com'
+            item.title = 'Electric kettle'
+            item.offer = 12
+
+            stub.SubmitItemOffer(
+                network_pb2.SubmitItemOfferRequest(item_offer=item))
+
         # Test to create user and get user
         elif cmd == "test":
             userDetails = network_pb2.UserDetails()

@@ -1,15 +1,16 @@
-import redis
-from redisgraph import Node, Edge, Graph, Path
-import os
-import sys
-import logging
-import uuid
-import grpc
 import base64
 from concurrent import futures
+from datetime import datetime
 from google.protobuf.json_format import MessageToJson, Parse
+import grpc
+import logging
 import network_pb2
 import network_pb2_grpc
+import os
+import redis
+from redisgraph import Node, Edge, Graph, Path
+import sys
+import uuid
 
 
 class Network(network_pb2_grpc.NetworkServicer):
@@ -77,10 +78,10 @@ class Network(network_pb2_grpc.NetworkServicer):
 
     def GetUser(self, request, context):
         log.info("Getting user")
-        email = request.email
+        email = self.Sanitize(request.email)
 
-        query = """MATCH (u:user ) 
-        where u.email = '%s' return u.first_name, u.last_name, u.email""" % self.Sanitize(email)
+        query = """MATCH (u:user )
+        where u.email = '%s' return u.first_name, u.last_name, u.email""" % email
         results = self.ExecuteQueryOnNetwork(query)
 
         userDetails = network_pb2.UserDetails()
@@ -120,12 +121,11 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         query = """MATCH (u:user {email:'%s'})
         MATCH (n:network {name:'%s'})
-        MERGE (i:item {title: '%s', description: '%s', asking_price: '%s'})
+        MERGE (i:item {title: '%s', description: '%s', asking_price: '%.2f'})
         MERGE (u)-[:SELLER]->(i)
         MERGE (i)-[:SALE]->(n)""" % (userEmail, networkName, itemTitle, itemDescription, itemAskingPrice)
 
         if len(img) > 0:
-            log.info(img)
             image_id = 'image:{0}'.format(str(uuid.uuid4()))
             query += ("""SET i.image_id = '%s'""" % image_id)
             self.GetRedisConnection().set(image_id, img)
@@ -137,20 +137,32 @@ class Network(network_pb2_grpc.NetworkServicer):
         return response
 
     def SubmitItemOffer(self, request, context):
+        offer = request.item_offer
+        buyerEmail = self.Sanitize(offer.email)
+        itemName = self.Sanitize(offer.title)
+        offerPrice = offer.offer
+
+        query = """MATCH (i:item {title:'%s'})
+        MATCH (u:user {email:'%s'})
+        MERGE (u)-[:OFFER {price:'%.2f', time:'%s'}]->(i)""" % (itemName, buyerEmail, offerPrice, datetime.now())
+
+        self.ExecuteQueryOnNetwork(query)
+
         response = network_pb2.SubmitItemOfferResponse()
+        response.success = True
         return response
 
     def CreateNetwork(self, request, context):
         newNetwork = request.network
-        networkName = newNetwork.name
-        desc = newNetwork.description
-        owner = newNetwork.owner_id
+        networkName = self.Sanitize(newNetwork.name)
+        desc = self.Sanitize(newNetwork.description)
+        owner = self.Sanitize(newNetwork.owner_id)
         img = newNetwork.image
 
-        query = """MATCH (u:user {email:'%s'})
+        query = """MATCH (u:user {email: '%s'})
         MERGE (n:network {name: '%s', description: '%s'})
         MERGE (u)-[:OWNER]->(n)
-        MERGE (u)-[:MEMBER]->(n)""" % (self.Sanitize(owner), self.Sanitize(networkName), self.Sanitize(desc))
+        MERGE (u)-[:MEMBER]->(n)""" % (owner, networkName, desc)
 
         if len(img) > 0:
             log.info(img)
@@ -168,7 +180,7 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         query = """MATCH (n:network)
         MATCH (owner:user)-[:OWNER]->(n)
-        OPTIONAL MATCH (u:user {email:'%s'})
+        OPTIONAL MATCH (u:user {email: '%s'})
         OPTIONAL MATCH (u)-[m:MEMBER]->(n)
         RETURN n.name, n.description, owner.email, n.image_id, exists(m)""" % self.Sanitize(email)
 
@@ -195,8 +207,8 @@ class Network(network_pb2_grpc.NetworkServicer):
     def JoinNetwork(self, request, context):
         userEmail = request.email
         networkName = request.network_name
-        query = """MATCH (u:user {email:'%s'})
-        MATCH (n:network {name:'%s'})
+        query = """MATCH (u:user {email: '%s'})
+        MATCH (n:network {name: '%s'})
         MERGE (u)-[:MEMBER]->(n)""" % (self.Sanitize(userEmail), self.Sanitize(networkName))
 
         self.ExecuteQueryOnNetwork(query)
@@ -217,7 +229,7 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         email = self.Sanitize(request.email)
 
-        query = """MATCH (u:user {email:'%s'})
+        query = """MATCH (u:user {email: '%s'})
         MATCH (i:item)
         MATCH (u:user)-[:SELLER]->(i)
         RETURN i.title, i.description, i.asking_price, i.image_id""" % email
@@ -240,12 +252,12 @@ class Network(network_pb2_grpc.NetworkServicer):
 
     def GetItemsForNetwork(self, request, context):
 
-        networkMame = self.Sanitize(request.network_name)
+        networkName = self.Sanitize(request.network_name)
 
-        query = """MATCH (n:network {name:'%s'})
+        query = """MATCH (n:network {name: '%s'})
         MATCH (i:item)
         MATCH (i:item)-[:SALE]->(n)
-        RETURN i.title, i.description, i.asking_price, i.image_id""" % networkMame
+        RETURN i.title, i.description, i.asking_price, i.image_id""" % networkName
 
         result = self.ExecuteQueryOnNetwork(query)
 
