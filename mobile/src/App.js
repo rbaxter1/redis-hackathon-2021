@@ -23,7 +23,9 @@ function drawerToggleButton(navigation) {
 
 function createButton(navigation) {
   const route = useRoute();
-  console.log("route: " + route.name);
+  const network = route.params ? route.params.network : ""
+  console.log("createbutton route: " + JSON.stringify(route));
+  console.log("createbutton network: " + network);
   if (route.name === "Create" || route.name === "Item Details") {
     return null;
   }
@@ -36,7 +38,7 @@ function createButton(navigation) {
   }
   return (
     <TouchableOpacity onPress={() => {
-        navigation.navigate('Create', {context: context})
+        navigation.navigate('Create', {context: context, network: network})
       }
     }>
       <Icon name="add" style={{color: 'black', padding: 10, marginLeft: 10, fontSize: 20}}/>
@@ -78,9 +80,9 @@ function NetworkItemsScreen ({route}) {
 }
 
 function CreateThingScreen ({route}) {
-  const {context} = route.params;
+  const {context, network} = route.params;
   return (
-    <CreateScreen context={context}></CreateScreen>
+    <CreateScreen context={context} network={network}></CreateScreen>
   );
 }
 
@@ -164,9 +166,9 @@ function UserStack () {
   );
 }
 
-function UserScreen () {
+function UserScreen ({navigation}) {
   return (
-    <UserPage></UserPage>
+    <UserPage navigation={navigation}></UserPage>
   );
 }
 
@@ -174,10 +176,10 @@ export default function App() {
   return (
       <NavigationContainer>
           <Drawer.Navigator 
-            initialRouteName="All Networks" >
+            initialRouteName="User" >
               <Drawer.Screen name="All Networks" component={NetworksStack} />
               <Drawer.Screen name="My Networks" component={MyNetworksStack} />
-              <Drawer.Screen name="My Items" component={MyItemsStack} />
+              <Drawer.Screen name="Browse Items" component={MyItemsStack} />
               <Drawer.Screen name="User" component={UserStack} />
           </Drawer.Navigator>
       </NavigationContainer>

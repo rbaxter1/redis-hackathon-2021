@@ -39,7 +39,8 @@ class CreateScreen extends Component {
             description: "",
             allowPublicPosting: true,
             askingPrice: "",
-            image: null
+            image: null,
+            network: this.props.network
         }
     }
 
@@ -106,8 +107,15 @@ class CreateScreen extends Component {
                 onChangeText={text => this.setState({askingPrice: text})}
                 keyboardType="numeric"
             />);
+            elements.push(<Input
+                key="5"
+                style={styles.input}
+                placeholder='Network'
+                value={this.state.network}
+                onChangeText={text => this.setState({network: text})}
+            />);
         }
-        elements.push(<Button key="5" title="Pick an image from camera roll" onPress={() => {this.pickImage()}} />)
+        elements.push(<Button key="6" title="Pick an image from camera roll" onPress={() => {this.pickImage()}} />)
 
         return (
             <View style={styles.container}>
@@ -152,11 +160,12 @@ class CreateScreen extends Component {
                             itemDeets.setTitle(this.state.name);
                             itemDeets.setDescription(this.state.description);
                             itemDeets.setAskingPrice(parseFloat(this.state.askingPrice));
-                            itemDeets.setNetworkName();
+                            itemDeets.setNetworkName(this.state.network);
                             itemDeets.setImage(this.state.image);
                             itemDeets.setLabelsList([]);
                             var request = new SubmitItemRequest();
                             request.setItemDetails(itemDeets);
+                            request.setEmail(globals.user);
 
                             server.submitItem(request, {}, (err, response) => {
                                 if (err) {
