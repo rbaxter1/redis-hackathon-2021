@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Text, Button, TouchableHighlight } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import ItemImage from './ItemImage'
 
@@ -28,13 +29,23 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '30%'
+    },
+    image: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        height: 100,
+        width: 100
     }
 });
 
-export default class PreviewCard extends Component {
+class PreviewCard extends Component {
     constructor(props) {
         super(props);
         this.handleJoinButtonClick = this.handleJoinButtonClick.bind(this);
+        this.onPressItem = this.onPressItem.bind(this);
         this.state = {
             joined: false
         }
@@ -42,13 +53,19 @@ export default class PreviewCard extends Component {
 
     componentDidMount () {
         //todo: load state of item from backend
-        //itemId is passed into props
+        //itemId is passed into props through item
     }
 
     handleJoinButtonClick() {
         this.setState({joined: true});
 
         //todo: update backend
+    }
+
+    onPressItem () {
+        const {navigation} = this.props;
+        console.log("why are we navigating dude " + navigation)
+        navigation.navigate('Item Details', {itemId: this.props.item.itemId});
     }
 
     render () {
@@ -59,18 +76,26 @@ export default class PreviewCard extends Component {
         }
 
         return (
-            <View style={styles.cardContainer}>
-                <View style={styles.imageContainer}>
-                    <ItemImage source={{uri: this.props.imageUrl}} />
+            <TouchableHighlight onPress={() => {this.onPressItem()}}>
+                <View style={styles.cardContainer}>
+                    <View style={styles.imageContainer}>
+                        <ItemImage style={styles.image} source={{uri: this.props.item.image_url}} />
+                    </View>
+                    <View style={styles.nameContainer}>
+                        <Text style={styles.title} align="center">
+                            {this.props.item.name}
+                        </Text>
+                        {button}
+                    </View>
                 </View>
-                <View style={styles.nameContainer}>
-                    <Text style={styles.title} align="center">
-                        {this.props.name}
-                    </Text>
-                    {button}
-                </View>
-            </View>
+            </TouchableHighlight>
         );
     }
     
 };
+
+export default function(props) {
+    const navigation = useNavigation();
+
+    return <PreviewCard {...props} navigation={navigation} />;
+}

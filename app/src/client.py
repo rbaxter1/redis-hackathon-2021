@@ -23,9 +23,30 @@ def run(cmd):
             response = stub.GetNetworksForUser(
                 network_pb2.GetNetworksForUserRequest(email=userEmail))
             print(MessageToJson(response))
+        elif cmd == "test":           
+            userDetails = network_pb2.UserDetails()
+            userDetails.first_name = "John"
+            userDetails.last_name = "Smith"
+            userDetails.email = "JohnSmith@test.com"
+            userRequest = network_pb2.CreateUserRequest(user = userDetails)
+            response = stub.CreateUser(userRequest)
+            print(MessageToJson(response))
+
+            getUserRequest  = network_pb2.GetUserRequest(email = userDetails.email)
+            response = stub.GetUser(getUserRequest)
+            
+            print(MessageToJson(response))
+        else:
+            print("Unknown command.")
+
 
 
 if __name__ == '__main__':
+    print("Enter a command...")
     cmd = str(input())
-
+    
+    print("Running command " + cmd)
     run(cmd)
+
+    print("Press enter to exit")
+    str(input())

@@ -52,35 +52,42 @@ class Network(network_pb2_grpc.NetworkServicer):
         return response
 
     def CreateUser(self, request, context):
-        log.info("Enter")
+        log.info("Creating user")
+        r = self.GetRedisConnection()
 
-        # this is just testing redisgraph
-        r = redis.Redis(connection_pool=self.redis_pool)
-        redis_graph = Graph('social', r)
-        john = Node(label='person', properties={
-                    'name': 'John Doe', 'age': 33, 'gender': 'male', 'status': 'single'})
-        redis_graph.add_node(john)
+        firstName = request.user.first_name
+        lastName = request.user.last_name
+        email = request.user.email  
 
-        japan = Node(label='country', properties={'name': 'Japan'})
-        redis_graph.add_node(japan)
+        query = """CREATE (:Person
+         {first_name: '%s', last_name: '%s', email: '%s' })""" % (firstName, lastName, email)
 
-        edge = Edge(john, 'visited', japan, properties={'purpose': 'pleasure'})
-        redis_graph.add_edge(edge)
-
-        redis_graph.commit()
-
-        query = """MATCH (p:person)-[v:visited {purpose:"pleasure"}]->(c:country)
-                RETURN p.name, p.age, v.purpose, c.name"""
-
-        result = redis_graph.query(query)
-
-        log.info(result.pretty_print())
+        self.ExecuteQueryOnNetwork(query)
 
         response = network_pb2.CreateUserResponse()
+        response.success = True
+        response.email = email
         return response
 
     def GetUser(self, request, context):
-        response = network_pb2.GetUserResponse()
+        log.info("Getting user")
+        email = request.email
+
+        query = """MATCH (p:Person ) 
+        where p.email = '%s' return p.first_name, p.last_name, p.email""" % email
+        results = self.ExecuteQueryOnNetwork(query)
+
+        
+        userDetails = network_pb2.UserDetails()
+        
+        for record in results.result_set:
+            log.info("processing record")
+            userDetails.first_name = record[0]
+            userDetails.last_name = record[1]
+            userDetails.email = record[2]
+            break
+
+        response = network_pb2.GetUserResponse(user=userDetails)
         return response
 
     def SearchForUser(self, request, context):
@@ -104,39 +111,34 @@ class Network(network_pb2_grpc.NetworkServicer):
         return response
 
     def CreateNetwork(self, request, context):
-        r = redis.Redis(connection_pool=self.redis_pool)
-
         newNetwork = request.network
         networkName = newNetwork.name
         desc = newNetwork.description
         owner = newNetwork.owner_id
-
-        redis_graph = Graph('the_network', r)
+      
         query = """MATCH (u:user {email:'%s'})
         MERGE (n:network {name: '%s', description: '%s'})
         MERGE (u)-[:OWNER]->(n)
         MERGE (u)-[:MEMBER]->(n)""" % (owner, networkName, desc)
 
-        redis_graph.query(query)
-        redis_graph.commit()
+        self.ExecuteQueryOnNetwork(query)
+
         response = network_pb2.CreateNetworkResponse()
         response.network_name = networkName
         return response
 
     def GetNetworksForUser(self, request, context):
         email = request.email
-        r = redis.Redis(connection_pool=self.redis_pool)
-
-        redis_graph = Graph('the_network', r)
+        
         query = """MATCH (u:user {email:'%s'})
         MATCH (n:network)
         MATCH (owner:user)-[:OWNER]->(n)
         OPTIONAL MATCH (u)-[m:MEMBER]->(n)
         RETURN n.name, n.description, owner.email, exists(m)""" % email
 
-        result = redis_graph.query(query)
-        response = network_pb2.GetNetworksForUserResponse()
+        self.ExecuteQueryOnNetwork(query)
 
+        response = network_pb2.GetNetworksForUserResponse()
         for record in result.result_set:
             network_data = network_pb2.NetworkDetails()
             network_data.name = record[0]
@@ -184,6 +186,17 @@ class Network(network_pb2_grpc.NetworkServicer):
         response = network_pb2.GetItemsForNetworkResponse()
         return response
 
+    def GetRedisConnection(self):
+        return redis.Redis(connection_pool=self.redis_pool)
+
+    def GetNetworkGraph(self):
+        r = self.GetRedisConnection()
+        redis_graph = Graph('the_network', r)
+        return redis_graph
+
+    def ExecuteQueryOnNetwork(self, query):
+        redis_graph = self.GetNetworkGraph()
+        return redis_graph.query(query)
 
 if __name__ == '__main__':
     log = logging.getLogger('')

@@ -13,20 +13,20 @@
 
 ## What is *The Network*?
 
-*The Network* is a mobile application where you can build your own personal network to buy and sell goods. When you meet people you want transact with, tell them to "join my network". Whether your an artist building a distribution network for your creations, or a group of sports fans coordinating ticket sales, *The Network* is the place to be.
+*The Network* is a mobile application that enables you to build your own personal buying and selling network for whatever you like. When you meet people you want transact with, tell them to "join my network". Whether your an artist building a distribution network for your creations, or a group of sports fans coordinating ticket sales, *The Network* is a space that makes transacting easy.
 
 ## Use of Redis
 
-This project uses RedisGraph to store and retrieve data. Redis runs in a Docker container from the [redismod](https://github.com/RedisLabsModules/redismod) image.
+This project uses RedisGraph to store and retrieve data. In the setup described below, Redis runs in a [redismod](https://github.com/RedisLabsModules/redismod) Docker container.
 
 ## How the data is stored
 
-All data for The Network is stored in a graph. Users, Networks, and Items are nodes. Edges between nodes represent relationships. For example, an edge between two users indicates friendship. An edge between a user and an item indicates listing an items for sale. An edge between a user and a network indicates membership.
+All data for *The Network* is stored in a graph. Users, networks, and items are nodes. Edges between nodes represent relationships. For example, an edge between two users indicates friendship. An edge between a user and an item indicates listing an items for sale. An edge between a user and a network indicates membership.
 
 ### Overview of Graph Structure:
 
 **Nodes**:
-- Users, Networks, Items
+- Users, Networks, Items, Tags
 
 **Edges**:
 
@@ -79,7 +79,7 @@ TODO: Command Details
 
 ### Making an Offer
 
-When a user makes an offer for a listed item, an **offer** edge is created between the user and the item. The edge has a property for offer status which could be one of the following: `active`, `accepted`, `rejected`. When an `offer` edge is created, the **status** property is initialized to `active`. Any offer made on a item having an `accepted` offer is initialized to `rejected`.
+When a user makes an offer for a listed item, an **offer** edge is created between the user and the item. The edge has a property for offer status which could be one of the following: `active`, `accepted`, `rejected`. When an **offer** edge is created, the **status** property is initialized to `active`. In the event that an offer is made on a item already having an `accepted` offer, the offer is initialized to `rejected`.
 
 TODO: Command Details
 
@@ -97,13 +97,22 @@ TODO: Command Details
 
 ## How the Data is Accessed
 
-#### Find Items for Sale in All a User's Networks
+### Find All Listed Items in Any Network a User is a Member
 
 The My Home screen shows the user all items for sale in all networks the user is a member. The following query finds all items for the My Home screen.
 
 TODO: Command Details
 
-#### Get All Offers for an Item (Manage Offers)
+### Find a User's Listed Items
+
+The *My Items* screen shows all items a user has for sale. The following query finds all items for the *My Items* screen.
+
+TODO: Command Details
+
+
+### Find All Offers for an Item
+
+
 
 TODO: Command Details
 
@@ -119,13 +128,14 @@ TODO: Command Details
 
 
 ## UX and DX
+The following table shows iPohone and Android screenshots for each page in the mobile application. 
 
 |Page |iPhone | Android|
 --- | --- | --- 
-|Main Menu|![](menu_iphone.jpg)|![](menu_android.jpg)|
-|Explore Networks|![](networks_iphone.jpg)|![](networks_android.jpg)|
-|My Networks|![](my_networks_iphone.jpg)|![](my_networks_android.jpg)|
-|My Listings|![](items_iphone.jpg)|![](items_android.jpg)|
+|Main Menu|![](./images/menu_iphone.jpg)|![](./images/menu_android.jpg)|
+|All Networks|![](./images/networks_iphone.jpg)|![](./images/networks_android.jpg)|
+|My Networks|![](./images/my_networks_iphone.jpg)|![](./images/my_networks_android.jpg)|
+|My Items|![](./images/items_iphone.jpg)|![](./images/items_android.jpg)|
 
 ## Installation Instructions
 
@@ -163,57 +173,61 @@ Run the mobile application using Expo in a local web browser. This application c
 	
 After running `expo start`, you are presented with the following options:
 
-![](expo_start.png)
+![](./images/expo_start.png)
 
  In the command window, type `w` to open the mobile application in your default web browser.
 
 > **Tip**: When running in the browser, you can to see debugger output from the React Native app by opening your browser's developer tools window ([Firefox](https://developer.mozilla.org/en-US/docs/Tools) | [Chrome](https://developer.chrome.com/docs/devtools/open/))
 
+Optional:
+
+The `docker compose up` command you ran in a above starts a RedisInsight server. To use RedisInight, open your favorite web browser and go to http://localhost:8001.
+
+After accepting the EULA agreement, click the "I already have a database" button. Then "Connect to a Redis Database". In the host field enter `redis`. The port is 6379. Enter anything you like for the name. Click "Add Redis Database"
+
+![](./images/redisinsight_add_db.png)
+## Architecture
+
+The following diagram illustrates the architecture.
+
+![](./images/architecture.png) 
+
+## Technology Stack
+
+- [Redis](https://redis.io/) powers the persistence layer. Using the [RedisGraph](https://oss.redislabs.com/redisgraph/) available from [Redis Labs](https://redislabs.com/) and provides fast, sophisticated graph operations making data management and querying easy.
+
+- The back-end server is written in [Python](https://www.python.org/). Redis is accessed though the [redis-py module](https://docs.redislabs.com/latest/rs/references/client_references/client_python/). We also use the [redisgraph-py module](https://github.com/RedisGraph/redisgraph-py).
+
+- We use [RedisInsight](https://redislabs.com/redis-enterprise/redis-insight/) to visualize the system graph and run ad hoc queries. 
+
+- All backend components are deployed to [Docker](https://www.docker.com/) containers. You can easily launch the entire back-end with a simple `docker compose up` command.
+
+- We use [gRPC](https://grpc.io/) for transport ([HTTP/2](https://http2.github.io/)), serialization ([ProtocolBuffers](https://developers.google.com/protocol-buffers/)), and service endpoint definitions.
+
+- The mobile front-end is built on [React Native](https://reactnative.dev/) which conveniently allows a developer to create both iOS and Android application with a single codebase.
+
+- Using [Expo](https://docs.expo.io/) developers can create an app with a single `expo init` command and debug either in a web browser or on a mobile device.
+
+- [grpc-web](https://github.com/grpc/grpc-web) enables gRPC interface definitions to be compiled into native Javascript.
+
+- We use [Envoy](https://www.envoyproxy.io/) for the proxy layer between the front-end mobile app and the back-end services. Envoy has a built-in `grpc_web` filter to convert HTTP/1.1 traffic to HTTP/2.
 
 
-## Architecture:
+| | | |
+--- | --- | ---
+|![](./images/redis_enterprise_logo.png) |![](./images/redis_graph_logo.png) | ![](./images/docker_logo.png) |
+|![](./images/reactnative_logo.png) | ![](./images/envoy_logo.png) | ![](./images/grpc_logo.png) |
 
-![](architecture.png)
+
+## Developer Notes
+
+To generate the native Javascript and Python classes and RPC endpoints from the gRPC proto file, execute the following commands.
 
 
+python:
 
-
-## THESE ARE JUST NOTES TODO REMOVE
-
-Required:
-
-    docker pull redislabs/redismod
-    docker pull envoyproxy/envoy-dev:0cdd980286615044b66ee585d56fedd71631c9df
-
-Start:
-    docker compose up --build -d
-
-Notes: 
-
-from grpc dir:
-
-    // to generate python
     python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/network.proto
 
-    // to generate grpc-web
+grpc-web (javascript):
+
     protoc -I=./proto ./proto/network.proto --js_out=import_style=commonjs:. --grpc-web_out=import_style=commonjs,mode=grpcwebtext:.
-
-    
-
-    
-
-At this point, if you have expo installed on your mobile device, you can open it and scan the QR code. You may need to change the connection type to Tunnel. If you do not have expo installed on your Android or iPhone, then simply type w to launch the app in your browser.
-
-
-client.py
-Generate a network
-Users - 20 (some cross users)
-Networks - 4 
-Items per Network - randomly select thumbnail... 20+ Items
-
-
-Nice to have list:
-Invite People to a network
-Search user
-Privacy
-

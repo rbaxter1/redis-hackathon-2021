@@ -8,6 +8,7 @@ import { Icon } from 'react-native-elements';
 import UserPage from './UserPage'
 import ItemListScreen from './ItemListScreen'
 import CreateScreen from './CreateScreen'
+import ItemDetailScreen from './ItemDetailScreen'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -92,19 +93,27 @@ function MyItemsStack() {
         })}>
           <Stack.Screen name="My Items" component={MyItemsScreen} />
           <Stack.Screen name="Create" component={NewItemScreen} />
+          <Stack.Screen name="Item Details" component={ItemDetailsScreen} />
       </Stack.Navigator>
   );
 }
 
-function MyItemsScreen () {
+function MyItemsScreen ({navigation}) {
   return (
-    <ItemListScreen></ItemListScreen>
+    <ItemListScreen navigation={navigation}></ItemListScreen>
   );
 }
 
 function NewItemScreen () {
   return (
     <CreateScreen context="item"></CreateScreen>
+  );
+}
+
+function ItemDetailsScreen ({route}) {
+  const {itemId} = route.params;
+  return (
+    <ItemDetailScreen itemId={itemId}></ItemDetailScreen>
   );
 }
 

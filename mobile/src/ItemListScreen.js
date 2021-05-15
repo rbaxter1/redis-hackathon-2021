@@ -3,6 +3,9 @@ import {FlatList, View} from 'react-native';
 
 import PreviewCard from './PreviewCard'
 
+const {GetItemsForUserRequest, GetItemsForUserResponse} = require('./network_pb.js');
+const {NetworkClient} = require('./network_grpc_web_pb.js');
+
 const DATA = [
     {
         id: 'thing1',
@@ -66,6 +69,7 @@ export default class ItemListScreen extends Component {
 
     componentDidMount() {
         console.log("item list did mount");
+        console.log("navigation passed in? " + this.props.navigation);
         this.fetchAllItems();
     }
 
@@ -73,6 +77,21 @@ export default class ItemListScreen extends Component {
         const {page} = this.state;
 
         //TODO: fetch items from backend and load into state
+        var request = new GetItemsForUserRequest()
+        var server = new NetworkClient('http://localhost:8080');
+
+        request.setEmail('me@you.com')
+
+        server.getItemsForUser(request, {}, (err, response) => {
+            if (err) {
+                console.log(`Unexpected error for getItemsForUser: code = ${err.code}` +
+                            `, message = "${err.message}"`);
+            } else {
+                if (response) {
+                    console.log(response)
+                }
+            }
+        });
 
         this.setState((prevState, nextProps) => ({
             data: DATA,
@@ -92,7 +111,7 @@ export default class ItemListScreen extends Component {
             keyExtractor={item => item.id.toString()}
             renderItem={({item}) => (
                 <View style={{marginTop: 25, width: '50%'}}>
-                    <PreviewCard name={item.name} itemId={item.id} imageUrl={item.image_url} isNetwork={this.props.isNetwork}/>
+                    <PreviewCard navigation={this.props.navigation} item={item} isNetwork={this.props.isNetwork}/>
                 </View>
             )}
             />
