@@ -191,7 +191,7 @@ function FetchData({context, network, onUpdate}) {
                         // put items list into data array
                         //this.setState({data: list})
                         var data = [];
-                        for (const it in list) {
+                        for (const it of list) {
                             data.push({
                                 title: it.array[0],
                                 description: it.array[1],
@@ -259,9 +259,7 @@ function FetchData({context, network, onUpdate}) {
                         console.log(response);
                         const list = response.getItemsList();
                         console.log(list);
-
                         // put items list into data array
-                        //this.setState({data: list})
                         // string title = 1;
                         // string description = 2;
                         // double asking_price = 3;
@@ -269,13 +267,13 @@ function FetchData({context, network, onUpdate}) {
                         // bytes image = 5;
                         // repeated string labels = 6;
                         var data = [];
-                        for (const it in list) {
+                        for (const item of list) {
                             data.push({
-                                title: it.array[0],
-                                description: it.array[1],
-                                asking_price: it.array[2],
-                                network_name: it.array[3],
-                                image: it.array[4]
+                                title: item.array[0],
+                                description: item.array[1],
+                                asking_price: item.array[2],
+                                network_name: item.array[3],
+                                image: item.array[4]
                             })
                         }
                         onUpdate(data);

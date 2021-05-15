@@ -7,6 +7,7 @@ import {
   Text
 } from 'react-native';
 import { Input, CheckBox } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 const {UserDetails, CreateUserRequest, GetUserRequest} = require('./network_pb.js');
 const {NetworkClient} = require('./network_grpc_web_pb.js');
@@ -18,15 +19,17 @@ class UserPage extends Component {
       super(props);
 
       this.state = {
-        user:""
+        user:"",
+        currentUser: globals.user
       }
     }
 
     render () {
+        const actualUser = this.state.currentUser === "" ? "None" : this.state.currentUser
         return (
             <View style={styles.container}>
             <Text style={styles.title} align="center">
-                Currently logged in user: {this.state.user !== "" ? this.state.user : "None"}
+                Currently logged in user: {actualUser}
             </Text>
             <Input
               style={styles.input}
@@ -59,6 +62,10 @@ class UserPage extends Component {
                           if (response.getSuccess()) {
                             globals.user = this.state.user;
                             console.log("user is now " + globals.user)
+
+                            this.setState({currentUser: this.state.user, user: ""})
+
+                            this.props.navigation.navigate('All Networks');
                           }
                           
                         }
@@ -86,6 +93,10 @@ class UserPage extends Component {
 
                           globals.user = this.state.user;
                           console.log("user is now " + globals.user)
+
+                          this.setState({currentUser: this.state.user, user: ""})
+
+                          this.props.navigation.navigate('All Networks');
                         }
                       }
                     });
@@ -117,4 +128,8 @@ const styles = StyleSheet.create({
   },
   });
 
-export default UserPage;
+  export default function(props) {
+    const navigation = useNavigation();
+
+    return <UserPage {...props} navigation={navigation} />;
+}
