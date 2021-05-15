@@ -60,7 +60,7 @@ When a network is created, the image associated with the network is stored in it
 
 When a user joins a network, a **member** edge is created between the **user** node and the **network** node.
 
-    GRAPH.QUERY THE_NETWORK_GRAPH  "Match (p:User {email: 'emusk@telsa.com'} ) MATCH (n:Network {name:'Red Sox Tickets'}) CREATE (p)-[:MEMBER]->(n)"
+    GRAPH.QUERY THE_NETWORK_GRAPH  "Match (p:User {email: 'emusk@tesla.com'} ) MATCH (n:Network {name:'Red Sox Tickets'}) CREATE (p)-[:MEMBER]->(n)"
 
 ### Listing Items
 
