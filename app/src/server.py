@@ -124,14 +124,13 @@ class Network(network_pb2_grpc.NetworkServicer):
         MERGE (u)-[:OWNER]->(i)
         MERGE (i)-[:SALE]->(n)""" % (userEmail, networkName, itemTitle, itemDescription, itemAskingPrice)
 
-
         if len(img) > 0:
             log.info(img)
             image_id = 'image:{0}'.format(str(uuid.uuid4()))
             query += ("""SET i.image_id = '%s'""" % image_id)
             self.GetRedisConnection().set(image_id, img)
         print(query)
-        
+
         self.ExecuteQueryOnNetwork(query)
 
         response = network_pb2.SubmitItemResponse(success=True)
@@ -169,9 +168,9 @@ class Network(network_pb2_grpc.NetworkServicer):
     def GetNetworksForUser(self, request, context):
         email = request.email
 
-        query = """MATCH (u:user {email:'%s'})
-        MATCH (n:network)
+        query = """MATCH (n:network)
         MATCH (owner:user)-[:OWNER]->(n)
+        OPTIONAL MATCH (u:user {email:'%s'})
         OPTIONAL MATCH (u)-[m:MEMBER]->(n)
         RETURN n.name, n.description, owner.email, n.image_id, exists(m)""" % self.Sanitize(email)
 
@@ -219,7 +218,7 @@ class Network(network_pb2_grpc.NetworkServicer):
     def GetItemsForUser(self, request, context):
 
         email = self.Sanitize(request.email)
-        
+
         query = """MATCH (u:user {email:'%s'})
         MATCH (i:item)
         MATCH (u:user)-[:OWNER]->(i)
@@ -233,7 +232,7 @@ class Network(network_pb2_grpc.NetworkServicer):
             itemDetail.title = record[0]
             itemDetail.description = record[1]
             itemDetail.asking_price = float(record[2])
-            
+
             image_id = record[3]
             if image_id is not None:
                 itemDetail.image = self.GetRedisConnection().get(image_id)
@@ -244,7 +243,7 @@ class Network(network_pb2_grpc.NetworkServicer):
     def GetItemsForNetwork(self, request, context):
 
         networkMame = self.Sanitize(request.network_name)
-        
+
         query = """MATCH (n:network {name:'%s'})
         MATCH (i:item)
         MATCH (i:item)-[:SALE]->(n)
@@ -258,7 +257,7 @@ class Network(network_pb2_grpc.NetworkServicer):
             itemDetail.title = record[0]
             itemDetail.description = record[1]
             itemDetail.asking_price = float(record[2])
-            
+
             image_id = record[3]
             if image_id is not None:
                 itemDetail.image = self.GetRedisConnection().get(image_id)
