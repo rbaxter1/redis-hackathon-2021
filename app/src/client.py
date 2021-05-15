@@ -115,6 +115,12 @@ def run(cmd):
             stub.SubmitItemOffer(
                 network_pb2.SubmitItemOfferRequest(item_offer=item))
 
+        # GetOffersMadeByUser endpoint
+        elif cmd == "GetOffersMadeByUser":
+            response = stub.GetOffersMadeByUser(
+                network_pb2.GetOffersMadeByUserRequest(email='twoods@gmail.com'))
+            print(MessageToJson(response))
+
         # Test to create user and get user
         elif cmd == "test":
             userDetails = network_pb2.UserDetails()

@@ -80,11 +80,11 @@ When a user joins a network, a **member** edge is created between the **user** n
 When a user lists an item for sale in a network, an **item** node is created and a **selling** edge is created between the user and the item.
 
     GRAPH.QUERY THE_NETWORK_GRAPH
-    MATCH (u:user {email:'emusk@tesla.com'})
+    "MATCH (u:user {email:'emusk@tesla.com'})
     MATCH (n:network {name:'Spaceship parts exchange'})
     MERGE (i:item {title: 'Spare rocket booster', description: 'lightly used, only one launch!', asking_price: '5000000'})
     MERGE (u)-[:SELLER]->(i)
-    MERGE (i)-[:SALE]->(n)
+    MERGE (i)-[:SALE]->(n)"
 
 When an item is created, the image associated with the item is stored in its own key. In the graph, the key is stored as a property on the item.
 
@@ -94,7 +94,10 @@ When an item is created, the image associated with the item is stored in its own
 
 When a user makes an offer for a listed item, an **offer** edge is created between the user and the item. The edge has a property for offer status which could be one of the following: `active`, `accepted`, `rejected`. When an **offer** edge is created, the **status** property is initialized to `active`. In the event that an offer is made on a item already having an `accepted` offer, the offer is initialized to `rejected`.
 
-TODO: Command Details
+GRAPH.QUERY THE_NETWORK_GRAPH
+"MATCH (i:item {title:'Spare rocket booster'})
+MATCH (u:user {email:'corporatepurchasing@nasa.org'})
+MERGE (u)-[:OFFER {offer:'4500000', time:'2021-05-15 12:00:00.000000'}]->(i)"
 
 ### Accepting an Offer
 
@@ -131,13 +134,14 @@ TODO: Command Details
 
 The *All Networks* screen shows all networks in a graph.
 
-TODO: Command Details
+GRAPH.QUERY THE_NETWORK_GRAPH
+"MATCH (n:network)
+MATCH (owner:user)-[:OWNER]->(n)
+OPTIONAL MATCH (u:user {email: 'emusk@tesla.com'})
+OPTIONAL MATCH (u)-[m:MEMBER]->(n)
+RETURN n.name, n.description, owner.email, n.image_id, exists(m)"
 
-### List All Networks the User Joined
-
-The *My Networks* screen shows all networks in a graph with a **member** edge to a specified user.
-
-TODO: Command Details
+This query returns a list of all networks, with a boolean value representing whether the user is a member of each given network.
 
 ### Find All Offers for Any Item Being Sold by a User
 
@@ -149,7 +153,9 @@ TODO: Command Details
 
 The *My Offers* screen shows the properties of any **offer** edge connected to a specified user.
 
-TODO: Command Details
+GRAPH.QUERY THE_NETWORK_GRAPH
+"MATCH (:user {email:'emusk@tesla.com'})-[o:OFFER]->(i:item)
+RETURN i.title, o.offer, o.time"
 
 #### All Item Tags that a User Has Made Offers on (Analytics)
 

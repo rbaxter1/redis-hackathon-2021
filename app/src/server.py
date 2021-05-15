@@ -144,7 +144,7 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         query = """MATCH (i:item {title:'%s'})
         MATCH (u:user {email:'%s'})
-        MERGE (u)-[:OFFER {price:'%.2f', time:'%s'}]->(i)""" % (itemName, buyerEmail, offerPrice, datetime.now())
+        MERGE (u)-[:OFFER {offer:'%.2f', time:'%s'}]->(i)""" % (itemName, buyerEmail, offerPrice, datetime.now())
 
         self.ExecuteQueryOnNetwork(query)
 
@@ -275,12 +275,30 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         return response
 
+    def GetOffersMadeByUser(self, request, context):
+        email = self.Sanitize(request.email)
+
+        query = """MATCH (:user {email:'%s'})-[o:OFFER]->(i:item)
+        RETURN i.title, o.offer, o.time""" % email
+
+        result = self.ExecuteQueryOnNetwork(query)
+        response = network_pb2.GetOffersMadeByUserResponse()
+        for record in result.result_set:
+            itemOffer = network_pb2.ItemOffer()
+            itemOffer.email = email
+            itemOffer.title = record[0]
+            itemOffer.offer = float(record[1])
+            itemOffer.time = record[2]
+            response.offers.append(itemOffer)
+
+        return response
+
     def GetRedisConnection(self):
         return redis.Redis(connection_pool=self.redis_pool)
 
     def GetNetworkGraph(self):
         r = self.GetRedisConnection()
-        redis_graph = Graph('the_network', r)
+        redis_graph = Graph('THE_NETWORK_GRAPH', r)
         return redis_graph
 
     def ExecuteQueryOnNetwork(self, query):
