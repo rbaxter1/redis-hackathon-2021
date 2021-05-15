@@ -3,9 +3,16 @@ import { Input, CheckBox } from 'react-native-elements';
 import {
     View,
     StyleSheet,
-    Button
+    Button,
+    Platform
   } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import * as ImagePicker from 'expo-image-picker';
+
+const {CreateNetworkRequest, CreateNetworkResponse, NetworkDetails, SubmitItemRequest, SubmitItemResponse, ItemDetails} = require('./network_pb.js');
+const {NetworkClient} = require('./network_grpc_web_pb.js');
+
+import globals from './global.js'
 
 const styles = StyleSheet.create({
     container: {
@@ -31,9 +38,36 @@ class CreateScreen extends Component {
             name: "",
             description: "",
             allowPublicPosting: true,
-            askingPrice: ""
+            askingPrice: "",
+            image: null
         }
     }
+
+    componentDidMount () {
+        (async () => {
+            if (Platform.OS !== 'web') {
+              const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+              if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+              }
+            }
+          })();
+    }
+
+    pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          base64: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        console.log(result);
+
+        if (!result.cancelled) {
+            this.setState({image:result.base64})
+        }
+    }   
 
     render () {
         const {navigation} = this.props;
@@ -73,6 +107,7 @@ class CreateScreen extends Component {
                 keyboardType="numeric"
             />);
         }
+        elements.push(<Button key="5" title="Pick an image from camera roll" onPress={() => {this.pickImage()}} />)
 
         return (
             <View style={styles.container}>
@@ -81,7 +116,61 @@ class CreateScreen extends Component {
                     title='Create'
                     onPress={() => {
                         //todo: submit data to backend
-    
+                        var server = new NetworkClient('http://localhost:8080');
+
+                        if (this.props.context === "network") {
+                            var networkDeets = new NetworkDetails();
+                            networkDeets.setName(this.state.name);
+                            networkDeets.setOwnerId(globals.user);
+                            networkDeets.setDescription(this.state.description);
+                            networkDeets.setImage(this.state.image);
+                            networkDeets.setIsMember(true);
+                            var request = new CreateNetworkRequest();
+                            request.setNetwork(networkDeets);
+                
+                            server.createNetwork(request, {}, (err, response) => {
+                                if (err) {
+                                    console.log(`Unexpected error for createNetwork: code = ${err.code}` +
+                                                `, message = "${err.message}"`);
+                                } else {
+                                    if (response) {
+                                        console.log(response);
+                                        console.log(response.getNetworkName());
+                                    }
+                                }
+                            });
+                        }
+
+                        if (this.props.context === "item") {
+                            var itemDeets = new ItemDetails();
+                            // string title = 1;
+                            // string description = 2;
+                            // double asking_price = 3;
+                            // string network_name = 4;
+                            // bytes image = 5;
+                            // repeated string labels = 6;
+                            itemDeets.setTitle(this.state.name);
+                            itemDeets.setDescription(this.state.description);
+                            itemDeets.setAskingPrice(parseFloat(this.state.askingPrice));
+                            itemDeets.setNetworkName();
+                            itemDeets.setImage(this.state.image);
+                            itemDeets.setLabelsList([]);
+                            var request = new SubmitItemRequest();
+                            request.setItemDetails(itemDeets);
+
+                            server.submitItem(request, {}, (err, response) => {
+                                if (err) {
+                                    console.log(`Unexpected error for submitItem: code = ${err.code}` +
+                                                `, message = "${err.message}"`);
+                                } else {
+                                    if (response) {
+                                        console.log(response);
+                                        console.log(response.getSuccess());
+                                    }
+                                }
+                            });
+                        }
+
                         navigation.goBack();
                     }}
                 />

@@ -42,14 +42,23 @@ function NetworksStack() {
           ),
         })}>
           <Stack.Screen name="Networks" component={NetworksScreen} />
+          <Stack.Screen name="Items" component={NetworkItemsScreen} />
           <Stack.Screen name="Create" component={NewNetworkScreen} />
+          <Stack.Screen name="Item Details" component={ItemDetailsScreen} />
       </Stack.Navigator>
   );
 }
 
 function NetworksScreen () {
   return (
-    <ItemListScreen isNetwork={true}></ItemListScreen>
+    <ItemListScreen context="all networks"></ItemListScreen>
+  );
+}
+
+function NetworkItemsScreen ({route}) {
+  const {network} = route.params;
+  return (
+    <ItemListScreen context="network items" network={network}></ItemListScreen>
   );
 }
 
@@ -69,13 +78,22 @@ function MyNetworksStack() {
           ),
         })}>
           <Stack.Screen name="My Networks" component={MyNetworksScreen} />
+          <Stack.Screen name="Items" component={MyNetworkItemsScreen} />
+          <Stack.Screen name="Item Details" component={ItemDetailsScreen} />
       </Stack.Navigator>
   );
 }
 
 function MyNetworksScreen () {
   return (
-    <ItemListScreen></ItemListScreen>
+    <ItemListScreen context="my networks"></ItemListScreen>
+  );
+}
+
+function MyNetworkItemsScreen ({route}) {
+  const {network} = route.params;
+  return (
+    <ItemListScreen context="network items" network={network}></ItemListScreen>
   );
 }
 
@@ -100,7 +118,7 @@ function MyItemsStack() {
 
 function MyItemsScreen ({navigation}) {
   return (
-    <ItemListScreen navigation={navigation}></ItemListScreen>
+    <ItemListScreen context="my items" navigation={navigation}></ItemListScreen>
   );
 }
 
@@ -111,9 +129,10 @@ function NewItemScreen () {
 }
 
 function ItemDetailsScreen ({route}) {
-  const {itemId} = route.params;
+  const {item} = route.params;
+  console.log("item: " + item);
   return (
-    <ItemDetailScreen itemId={itemId}></ItemDetailScreen>
+    <ItemDetailScreen item={item}></ItemDetailScreen>
   );
 }
 

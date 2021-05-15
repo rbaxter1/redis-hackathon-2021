@@ -164,15 +164,11 @@ class Network(network_pb2_grpc.NetworkServicer):
     def JoinNetwork(self, request, context):
         userEmail = request.email
         networkName = request.network_name
-
-        r = redis.Redis(connection_pool=self.redis_pool)
-        redis_graph = Graph('the_network', r)
-
         query = """MATCH (u:user {email:'%s'})
         MATCH (n:network {name:'%s'})
         MERGE (u)-[:MEMBER]->(n)""" % (userEmail, networkName)
 
-        result = redis_graph.query(query)
+        self.ExecuteQueryOnNetwork(query)
 
         response = network_pb2.JoinNetworkResponse()
         response.success = True

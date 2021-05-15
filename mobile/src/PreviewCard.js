@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, Button, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+const {JoinNetworkRequest} = require('./network_pb.js');
+const {NetworkClient} = require('./network_grpc_web_pb.js');
+
 import ItemImage from './ItemImage'
+
+import globals from './global.js'
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -47,43 +52,67 @@ class PreviewCard extends Component {
         this.handleJoinButtonClick = this.handleJoinButtonClick.bind(this);
         this.onPressItem = this.onPressItem.bind(this);
         this.state = {
-            joined: false
+            joined: this.props.item.is_member
         }
     }
 
-    componentDidMount () {
-        //todo: load state of item from backend
-        //itemId is passed into props through item
-    }
+    // componentDidMount () {
+
+    // }
 
     handleJoinButtonClick() {
         this.setState({joined: true});
 
-        //todo: update backend
+        var server = new NetworkClient('http://localhost:8080');
+        var request = new JoinNetworkRequest();
+        // string email = 1;
+        // string network_name = 2;
+        request.setEmail(globals.user);
+        request.setNetworkName(this.props.item.name);
+
+        server.joinNetwork(request, {}, (err, response) => {
+            if (err) {
+            console.log(`Unexpected error for joinNetwork: code = ${err.code}` +
+                        `, message = "${err.message}"`);
+            } else {
+            if (response) {
+                console.log(response);
+                console.log(response.getSuccess());
+            }
+            }
+        });
     }
 
     onPressItem () {
         const {navigation} = this.props;
         console.log("why are we navigating dude " + navigation)
-        navigation.navigate('Item Details', {itemId: this.props.item.itemId});
+        console.log(this.props.item)
+        console.log(this.props.item.name)
+
+        if (this.props.isNetwork) {
+            navigation.navigate('Items', {network: this.props.item.name});
+        }
+        else {
+            navigation.navigate('Item Details', {item: this.props.item});
+        }
     }
 
     render () {
         const isJoined = this.state.joined;
         let button;
         if (!isJoined && this.props.isNetwork) {
-            button = <Button style={styles.button} title="Join" onPress={this.handleJoinButtonClick}/>
+            button = <Button style={styles.button} title="Join" onPress={() => {this.handleJoinButtonClick()}}/>
         }
 
         return (
             <TouchableHighlight onPress={() => {this.onPressItem()}}>
                 <View style={styles.cardContainer}>
                     <View style={styles.imageContainer}>
-                        <ItemImage style={styles.image} source={{uri: this.props.item.image_url}} />
+                        <ItemImage style={styles.image} source={{uri: `data:image/png;base64,${this.props.item.image}`}}/>
                     </View>
                     <View style={styles.nameContainer}>
                         <Text style={styles.title} align="center">
-                            {this.props.item.name}
+                            {this.props.isNetwork ? this.props.item.name : this.props.item.title}
                         </Text>
                         {button}
                     </View>
