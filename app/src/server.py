@@ -63,13 +63,15 @@ class Network(network_pb2_grpc.NetworkServicer):
         lastName = request.user.last_name
         email = request.user.email
 
-        query = """CREATE (:user
-         {first_name: '%s', last_name: '%s', email: '%s' })""" % (self.Sanitize(firstName), self.Sanitize(lastName), self.Sanitize(email))
+        query = """OPTIONAL MATCH (check:user {email: '%s'})
+        MERGE (u:user {email: '%s' })
+        ON CREATE SET u.first_name='%s', u.last_name='%s'
+        RETURN not(exists(check))""" % (self.Sanitize(email), self.Sanitize(email), self.Sanitize(firstName), self.Sanitize(lastName))
 
-        self.ExecuteQueryOnNetwork(query)
+        result = self.ExecuteQueryOnNetwork(query)
 
         response = network_pb2.CreateUserResponse()
-        response.success = True
+        response.success = result.result_set[0][0]
         response.email = email
         return response
 
@@ -106,7 +108,33 @@ class Network(network_pb2_grpc.NetworkServicer):
         return response
 
     def SubmitItem(self, request, context):
-        response = network_pb2.SubmitItemResponse()
+
+        itemTitle = self.Sanitize(request.item_details.title)
+        itemDescription = self.Sanitize(request.item_details.description)
+        itemAskingPrice = request.item_details.asking_price
+        img = request.item_details.image
+
+        networkName = self.Sanitize(request.item_details.network_name)
+
+        userEmail = self.Sanitize(request.email)
+
+        query = """MATCH (u:user {email:'%s'})
+        MATCH (n:network {name:'%s'})
+        MERGE (i:item {title: '%s', description: '%s', asking_price: '%s'})
+        MERGE (u)-[:OWNER]->(i)
+        MERGE (i)-[:SALE]->(n)""" % (userEmail, networkName, itemTitle, itemDescription, itemAskingPrice)
+
+
+        if len(img) > 0:
+            log.info(img)
+            image_id = 'image:{0}'.format(str(uuid.uuid4()))
+            query += ("""SET i.image_id = '%s'""" % image_id)
+            self.GetRedisConnection().set(image_id, img)
+        print(query)
+        
+        self.ExecuteQueryOnNetwork(query)
+
+        response = network_pb2.SubmitItemResponse(success=True)
         return response
 
     def SubmitItemOffer(self, request, context):
@@ -189,11 +217,53 @@ class Network(network_pb2_grpc.NetworkServicer):
         return response
 
     def GetItemsForUser(self, request, context):
-        response = network_pb2.GetItemsForUserResponse()
+
+        email = self.Sanitize(request.email)
+        
+        query = """MATCH (u:user {email:'%s'})
+        MATCH (i:item)
+        MATCH (u:user)-[:OWNER]->(i)
+        RETURN i.title, i.description, i.asking_price, i.image_id""" % email
+
+        result = self.ExecuteQueryOnNetwork(query)
+
+        response = network_pb2.GetItemsForUserResponse(success=True)
+        for record in result.result_set:
+            itemDetail = network_pb2.ItemDetails()
+            itemDetail.title = record[0]
+            itemDetail.description = record[1]
+            itemDetail.asking_price = float(record[2])
+            
+            image_id = record[3]
+            if image_id is not None:
+                itemDetail.image = self.GetRedisConnection().get(image_id)
+            response.items.append(itemDetail)
+
         return response
 
     def GetItemsForNetwork(self, request, context):
-        response = network_pb2.GetItemsForNetworkResponse()
+
+        networkMame = self.Sanitize(request.network_name)
+        
+        query = """MATCH (n:network {name:'%s'})
+        MATCH (i:item)
+        MATCH (i:item)-[:SALE]->(n)
+        RETURN i.title, i.description, i.asking_price, i.image_id""" % networkMame
+
+        result = self.ExecuteQueryOnNetwork(query)
+
+        response = network_pb2.GetItemsForNetworkResponse(success=True)
+        for record in result.result_set:
+            itemDetail = network_pb2.ItemDetails()
+            itemDetail.title = record[0]
+            itemDetail.description = record[1]
+            itemDetail.asking_price = float(record[2])
+            
+            image_id = record[3]
+            if image_id is not None:
+                itemDetail.image = self.GetRedisConnection().get(image_id)
+            response.items.append(itemDetail)
+
         return response
 
     def GetRedisConnection(self):

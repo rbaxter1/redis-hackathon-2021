@@ -3247,7 +3247,8 @@ proto.protobuf.SubmitItemRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.protobuf.SubmitItemRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    itemDetails: (f = msg.getItemDetails()) && proto.protobuf.ItemDetails.toObject(includeInstance, f)
+    itemDetails: (f = msg.getItemDetails()) && proto.protobuf.ItemDetails.toObject(includeInstance, f),
+    email: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -3289,6 +3290,10 @@ proto.protobuf.SubmitItemRequest.deserializeBinaryFromReader = function(msg, rea
       reader.readMessage(value,proto.protobuf.ItemDetails.deserializeBinaryFromReader);
       msg.setItemDetails(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEmail(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -3324,6 +3329,13 @@ proto.protobuf.SubmitItemRequest.serializeBinaryToWriter = function(message, wri
       1,
       f,
       proto.protobuf.ItemDetails.serializeBinaryToWriter
+    );
+  }
+  f = message.getEmail();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
     );
   }
 };
@@ -3363,6 +3375,24 @@ proto.protobuf.SubmitItemRequest.prototype.clearItemDetails = function() {
  */
 proto.protobuf.SubmitItemRequest.prototype.hasItemDetails = function() {
   return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string email = 2;
+ * @return {string}
+ */
+proto.protobuf.SubmitItemRequest.prototype.getEmail = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.protobuf.SubmitItemRequest} returns this
+ */
+proto.protobuf.SubmitItemRequest.prototype.setEmail = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

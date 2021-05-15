@@ -1,0 +1,538 @@
+{
+    "users": [
+        {
+            "first_name": "Xander",
+            "last_name": "Bogaerts",
+            "email": "thexman2@gmail.com"
+        },
+        {
+            "first_name": "LeBron",
+            "last_name": "James",
+            "email": "kingjames23@gmail.com"
+        },
+        {
+            "first_name": "Serena",
+            "last_name": "Williams",
+            "email": "serena.w@gmail.com"
+        },
+        {
+            "first_name": "Zeb",
+            "last_name": "Powell",
+            "email": "zeb@gmail.com"
+        },
+        {
+            "first_name": "Candace",
+            "last_name": "Parker",
+            "email": "cparker@gmail.com"
+        },
+        {
+            "first_name": "Dwyane",
+            "last_name": "Wade",
+            "email": "d.wade@gmail.com"
+        },
+        {
+            "first_name": "Megan",
+            "last_name": "Rapinoe",
+            "email": "rapinoe@gmail.com"
+        },
+        {
+            "first_name": "Patrick",
+            "last_name": "Mahomes",
+            "email": "patty.mahomes@gmail.com"
+        },
+        {
+            "first_name": "Julian",
+            "last_name": "Edelman",
+            "email": "thesquirrel@gmail.com"
+        },
+        {
+            "first_name": "Mookie",
+            "last_name": "Betts",
+            "email": "moooooooook@gmail.com"
+        },
+        {
+            "first_name": "Tom",
+            "last_name": "Brady",
+            "email": "tb12@gmail.com"
+        },
+        {
+            "first_name": "Cam",
+            "last_name": "Newton",
+            "email": "the.cam.show@gmail.com"
+        },
+        {
+            "first_name": "Maya",
+            "last_name": "Moore",
+            "email": "mayamoore@gmail.com"
+        },
+        {
+            "first_name": "Simone",
+            "last_name": "Biles",
+            "email": "simonebiles@gmail.com"
+        },
+        {
+            "first_name": "Lewis",
+            "last_name": "Hamilton",
+            "email": "still.we.rise@gmail.com"
+        },
+        {
+            "first_name": "Naomi",
+            "last_name": "Osaka",
+            "email": "naomi@gmail.com"
+        },
+        {
+            "first_name": "Danica",
+            "last_name": "Patrick",
+            "email": "danica.p@gmail.com"
+        },
+        {
+            "first_name": "Maria",
+            "last_name": "Sharipova",
+            "email": "msharipova@gmail.com"
+        },
+        {
+            "first_name": "Alex",
+            "last_name": "Morgan",
+            "email": "amorgan13@gmail.com"
+        },
+        {
+            "first_name": "Lindsey",
+            "last_name": "Vonn",
+            "email": "l.vonn@gmail.com"
+        },
+        {
+            "first_name": "Aaron",
+            "last_name": "Rodgers",
+            "email": "new.hire@jeopardytheshow.com"
+        },
+        {
+            "first_name": "Tiger",
+            "last_name": "Woods",
+            "email": "twoods@gmail.com"
+        },
+        {
+            "first_name": "Rory",
+            "last_name": "McIlroy",
+            "email": "rorymac@gmail.com"
+        },
+        {
+            "first_name": "Jayson",
+            "last_name": "Tatum",
+            "email": "jaytatum0@gmail.com"
+        },
+        {
+            "first_name": "Steph",
+            "last_name": "Curry",
+            "email": "curry30@gmail.com"
+        },
+        {
+            "first_name": "Kevin",
+            "last_name": "Durant",
+            "email": "the.kd@gmail.com"
+        },
+        {
+            "first_name": "Damian",
+            "last_name": "Lillard",
+            "email": "dametime@gmail.com"
+        },
+        {
+            "first_name": "Zion",
+            "last_name": "Williamson",
+            "email": "zion@gmail.com"
+        },
+        {
+            "first_name": "Fernando",
+            "last_name": "Tatis",
+            "email": "tatis@gmail.com"
+        },
+        {
+            "first_name": "Bryce",
+            "last_name": "Harper",
+            "email": "hairflipbryce@gmail.com"
+        },
+        {
+            "first_name": "Mike",
+            "last_name": "Trout",
+            "email": "mtrout@gmail.com"
+        },
+        {
+            "first_name": "Jacob",
+            "last_name": "deGrom",
+            "email": "ithrowheaters@gmail.com"
+        },
+        {
+            "first_name": "Cristiano",
+            "last_name": "Ronaldo",
+            "email": "cr7@gmail.com"
+        },
+        {
+            "first_name": "Neymar",
+            "last_name": "da Silva Santos",
+            "email": "neymar@gmail.com"
+        },
+        {
+            "first_name": "Lionel",
+            "last_name": "Messi",
+            "email": "messi@gmail.com"
+        },
+        {
+            "first_name": "Michelle",
+            "last_name": "Wie",
+            "email": "m.wie@gmail.com"
+        },
+        {
+            "first_name": "Amanda",
+            "last_name": "Nunes",
+            "email": "a.nunes@gmail.com"
+        },
+        {
+            "first_name": "Sage",
+            "last_name": "Kotsenberg",
+            "email": "sage@gmail.com"
+        },
+        {
+            "first_name": "Roger",
+            "last_name": "Federer",
+            "email": "rfederer@gmail.com"
+        },
+        {
+            "first_name": "Rafael",
+            "last_name": "Nadal",
+            "email": "rafa@gmail.com"
+        }
+    ],
+    "networks": [
+        {
+            "name": "Boston sports tickets",
+            "description": "Buy and sell trips to the next big game in title town",
+            "items": [
+                {
+                    "title": "Sox vs. TOR 5/20, 2 tickets",
+                    "description": "Two bleacher seats, section 38",
+                    "asking_price": "$90"
+                },
+                {
+                    "title": "Sox vs. LAA 5/16, 2 tickets",
+                    "description": "Two loge seats, unobstructed view",
+                    "asking_price": "$180"
+                },
+                {
+                    "title": "Sox vs. HOU 6/10, 4 tickets",
+                    "description": "Great view from the LF grandstand family section",
+                    "asking_price": "$300"
+                },
+                {
+                    "title": "Sox vs. HOU 6/10, 2 tickets",
+                    "description": "Awesome seats behind home plate",
+                    "asking_price": "$400"
+                },
+                {
+                    "title": "Sox vs. HOU 6/11, 2 tickets",
+                    "description": "Two RF grandstand seats for a Friday night game",
+                    "asking_price": "$120"
+                },
+                {
+                    "title": "Celtics vs Knicks 5/6, 4 tickets",
+                    "description": "C's season finale, upper deck tickets perfect for family",
+                    "asking_price": "$200"
+                },
+                {
+                    "title": "Celtics vs 10 seed play-in game 5/18, 2 tickets",
+                    "description": "Celtics playoff basketball, awesome seats in lower bowl",
+                    "asking_price": "$220"
+                },
+                {
+                    "title": "Patriots-Bucs 10/3, 2 tickets",
+                    "description": "Brady's return! Good seats! Will sell fast!",
+                    "asking_price": "$1200"
+                },
+                {
+                    "title": "Patriots vs Jets 10/24, 2 tickets",
+                    "description": "Upper-deck seats, 30 yd line",
+                    "asking_price": "$210"
+                },
+                {
+                    "title": "Pats vs Washington 8/12 preseason, 4 tickets",
+                    "description": "Lower bowl in the end zone by the bridge, go check out Mac Jones' first reps!",
+                    "asking_price": "$280"
+                },
+                {
+                    "title": "Celtics vs 10 seed play-in game 5/18, 2 tickets",
+                    "description": "Celtics playoff basketball, awesome seats in lower bowl",
+                    "asking_price": "$220"
+                },
+                {
+                    "title": "Pats vs Saints Sept 26, 2 tickets",
+                    "description": "Two tickets 300 level",
+                    "asking_price": "$200"
+                },
+                {
+                    "title": "Pats/Titans Nov 28, 4 tickets",
+                    "description": "good seats 50 yard line",
+                    "asking_price": "$500"
+                },
+                {
+                    "title": "Sox vs Royals 7/1, 4 tickets",
+                    "description": "LF upper deck",
+                    "asking_price": "$240"
+                },
+                {
+                    "title": "Jays @ red sox june 13, 2 tickets",
+                    "description": "bleacher seats",
+                    "asking_price": "$80"
+                },
+                {
+                    "title": "Sox-Yankees June 25, 4 tickets",
+                    "description": "4 standing room tickets behind home plate for the classic rivalry",
+                    "asking_price": "$200"
+                },
+                {
+                    "title": "Marlins-Red Sox 5/30, 2 tickets",
+                    "description": "3rd row behind home plate! Awesome deal!",
+                    "asking_price": "$400"
+                },
+                {
+                    "title": "Sox vs. ATL May 26, 2 tickets",
+                    "description": "RF field box",
+                    "asking_price": "$130"
+                },
+                {
+                    "title": "Sox vs. Yankees 6/25, FULL SUITE",
+                    "description": "Company can no longer attend, offering a FULL SUITE at a discount! ",
+                    "asking_price": "$2400"
+                },
+                {
+                    "title": "Sox vs. Phillies 7/11, 4 tickets",
+                    "description": "Great first base grandstand seats",
+                    "asking_price": "$300"
+                }
+            ]
+        },
+        {
+            "name": "Furniture",
+            "description": "Find the perfect \"piece\" to make your house a home",
+            "items": [
+                {
+                    "title": "Green armchair",
+                    "description": "Mid-century modern suede chair, good condition",
+                    "asking_price": "$250"
+                },
+                {
+                    "title": "Set of bedside tables",
+                    "description": "Really nice hand-made walnut tables",
+                    "asking_price": "$200"
+                },
+                {
+                    "title": "Coffee table",
+                    "description": "Unique piece from reclaimed wood",
+                    "asking_price": "$125"
+                },
+                {
+                    "title": "Queen bed headboard",
+                    "description": "Fits most bed frames, great piece to change up the look of a bedroom",
+                    "asking_price": "$100"
+                },
+                {
+                    "title": "Dining room set",
+                    "description": "Table and 4 chairs in wonderful condition",
+                    "asking_price": "$600"
+                },
+                {
+                    "title": "Armoire",
+                    "description": "Great as an addition to rooms without much closet space",
+                    "asking_price": "$200"
+                },
+                {
+                    "title": "China cabinet",
+                    "description": "Perfect condition, no scratches and glass still looks beautiful",
+                    "asking_price": "$500"
+                },
+                {
+                    "title": "Small desk",
+                    "description": "Good condition, great for a playroom or study room",
+                    "asking_price": "$60"
+                },
+                {
+                    "title": "Tall dresser",
+                    "description": "Great space and pretty good condition",
+                    "asking_price": "$200"
+                },
+                {
+                    "title": "Leather sofa",
+                    "description": "A little beat up but available for a great price",
+                    "asking_price": "$100"
+                },
+                {
+                    "title": "Globe bar cart",
+                    "description": "Classic style! All wheels roll smoothly",
+                    "asking_price": "$90"
+                }
+            ]
+        },
+        {
+            "name": "Art by Amanda",
+            "description": "Unique prints and paintings by MMA champion Amanda Nunes",
+            "owner_id": "a.nunes@gmail.com",
+            "items": [
+                {
+                    "title": "Self Portrait",
+                    "description": "24 x 18, oil on canvas",
+                    "asking_price": "$150"
+                },
+                {
+                    "title": "Skyline at Dawn",
+                    "description": " 11 x 17, digital print, 5 available",
+                    "asking_price": "$90"
+                },
+                {
+                    "title": "Chaos",
+                    "description": "News clippings collage, something outside of my normal practice",
+                    "asking_price": "$120"
+                },
+                {
+                    "title": "Use a Coaster!",
+                    "description": "Oil paint on solid wood coffee table",
+                    "asking_price": "$300"
+                },
+                {
+                    "title": "Chaos",
+                    "description": "News clippings collage, something outside of my normal practice",
+                    "asking_price": "$120"
+                },
+                {
+                    "title": "Through the Looking Glass",
+                    "description": "36 x 24, Oil on canvas",
+                    "asking_price": "$200"
+                },
+                {
+                    "title": "Speak Up, I Can't Hear You",
+                    "description": "11 x 17, digital print, 3 available",
+                    "asking_price": "$90"
+                }
+            ]
+        },
+        {
+            "name": "Video games",
+            "description": "Games, systems, accessories. Retro, modern, everywhere in between. Come find your next game!",
+            "items": [
+                {
+                    "title": "Nintendo 64 full system w/ 2 games",
+                    "description": "Rare find! Perfect working condition, all cables, 2 controllers. Comes with Mario Kart and Super Smash Bros",
+                    "asking_price": "$150"
+                },
+                {
+                    "title": "Xbox 1",
+                    "description": "1TB hard drive, with disc slot. Selling because I'm upgrading to the new system",
+                    "asking_price": "$125"
+                },
+                {
+                    "title": "Madden/NBA 2K games for xbox 360",
+                    "description": "2 madden games, 4 2k games. Fun add to a collection to play with some old teams",
+                    "asking_price": "$40"
+                },
+                {
+                    "title": "Nintendo wii",
+                    "description": "Great conditions, comes with 2 controllers, balance board, the wii sports games and mario kart",
+                    "asking_price": "$75"
+                },
+                {
+                    "title": "NCAA Football 13 for PS3",
+                    "description": "All-time great sports game, disc in great condition and plays perfectly",
+                    "asking_price": "$100"
+                },
+                {
+                    "title": "PS4 controllers",
+                    "description": "2 extra controllers, very lightly used, got them right before I upgraded to PS5",
+                    "asking_price": "$60"
+                },
+                {
+                    "title": "Nintendo switch",
+                    "description": "Won in a raffle but I already have one, brand new!",
+                    "asking_price": "$250"
+                },
+                {
+                    "title": "Playstation 2 + Crash Bandicoot",
+                    "description": "Awesome add to a gaming setup with a classic game. Everything in great working condiiton",
+                    "asking_price": "$80"
+                },
+                {
+                    "title": "Overcooked 2 for XBOX 1",
+                    "description": "Fun family game!",
+                    "asking_price": "$40"
+                },
+                {
+                    "title": "GTA V for XBOX 1",
+                    "description": "Good condition, no scratches",
+                    "asking_price": "$25"
+                },
+                {
+                    "title": "NBA 2k20 for PS4",
+                    "description": "Disc works great, just don't have interest in the game anymore",
+                    "asking_price": "$30"
+                },
+                {
+                    "title": "Call of Duty: Modern Warfare for PS4",
+                    "description": "No issues with the disc, just not playing anymore",
+                    "asking_price": "$50"
+                }
+            ]
+        },
+        {
+            "name": "Kitchen tools",
+            "description": "Clean out your cabinets and pick up fun new appliances",
+            "items": [
+                {
+                    "title": "Magic Bullet blender",
+                    "description": "Full magic bullet system in good condition",
+                    "asking_price": "$40"
+                },
+                {
+                    "title": "Full pots and pans set",
+                    "description": "Kirkland brand but great quality, lightly used, everything is still in great shape",
+                    "asking_price": "$75"
+                },
+                {
+                    "title": "Immersion blender",
+                    "description": "Fun and useful add to the kitchen!",
+                    "asking_price": "$35"
+                },
+                {
+                    "title": "Induction cooktop",
+                    "description": "Heats fast and consistently, super useful especially for kitchens with old electric cooktops that don't always behave",
+                    "asking_price": "$40"
+                },
+                {
+                    "title": "Ninja air fryer/toaster oven",
+                    "description": "Awesome do-it-all mini oven! Air fry, bake, broil, toast, etc. Has a ton of capacity but conveniently flips up when not using it to save counter space",
+                    "asking_price": "$100"
+                },
+                {
+                    "title": "Full pots and pans set",
+                    "description": "Kirkland brand but great quality, lightly used, everything is still in great shape",
+                    "asking_price": "$75"
+                }
+            ]
+        },
+        {
+            "name": "Vinyl",
+            "description": "Find new-to-you tunes"
+        },
+        {
+            "name": "Vintage clothing",
+            "description": "Get some new retro threads!"
+        },
+        {
+            "name": "Designer clothing",
+            "description": "Your new favorite piece from your favorite brand"
+        },
+        {
+            "name": "Collectible coins",
+            "description": "Add to your collection today!"
+        },
+        {
+            "name": "Bryce's Hand-Built Bikes",
+            "description": "Get a new unique classic ride, fully restored to perfect riding condition by MLB star Bryce Harper",
+            "owner_id": "hairflipbryce@gmail.com"
+        }
+    ]
+}
