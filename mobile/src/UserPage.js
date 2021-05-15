@@ -3,7 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import {
   View,
   StyleSheet,
-  Button
+  Button,
+  Text
 } from 'react-native';
 import { Input, CheckBox } from 'react-native-elements';
 
@@ -24,6 +25,9 @@ class UserPage extends Component {
     render () {
         return (
             <View style={styles.container}>
+            <Text style={styles.title} align="center">
+                Currently logged in user: {this.state.user !== "" ? this.state.user : "None"}
+            </Text>
             <Input
               style={styles.input}
               placeholder='Username'
@@ -51,10 +55,17 @@ class UserPage extends Component {
                         if (response) {
                           console.log(response.getSuccess());
                           console.log(response.getEmail());
+
+                          if (response.getSuccess()) {
+                            globals.user = this.state.user;
+                            console.log("user is now " + globals.user)
+                          }
+                          
                         }
                       }
                     });
-                    globals.user = this.state.user;
+                    
+
                   }}
                 />
                 <Button
@@ -72,10 +83,13 @@ class UserPage extends Component {
                         if (response) {
                           console.log(response);
                           console.log(response.getUser());
+
+                          globals.user = this.state.user;
+                          console.log("user is now " + globals.user)
                         }
                       }
                     });
-                    globals.user = this.state.user;
+
                   }}
                 />
               <StatusBar style="auto" />
@@ -93,7 +107,14 @@ const styles = StyleSheet.create({
     },
     input: {
       borderWidth: 1
-    }
+    },
+    title: {
+      fontSize: 16,
+      color: '#000000',
+      lineHeight: 24,
+      textAlign: 'left',
+      alignSelf: 'center'
+  },
   });
 
 export default UserPage;

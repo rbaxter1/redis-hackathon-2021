@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { TouchableOpacity } from 'react-native';
@@ -22,8 +22,23 @@ function drawerToggleButton(navigation) {
 }
 
 function createButton(navigation) {
+  const route = useRoute();
+  console.log("route: " + route.name);
+  if (route.name === "Create" || route.name === "Item Details") {
+    return null;
+  }
+  let context;
+  if (route.name === "Networks" || route.name === "My Networks") {
+    context = "network"
+  }
+  if (route.name === "Items" || route.name === "My Items") {
+    context = "item"
+  }
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+    <TouchableOpacity onPress={() => {
+        navigation.navigate('Create', {context: context})
+      }
+    }>
       <Icon name="add" style={{color: 'black', padding: 10, marginLeft: 10, fontSize: 20}}/>
     </TouchableOpacity>
   );
@@ -43,7 +58,7 @@ function NetworksStack() {
         })}>
           <Stack.Screen name="Networks" component={NetworksScreen} />
           <Stack.Screen name="Items" component={NetworkItemsScreen} />
-          <Stack.Screen name="Create" component={NewNetworkScreen} />
+          <Stack.Screen name="Create" component={CreateThingScreen} />
           <Stack.Screen name="Item Details" component={ItemDetailsScreen} />
       </Stack.Navigator>
   );
@@ -62,9 +77,10 @@ function NetworkItemsScreen ({route}) {
   );
 }
 
-function NewNetworkScreen () {
+function CreateThingScreen ({route}) {
+  const {context} = route.params;
   return (
-    <CreateScreen context="network"></CreateScreen>
+    <CreateScreen context={context}></CreateScreen>
   );
 }
 
@@ -76,10 +92,14 @@ function MyNetworksStack() {
           headerLeft: () => (
             drawerToggleButton(navigation)
           ),
+          headerRight: () => (
+            createButton(navigation)
+          ),
         })}>
           <Stack.Screen name="My Networks" component={MyNetworksScreen} />
           <Stack.Screen name="Items" component={MyNetworkItemsScreen} />
           <Stack.Screen name="Item Details" component={ItemDetailsScreen} />
+          <Stack.Screen name="Create" component={CreateThingScreen} />
       </Stack.Navigator>
   );
 }
@@ -110,7 +130,7 @@ function MyItemsStack() {
           ),
         })}>
           <Stack.Screen name="My Items" component={MyItemsScreen} />
-          <Stack.Screen name="Create" component={NewItemScreen} />
+          <Stack.Screen name="Create" component={CreateThingScreen} />
           <Stack.Screen name="Item Details" component={ItemDetailsScreen} />
       </Stack.Navigator>
   );
@@ -119,12 +139,6 @@ function MyItemsStack() {
 function MyItemsScreen ({navigation}) {
   return (
     <ItemListScreen context="my items" navigation={navigation}></ItemListScreen>
-  );
-}
-
-function NewItemScreen () {
-  return (
-    <CreateScreen context="item"></CreateScreen>
   );
 }
 

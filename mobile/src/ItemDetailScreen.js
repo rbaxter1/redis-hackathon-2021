@@ -10,7 +10,6 @@ import {
 
 import ItemImage from './ItemImage'
 import globals from './global.js'
-import ThemedListItem from 'react-native-elements/dist/list/ListItem';
 
 const {SubmitItemOfferRequest, ItemOffer} = require('./network_pb.js');
 const {NetworkClient} = require('./network_grpc_web_pb.js');
