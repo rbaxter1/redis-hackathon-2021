@@ -110,22 +110,44 @@ TODO: Command Details
 
 ## How the Data is Accessed
 
+*My Offers*
+
+*Review Offers*
+
+
 ### Find All Listed Items in Any Network a User is a Member
 
-The My Home screen shows the user all items for sale in all networks the user is a member. The following query finds all items for the My Home screen.
+The *Browse Items* screen shows all items for sale in all networks the user is a member.
 
 TODO: Command Details
 
 ### Find a User's Listed Items
 
-The *My Items* screen shows all items a user has for sale. The following query finds all items for the *My Items* screen.
+The *My Items* screen shows all items a user has for sale.
 
 TODO: Command Details
 
+### List All Available Networks
 
-### Find All Offers for an Item
+The *All Networks* screen shows all networks in a graph.
 
+TODO: Command Details
 
+### List All Networks the User Joined
+
+The *My Networks* screen shows all networks in a graph with a **member** edge to a specified user.
+
+TODO: Command Details
+
+### Find All Offers for Any Item Being Sold by a User
+
+The *Review Offers* screen shows the properties of any **offer** edge for all items for sale by a specified user.
+
+TODO: Command Details
+
+### Find All Offers Submitted by a User
+
+The *My Offers* screen shows the properties of any **offer** edge connected to a specified user.
 
 TODO: Command Details
 
@@ -141,7 +163,7 @@ TODO: Command Details
 
 
 ## UX and DX
-The following table shows iPohone and Android screenshots for each page in the mobile application. 
+The following table shows iPhone and Android screenshots for each page in the mobile application. 
 
 |Page |iPhone | Android|
 --- | --- | --- 
@@ -176,7 +198,7 @@ Build and start the containers for Redis, RedisInsight, the backend Python gRPC 
 
     docker compose up -d
 
-Run the mobile application using Expo in a local web browser. This application can be run on your mobile phone by installing [Expo Go](https://expo.io/client). However, we recommend starting with the web browser since you may encounter into connectivity issues that require custom configuration, depending on your local network setup.
+Run the mobile application using Expo in a local web browser. This application can be run on your mobile phone by installing [Expo Go](https://expo.io/client). However, we recommend starting with the web browser since you may encounter connectivity issues that require custom configuration, depending on your local network setup.
 
     cd mobile/src
 
