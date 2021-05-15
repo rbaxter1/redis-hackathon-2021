@@ -102,8 +102,52 @@ def run(cmd):
             getUserRequest = network_pb2.GetUserRequest(
                 email=userDetails.email)
             response = stub.GetUser(getUserRequest)
-
             print(MessageToJson(response))
+
+            newNetwork = network_pb2.NetworkDetails()
+            newNetwork.name = 'myNetwork'
+            newNetwork.owner_id = userDetails.email
+            newNetwork.description = 'some blah description'
+            response = stub.CreateNetwork(
+                network_pb2.CreateNetworkRequest(network=newNetwork))
+            print("Greeter client received: " + response.network_name)
+
+            item = network_pb2.ItemDetails()
+            item.title = "test item"
+            item.description = "an item for testing"
+            item.asking_price = 25.23 
+            item.network_name = newNetwork.name
+            image_string = "image_data_12345"
+            item.image = image_string.encode('utf-8')
+
+            submitItemRequest = network_pb2.SubmitItemRequest(item_details=item)
+            submitItemRequest.email = userDetails.email
+
+            response = stub.SubmitItem(submitItemRequest)
+            print(MessageToJson(response))
+
+            item = network_pb2.ItemDetails()
+            item.title = "test item two"
+            item.description = "another item for testing"
+            item.asking_price = 25.233245 
+            item.network_name = newNetwork.name
+            image_string = "image_data_12345"
+            item.image = image_string.encode('utf-8')
+
+            submitItemRequest = network_pb2.SubmitItemRequest(item_details=item)
+            submitItemRequest.email = userDetails.email
+
+            response = stub.SubmitItem(submitItemRequest)
+            print(MessageToJson(response))
+
+            getItemsForUsersRequest = network_pb2.GetItemsForUserRequest(email=userDetails.email)
+            response = stub.GetItemsForUser(getItemsForUsersRequest)
+            print(MessageToJson(response))
+
+            getItemsForNetworkRequest = network_pb2.GetItemsForNetworkRequest(network_name=newNetwork.name)
+            response = stub.GetItemsForNetwork(getItemsForNetworkRequest)
+            print(MessageToJson(response))
+
         else:
             print("Unknown command.")
 
