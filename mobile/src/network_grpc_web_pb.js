@@ -1433,80 +1433,160 @@ proto.protobuf.NetworkPromiseClient.prototype.joinNetwork =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.protobuf.GetOffersForUserRequest,
- *   !proto.protobuf.GetOffersForUserResponse>}
+ *   !proto.protobuf.GetOffersForUserItemsRequest,
+ *   !proto.protobuf.GetOffersForUserItemsResponse>}
  */
-const methodDescriptor_Network_GetOffersForUser = new grpc.web.MethodDescriptor(
-  '/protobuf.Network/GetOffersForUser',
+const methodDescriptor_Network_GetOffersForUserItems = new grpc.web.MethodDescriptor(
+  '/protobuf.Network/GetOffersForUserItems',
   grpc.web.MethodType.UNARY,
-  proto.protobuf.GetOffersForUserRequest,
-  proto.protobuf.GetOffersForUserResponse,
+  proto.protobuf.GetOffersForUserItemsRequest,
+  proto.protobuf.GetOffersForUserItemsResponse,
   /**
-   * @param {!proto.protobuf.GetOffersForUserRequest} request
+   * @param {!proto.protobuf.GetOffersForUserItemsRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.protobuf.GetOffersForUserResponse.deserializeBinary
+  proto.protobuf.GetOffersForUserItemsResponse.deserializeBinary
 );
 
 
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.protobuf.GetOffersForUserRequest,
- *   !proto.protobuf.GetOffersForUserResponse>}
+ *   !proto.protobuf.GetOffersForUserItemsRequest,
+ *   !proto.protobuf.GetOffersForUserItemsResponse>}
  */
-const methodInfo_Network_GetOffersForUser = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.protobuf.GetOffersForUserResponse,
+const methodInfo_Network_GetOffersForUserItems = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.protobuf.GetOffersForUserItemsResponse,
   /**
-   * @param {!proto.protobuf.GetOffersForUserRequest} request
+   * @param {!proto.protobuf.GetOffersForUserItemsRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.protobuf.GetOffersForUserResponse.deserializeBinary
+  proto.protobuf.GetOffersForUserItemsResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.protobuf.GetOffersForUserRequest} request The
+ * @param {!proto.protobuf.GetOffersForUserItemsRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.protobuf.GetOffersForUserResponse)}
+ * @param {function(?grpc.web.Error, ?proto.protobuf.GetOffersForUserItemsResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.protobuf.GetOffersForUserResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.protobuf.GetOffersForUserItemsResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.protobuf.NetworkClient.prototype.getOffersForUser =
+proto.protobuf.NetworkClient.prototype.getOffersForUserItems =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/protobuf.Network/GetOffersForUser',
+      '/protobuf.Network/GetOffersForUserItems',
       request,
       metadata || {},
-      methodDescriptor_Network_GetOffersForUser,
+      methodDescriptor_Network_GetOffersForUserItems,
       callback);
 };
 
 
 /**
- * @param {!proto.protobuf.GetOffersForUserRequest} request The
+ * @param {!proto.protobuf.GetOffersForUserItemsRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.protobuf.GetOffersForUserResponse>}
+ * @return {!Promise<!proto.protobuf.GetOffersForUserItemsResponse>}
  *     Promise that resolves to the response
  */
-proto.protobuf.NetworkPromiseClient.prototype.getOffersForUser =
+proto.protobuf.NetworkPromiseClient.prototype.getOffersForUserItems =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/protobuf.Network/GetOffersForUser',
+      '/protobuf.Network/GetOffersForUserItems',
       request,
       metadata || {},
-      methodDescriptor_Network_GetOffersForUser);
+      methodDescriptor_Network_GetOffersForUserItems);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.protobuf.GetOffersMadeByUserRequest,
+ *   !proto.protobuf.GetOffersMadeByUserResponse>}
+ */
+const methodDescriptor_Network_GetOffersMadeByUser = new grpc.web.MethodDescriptor(
+  '/protobuf.Network/GetOffersMadeByUser',
+  grpc.web.MethodType.UNARY,
+  proto.protobuf.GetOffersMadeByUserRequest,
+  proto.protobuf.GetOffersMadeByUserResponse,
+  /**
+   * @param {!proto.protobuf.GetOffersMadeByUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetOffersMadeByUserResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.protobuf.GetOffersMadeByUserRequest,
+ *   !proto.protobuf.GetOffersMadeByUserResponse>}
+ */
+const methodInfo_Network_GetOffersMadeByUser = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.protobuf.GetOffersMadeByUserResponse,
+  /**
+   * @param {!proto.protobuf.GetOffersMadeByUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.GetOffersMadeByUserResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.protobuf.GetOffersMadeByUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.protobuf.GetOffersMadeByUserResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.protobuf.GetOffersMadeByUserResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.protobuf.NetworkClient.prototype.getOffersMadeByUser =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/protobuf.Network/GetOffersMadeByUser',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetOffersMadeByUser,
+      callback);
+};
+
+
+/**
+ * @param {!proto.protobuf.GetOffersMadeByUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.protobuf.GetOffersMadeByUserResponse>}
+ *     Promise that resolves to the response
+ */
+proto.protobuf.NetworkPromiseClient.prototype.getOffersMadeByUser =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/protobuf.Network/GetOffersMadeByUser',
+      request,
+      metadata || {},
+      methodDescriptor_Network_GetOffersMadeByUser);
 };
 
 

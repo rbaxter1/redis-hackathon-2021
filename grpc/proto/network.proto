@@ -188,15 +188,23 @@ message JoinNetworkResponse {
   bool success = 1;
 }
 
-message GetOffersForUserRequest {
+message GetOffersForUserItemsRequest {
   string email = 1;
 }
 
-message GetOffersForUserResponse {
+message GetOffersForUserItemsResponse {
   bool success = 1;
   repeated ItemOffer offers = 2;
 }
 
+message GetOffersMadeByUserRequest {
+  string email = 1;
+}
+
+message GetOffersMadeByUserResponse {
+  bool success = 1;
+  repeated ItemOffer offers = 2;
+}
 
 service Network {
   rpc SaveImage(SaveImageRequest) returns (SaveImageResponse);
@@ -216,6 +224,7 @@ service Network {
   rpc InviteUserToNetwork(InviteUserToNetworkRequest) returns (InviteUserToNetworkResponse);
   rpc ReplyToNetworkInvite(ReplyToNetworkInviteRequest) returns (ReplyToNetworkInviteResponse);
   rpc JoinNetwork(JoinNetworkRequest) returns (JoinNetworkResponse);
-  rpc GetOffersForUser(GetOffersForUserRequest) returns (GetOffersForUserResponse);
+  rpc GetOffersForUserItems(GetOffersForUserItemsRequest) returns (GetOffersForUserItemsResponse);
+  rpc GetOffersMadeByUser(GetOffersMadeByUserRequest) returns (GetOffersMadeByUserResponse);
 
 }
