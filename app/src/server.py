@@ -121,7 +121,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         query = """MATCH (u:user {email:'%s'})
         MATCH (n:network {name:'%s'})
         MERGE (i:item {title: '%s', description: '%s', asking_price: '%s'})
-        MERGE (u)-[:OWNER]->(i)
+        MERGE (u)-[:SELLER]->(i)
         MERGE (i)-[:SALE]->(n)""" % (userEmail, networkName, itemTitle, itemDescription, itemAskingPrice)
 
         if len(img) > 0:
@@ -152,8 +152,6 @@ class Network(network_pb2_grpc.NetworkServicer):
         MERGE (u)-[:OWNER]->(n)
         MERGE (u)-[:MEMBER]->(n)""" % (self.Sanitize(owner), self.Sanitize(networkName), self.Sanitize(desc))
 
-        log.info("Creating network. Query:")
-        log.info(query)
         if len(img) > 0:
             log.info(img)
             image_id = 'image:{0}'.format(str(uuid.uuid4()))
@@ -221,7 +219,7 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         query = """MATCH (u:user {email:'%s'})
         MATCH (i:item)
-        MATCH (u:user)-[:OWNER]->(i)
+        MATCH (u:user)-[:SELLER]->(i)
         RETURN i.title, i.description, i.asking_price, i.image_id""" % email
 
         result = self.ExecuteQueryOnNetwork(query)

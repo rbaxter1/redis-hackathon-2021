@@ -41,41 +41,54 @@ TODO: Screenshot of a graph from RedisInsight
 
 ### Creating Users
 
-When a person signs up for *The Network*, a **user** node is created. Properties are set on the node for user detail, such as email.
+When a person signs up for *The Network*, a **user** node is created. Properties are set on the node for user detail including email, first name and last name.
 
-    GRAPH.QUERY THE_NETWORK_GRAPH "CREATE (:User {firstName: 'Elon', lastName: 'Musk', email: 'emusk@tesla.com'})"
+    GRAPH.QUERY THE_NETWORK_GRAPH
+    "OPTIONAL MATCH (check:user {email: '%emusk@tesla.com'})
+    MERGE (u:user {email: 'emusk@tesla.com' })
+    ON CREATE SET u.first_name='Elon', u.last_name='Musk'
+    RETURN not(exists(check))"
+
+The merge is used to make sure no duplicate users are created for a given email address. The optional match returns to the service whether this user did not already exist, and the user was truly "created." 
 
 ### Creating Networks
 
-When a user creates a network, a **netowrk** node is created and an **owner** edge is created between the user and the network.
+When a user creates a network, a **netowrk** node is created, and both an **owner** edge and a **member** created between the user and the network.
 
-    GRAPH.QUERY THE_NETWORK_GRAPH "CREATE (:Network {name: 'Red Sox Tickets', description: 'A network for exchanging Red Sox tickets.'})"
+    GRAPH.QUERY THE_NETWORK_GRAPH 
+    "MATCH (u:user {email:'emusk@tesla.com'})
+    MERGE (n:network {name: 'Spaceship parts exchange', description: 'Buy and sell lightly used space travel tech'})
+    MERGE (u)-[:OWNER]->(n)
+    MERGE (u)-[:MEMBER]->(n)
+    SET n.image_id = 'image:3261'"
 
-    // TODO: Need this query
-    GRAPH.QUERY THE_NETWORK_GRAPH  "Match (p:User {email: 'emusk@tesla.com'} ) MATCH (n:Network {name:'Red Sox Tickets'}) CREATE (p)-[:MEMBER]->(n)"
-
-When a network is created, the image associated with the network is stored in its own key. In the graph, the key is stored as a property on the network.
+    The image associated with the network is stored in its own key. In the graph, the key is stored as a property on the network.
+    
+    SET image:46 ajsdkjashdkjhaskdjhasd
 
 ### Joining Networks
 
 When a user joins a network, a **member** edge is created between the **user** node and the **network** node.
 
-    GRAPH.QUERY THE_NETWORK_GRAPH  "Match (p:User {email: 'emusk@tesla.com'} ) MATCH (n:Network {name:'Red Sox Tickets'}) CREATE (p)-[:MEMBER]->(n)"
+    GRAPH.QUERY THE_NETWORK_GRAPH 
+    "MATCH (u:user {email:'emusk@tesla.com'})
+    MATCH (n:network {name:'Tesla apparel'})
+    MERGE (u)-[:MEMBER]->(n)"
 
 ### Listing Items
 
 When a user lists an item for sale in a network, an **item** node is created and a **selling** edge is created between the user and the item.
 
-    // TODO: need query for creating the edge
-    GRAPH.QUERY THE_NETWORK_GRAPH "CREATE (:Item {title: 'SOX v LAA Sat 5/15', description: '2 Seats. Awesome Loge Box', askingPrice: '$150', imageKey: 'image:46'})"
+    GRAPH.QUERY THE_NETWORK_GRAPH
+    MATCH (u:user {email:'emusk@tesla.com'})
+    MATCH (n:network {name:'Spaceship parts exchange'})
+    MERGE (i:item {title: 'Spare rocket booster', description: 'lightly used, only one launch!', asking_price: '5000000'})
+    MERGE (u)-[:SELLER]->(i)
+    MERGE (i)-[:SALE]->(n)
 
 When an item is created, the image associated with the item is stored in its own key. In the graph, the key is stored as a property on the item.
 
-    SET image:46 ajsdkjashdkjhaskdjhasd
-
-TODO: Command Details
-
-// TODO: add tags description and code
+    SET image:4986 ajsdkjashdkjhaskdjhasd
 
 ### Making an Offer
 

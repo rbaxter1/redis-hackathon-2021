@@ -23,6 +23,13 @@ def JoinNetwork(stub, userEmail, networkName):
     )
 
 
+def SubmitItem(stub, itemDetails, userEmail):
+    return stub.SubmitItem(
+        network_pb2.SubmitItemRequest(
+            item_details=itemDetails, email=userEmail)
+    )
+
+
 def run(cmd):
     # NOTE(gRPC Python Team): .close() is possible on a channel and should be
     # used in circumstances in which the with statement does not fit the needs
@@ -42,7 +49,7 @@ def run(cmd):
 
         # GetNetworksForUser endpoint
         elif cmd == "GetNetworksForUser":
-            response = GetNetworksForUser(stub, 'jsmith@gmail.com')
+            response = GetNetworksForUser(stub, 'sage@gmail.com')
             print(MessageToJson(response))
 
         # JoinNetwork endpoint
@@ -76,7 +83,6 @@ def run(cmd):
                 else:
                     users = random.sample(data['users'], 10)
                     n['owner_id'] = users[0]['email']
-                    users.pop(0)
 
                 # Create the network itself
                 newNetwork = network_pb2.NetworkDetails()
@@ -87,7 +93,17 @@ def run(cmd):
 
                 # Add users to network
                 for u in users:
-                    JoinNetwork(stub, u['email'], n['name'])
+                    if (u['email'] != newNetwork.owner_id):
+                        JoinNetwork(stub, u['email'], n['name'])
+
+                # add items
+                for i in n['items']:
+                    item = Parse(
+                        json.dumps(i), network_pb2.ItemDetails())
+                    item.network_name = n['name']
+                    email = n['owner_id'] if alreadyOwned else (
+                        random.choice(users)['email'])
+                    SubmitItem(stub, item, email)
 
         # Test to create user and get user
         elif cmd == "test":
@@ -115,12 +131,13 @@ def run(cmd):
             item = network_pb2.ItemDetails()
             item.title = "test item"
             item.description = "an item for testing"
-            item.asking_price = 25.23 
+            item.asking_price = 25.23
             item.network_name = newNetwork.name
             image_string = "image_data_12345"
             item.image = image_string.encode('utf-8')
 
-            submitItemRequest = network_pb2.SubmitItemRequest(item_details=item)
+            submitItemRequest = network_pb2.SubmitItemRequest(
+                item_details=item)
             submitItemRequest.email = userDetails.email
 
             response = stub.SubmitItem(submitItemRequest)
@@ -129,22 +146,25 @@ def run(cmd):
             item = network_pb2.ItemDetails()
             item.title = "test item two"
             item.description = "another item for testing"
-            item.asking_price = 25.233245 
+            item.asking_price = 25.233245
             item.network_name = newNetwork.name
             image_string = "image_data_12345"
             item.image = image_string.encode('utf-8')
 
-            submitItemRequest = network_pb2.SubmitItemRequest(item_details=item)
+            submitItemRequest = network_pb2.SubmitItemRequest(
+                item_details=item)
             submitItemRequest.email = userDetails.email
 
             response = stub.SubmitItem(submitItemRequest)
             print(MessageToJson(response))
 
-            getItemsForUsersRequest = network_pb2.GetItemsForUserRequest(email=userDetails.email)
+            getItemsForUsersRequest = network_pb2.GetItemsForUserRequest(
+                email=userDetails.email)
             response = stub.GetItemsForUser(getItemsForUsersRequest)
             print(MessageToJson(response))
 
-            getItemsForNetworkRequest = network_pb2.GetItemsForNetworkRequest(network_name=newNetwork.name)
+            getItemsForNetworkRequest = network_pb2.GetItemsForNetworkRequest(
+                network_name=newNetwork.name)
             response = stub.GetItemsForNetwork(getItemsForNetworkRequest)
             print(MessageToJson(response))
 
