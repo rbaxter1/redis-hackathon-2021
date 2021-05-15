@@ -63,13 +63,15 @@ class Network(network_pb2_grpc.NetworkServicer):
         lastName = request.user.last_name
         email = request.user.email
 
-        query = """CREATE (:user
-         {first_name: '%s', last_name: '%s', email: '%s' })""" % (self.Sanitize(firstName), self.Sanitize(lastName), self.Sanitize(email))
+        query = """OPTIONAL MATCH (check:user {email: '%s'})
+        MERGE (u:user {email: '%s' })
+        ON CREATE SET u.first_name='%s', u.last_name='%s'
+        RETURN not(exists(check))""" % (self.Sanitize(email), self.Sanitize(email), self.Sanitize(firstName), self.Sanitize(lastName))
 
-        self.ExecuteQueryOnNetwork(query)
+        result = self.ExecuteQueryOnNetwork(query)
 
         response = network_pb2.CreateUserResponse()
-        response.success = True
+        response.success = result.result_set[0][0]
         response.email = email
         return response
 
