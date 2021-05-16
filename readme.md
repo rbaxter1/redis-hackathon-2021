@@ -38,7 +38,9 @@ All data for *The Network* is stored in a graph. **Users**, **Networks**, and **
 |User | Network | Member |
 |Item | Tags | Label |
 
-TODO: Screenshot of a graph from RedisInsight
+The following is an actual graph from The Network. The image was generated using RedisInsight.
+
+![](./images/the_network_graph.png)
 
 ### Creating Users
 
