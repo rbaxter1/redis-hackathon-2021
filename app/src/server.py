@@ -227,9 +227,7 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         networkName = self.Sanitize(request.network_name)
 
-        query = """MATCH (n:network {name: '%s'})
-        MATCH (i:item)
-        MATCH (i:item)-[:SALE]->(n)
+        query = """MATCH (i:item)-[:SALE]->(n:network {name: '%s'})
         RETURN i.title, i.description, i.asking_price, i.image_id""" % networkName
 
         result = self.ExecuteQueryOnNetwork(query)

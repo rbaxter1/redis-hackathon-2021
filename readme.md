@@ -47,7 +47,7 @@ The following is an actual graph from The Network. The image was generated using
 When a person signs up for *The Network*, a **user** node is created. Properties are set on the node for user detail including email, first name and last name.
 
     GRAPH.QUERY THE_NETWORK_GRAPH
-    "OPTIONAL MATCH (check:user {email: '%emusk@tesla.com'})
+    "OPTIONAL MATCH (check:user {email: 'emusk@tesla.com'})
     MERGE (u:user {email: 'emusk@tesla.com' })
     ON CREATE SET u.first_name='Elon', u.last_name='Musk'
     RETURN not(exists(check))"
@@ -80,7 +80,7 @@ When a user joins a network, a **member** edge is created between the **user** a
 
 ### Listing Items
 
-When a user lists an item for sale in a network, an **item** node is created and a **selling** edge is created between the user and the item.
+When a user lists an item for sale in a network, an **item** node is created and a **seller** edge is created between the user and the item.
 
     GRAPH.QUERY THE_NETWORK_GRAPH
     "MATCH (u:user {email:'emusk@tesla.com'})
@@ -120,20 +120,21 @@ TODO: Command Details
 
 *Review Offers*
 
+### Find All Listed Items in A Network
+
+The *Items* screen shows all items for sale in a network.
+
+    GRAPH.QUERY THE_NETWORK_GRAPH
+    "MATCH (i:item)-[:SALE]->(n:network {name: 'emusk@tesla.com'})
+    RETURN i.title, i.description, i.asking_price, i.image_id" 
 
 ### Find All Listed Items in Any Network a User is a Member
 
 The *Browse Items* screen shows all items for sale in all networks the user is a member.
 
     GRAPH.QUERY THE_NETWORK_GRAPH
-    "MATCH (:user {email: '%s'})-[:MEMBER]->(n:network)
+    "MATCH (:user {email: 'emusk@tesla.com'})-[:MEMBER]->(n:network)
     MATCH (i:item)-[:SALE]->(n) return i.title, i.description, i.asking_price, i.image_id"
-
-### Find a User's Listed Items
-
-The *My Items* screen shows all items a user has for sale.
-
-TODO: Command Details
 
 ### List All Available Networks
 
