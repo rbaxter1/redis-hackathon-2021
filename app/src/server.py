@@ -290,7 +290,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         query = """MATCH (:user {email:'%s'} )-[goodOffer:OFFER]->(i:item {title:'%s'})
                    MATCH (:user)-[anyOffer:OFFER]->(i})
                    SET anyOffer.status = 'rejected'
-                   SET goodOffer.status = 'accepted'""" % (offer_email, item_title, item_title)
+                   SET goodOffer.status = 'accepted'""" % (offer_email, item_title)
 
         self.ExecuteQueryOnNetwork(query)
 
