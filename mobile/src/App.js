@@ -9,6 +9,7 @@ import UserPage from './UserPage'
 import ItemListScreen from './ItemListScreen'
 import CreateScreen from './CreateScreen'
 import ItemDetailScreen from './ItemDetailScreen'
+import OffersScreen from './OffersScreen'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -144,11 +145,11 @@ function MyItemsScreen ({navigation}) {
   );
 }
 
-function ItemDetailsScreen ({route}) {
+function ItemDetailsScreen ({navigation, route}) {
   const {item} = route.params;
   console.log("item: " + item);
   return (
-    <ItemDetailScreen item={item}></ItemDetailScreen>
+    <ItemDetailScreen navigation={navigation} item={item}></ItemDetailScreen>
   );
 }
 
@@ -172,6 +173,46 @@ function UserScreen ({navigation}) {
   );
 }
 
+function OffersReceivedScreen () {
+  return (
+    <Stack.Navigator
+    initialRouteName="Offers Received"
+    screenOptions={({navigation}) => ({
+      headerLeft: () => (
+        drawerToggleButton(navigation)
+      ),
+    })}>
+      <Stack.Screen name="Offers Received" component={OffersReceived} />
+    </Stack.Navigator>
+  );
+}
+
+function OffersReceived () {
+  return (
+    <OffersScreen context="received"></OffersScreen>
+  );
+}
+
+function MyOffersScreen () {
+  return (
+    <Stack.Navigator
+    initialRouteName="My Offers"
+    screenOptions={({navigation}) => ({
+      headerLeft: () => (
+        drawerToggleButton(navigation)
+      ),
+    })}>
+      <Stack.Screen name="My Offers" component={MyOffers} />
+    </Stack.Navigator>
+  );
+}
+
+function MyOffers () {
+  return (
+    <OffersScreen context="my offers"></OffersScreen>
+  );
+}
+
 export default function App() {
   return (
       <NavigationContainer>
@@ -181,6 +222,8 @@ export default function App() {
               <Drawer.Screen name="My Networks" component={MyNetworksStack} />
               <Drawer.Screen name="Browse Items" component={MyItemsStack} />
               <Drawer.Screen name="User" component={UserStack} />
+              <Drawer.Screen name="Offers Received" component={OffersReceivedScreen} />
+              <Drawer.Screen name="My Offers" component={MyOffersScreen} />
           </Drawer.Navigator>
       </NavigationContainer>
   );

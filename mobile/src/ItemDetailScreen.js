@@ -6,7 +6,8 @@ import {
     Text,
     Image
   } from 'react-native';
-  import { Input } from 'react-native-elements';
+import { Input } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 import ItemImage from './ItemImage'
 import globals from './global.js'
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class ItemDetailScreen extends Component {
+class ItemDetailScreen extends Component {
     constructor(props) {
         super(props);
 
@@ -52,23 +53,25 @@ export default class ItemDetailScreen extends Component {
 
     componentDidMount () {
         // load item using id from backend
-        console.log("item: " + this.props.item);
+        console.log("item: " + JSON.stringify(this.props.item));
 
         //just kidding lol we just pass it in from parent screen
     }
 
     render () {
+        var enc = new TextDecoder("utf-8");
+        const b64image = enc.decode(this.props.item.image);
         return(
             <View style={styles.container}>
                 <Text style={styles.title} align="center">
-                    {this.props.item.name}
+                    {this.props.item.title}
                 </Text>
-                <ItemImage style={styles.image} source={{uri: `data:image/png;base64,${this.props.item.image}`}}/>
+                <ItemImage style={styles.image} source={{uri: b64image}}/>
                 <Text style={styles.title} align="center">
                     {this.props.item.description}
                 </Text>
                 <Text style={styles.title} align="center">
-                    {this.props.askingPrice}
+                    {this.props.item.asking_price}
                 </Text>
                 <Input
                     style={styles.input}
@@ -86,11 +89,14 @@ export default class ItemDetailScreen extends Component {
                         // string title = 2;
                         // double offer = 3;
                         // string time = 4;
+                        // string status = 5;
+
                         var offer = new ItemOffer();
                         offer.setEmail(globals.user);
-                        offer.setTitle(this.props.item.name);
+                        offer.setTitle(this.props.item.title);
                         offer.setOffer(parseFloat(this.state.offer));
                         offer.setTime(Date.now());
+                        offer.setStatus("Pending");
                         var req = new SubmitItemOfferRequest();
                         req.setItemOffer(offer);
 
@@ -107,7 +113,17 @@ export default class ItemDetailScreen extends Component {
                         });
                     }}
                 />
+                <Button
+                    title={"Go Back"}
+                    onPress={() => {this.props.navigation.goBack()}}
+                />
             </View>
         );
     }
+}
+
+export default function(props) {
+    const navigation = useNavigation();
+
+    return <ItemDetailScreen {...props} navigation={navigation} />;
 }
