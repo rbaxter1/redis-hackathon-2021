@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rnetwork.proto\x12\x08protobuf\"n\n\x0bUserDetails\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x15\n\rnetwork_names\x18\x04 \x03(\t\x12\x12\n\nfriend_ids\x18\x05 \x03(\t\"8\n\x11\x43reateUserRequest\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"4\n\x12\x43reateUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"\x1f\n\x0eGetUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"6\n\x0fGetUserResponse\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"|\n\x0bItemDetails\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x14\n\x0c\x61sking_price\x18\x03 \x01(\x01\x12\x14\n\x0cnetwork_name\x18\x04 \x01(\t\x12\r\n\x05image\x18\x05 \x01(\x0c\x12\x0e\n\x06labels\x18\x06 \x03(\t\"O\n\x11SubmitItemRequest\x12+\n\x0citem_details\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"%\n\x12SubmitItemResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"V\n\tItemOffer\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\r\n\x05offer\x18\x03 \x01(\x01\x12\x0c\n\x04time\x18\x04 \x01(\t\x12\x0e\n\x06status\x18\x05 \x01(\t\"A\n\x16SubmitItemOfferRequest\x12\'\n\nitem_offer\x18\x01 \x01(\x0b\x32\x13.protobuf.ItemOffer\"*\n\x17SubmitItemOfferResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"g\n\x0eNetworkDetails\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08owner_id\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\r\n\x05image\x18\x04 \x01(\x0c\x12\x11\n\tis_member\x18\x05 \x01(\x08\"A\n\x14\x43reateNetworkRequest\x12)\n\x07network\x18\x01 \x01(\x0b\x32\x18.protobuf.NetworkDetails\"-\n\x15\x43reateNetworkResponse\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"*\n\x19GetNetworksForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"H\n\x1aGetNetworksForUserResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"0\n\x18SearchForNetworksRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"!\n\x10SaveImageRequest\x12\r\n\x05image\x18\x01 \x01(\x0c\"6\n\x11SaveImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x10\n\x08image_id\x18\x02 \x01(\t\"#\n\x0fGetImageRequest\x12\x10\n\x08image_id\x18\x01 \x01(\t\"2\n\x10GetImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05image\x18\x02 \x01(\x0c\"\'\n\x16GetItemsForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"P\n\x17GetItemsForUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails\"1\n\x19GetItemsForNetworkRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"S\n\x1aGetItemsForNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails\"9\n\x12JoinNetworkRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x14\n\x0cnetwork_name\x18\x02 \x01(\t\"&\n\x13JoinNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"-\n\x1cGetOffersForUserItemsRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"U\n\x1dGetOffersForUserItemsResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12#\n\x06offers\x18\x02 \x03(\x0b\x32\x13.protobuf.ItemOffer\"+\n\x1aGetOffersMadeByUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"S\n\x1bGetOffersMadeByUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12#\n\x06offers\x18\x02 \x03(\x0b\x32\x13.protobuf.ItemOffer\"?\n\x13ReplyToOfferRequest\x12\x12\n\nitem_title\x18\x01 \x01(\t\x12\x14\n\x0coffer_status\x18\x02 \x01(\t\"\'\n\x14ReplyToOfferResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\xc2\x08\n\x07Network\x12\x44\n\tSaveImage\x12\x1a.protobuf.SaveImageRequest\x1a\x1b.protobuf.SaveImageResponse\x12\x41\n\x08GetImage\x12\x19.protobuf.GetImageRequest\x1a\x1a.protobuf.GetImageResponse\x12G\n\nCreateUser\x12\x1b.protobuf.CreateUserRequest\x1a\x1c.protobuf.CreateUserResponse\x12>\n\x07GetUser\x12\x18.protobuf.GetUserRequest\x1a\x19.protobuf.GetUserResponse\x12G\n\nSubmitItem\x12\x1b.protobuf.SubmitItemRequest\x1a\x1c.protobuf.SubmitItemResponse\x12V\n\x0fSubmitItemOffer\x12 .protobuf.SubmitItemOfferRequest\x1a!.protobuf.SubmitItemOfferResponse\x12P\n\rCreateNetwork\x12\x1e.protobuf.CreateNetworkRequest\x1a\x1f.protobuf.CreateNetworkResponse\x12_\n\x12GetNetworksForUser\x12#.protobuf.GetNetworksForUserRequest\x1a$.protobuf.GetNetworksForUserResponse\x12V\n\x0fGetItemsForUser\x12 .protobuf.GetItemsForUserRequest\x1a!.protobuf.GetItemsForUserResponse\x12_\n\x12GetItemsForNetwork\x12#.protobuf.GetItemsForNetworkRequest\x1a$.protobuf.GetItemsForNetworkResponse\x12J\n\x0bJoinNetwork\x12\x1c.protobuf.JoinNetworkRequest\x1a\x1d.protobuf.JoinNetworkResponse\x12h\n\x15GetOffersForUserItems\x12&.protobuf.GetOffersForUserItemsRequest\x1a\'.protobuf.GetOffersForUserItemsResponse\x12\x62\n\x13GetOffersMadeByUser\x12$.protobuf.GetOffersMadeByUserRequest\x1a%.protobuf.GetOffersMadeByUserResponseb\x06proto3'
+  serialized_pb=b'\n\rnetwork.proto\x12\x08protobuf\"n\n\x0bUserDetails\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x15\n\rnetwork_names\x18\x04 \x03(\t\x12\x12\n\nfriend_ids\x18\x05 \x03(\t\"8\n\x11\x43reateUserRequest\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"4\n\x12\x43reateUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"\x1f\n\x0eGetUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"6\n\x0fGetUserResponse\x12#\n\x04user\x18\x01 \x01(\x0b\x32\x15.protobuf.UserDetails\"|\n\x0bItemDetails\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x14\n\x0c\x61sking_price\x18\x03 \x01(\x01\x12\x14\n\x0cnetwork_name\x18\x04 \x01(\t\x12\r\n\x05image\x18\x05 \x01(\x0c\x12\x0e\n\x06labels\x18\x06 \x03(\t\"O\n\x11SubmitItemRequest\x12+\n\x0citem_details\x18\x01 \x01(\x0b\x32\x15.protobuf.ItemDetails\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"%\n\x12SubmitItemResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"V\n\tItemOffer\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\r\n\x05offer\x18\x03 \x01(\x01\x12\x0c\n\x04time\x18\x04 \x01(\t\x12\x0e\n\x06status\x18\x05 \x01(\t\"A\n\x16SubmitItemOfferRequest\x12\'\n\nitem_offer\x18\x01 \x01(\x0b\x32\x13.protobuf.ItemOffer\"*\n\x17SubmitItemOfferResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"g\n\x0eNetworkDetails\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08owner_id\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\r\n\x05image\x18\x04 \x01(\x0c\x12\x11\n\tis_member\x18\x05 \x01(\x08\"A\n\x14\x43reateNetworkRequest\x12)\n\x07network\x18\x01 \x01(\x0b\x32\x18.protobuf.NetworkDetails\"-\n\x15\x43reateNetworkResponse\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"*\n\x19GetNetworksForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"H\n\x1aGetNetworksForUserResponse\x12*\n\x08networks\x18\x01 \x03(\x0b\x32\x18.protobuf.NetworkDetails\"0\n\x18SearchForNetworksRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"!\n\x10SaveImageRequest\x12\r\n\x05image\x18\x01 \x01(\x0c\"6\n\x11SaveImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x10\n\x08image_id\x18\x02 \x01(\t\"#\n\x0fGetImageRequest\x12\x10\n\x08image_id\x18\x01 \x01(\t\"2\n\x10GetImageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05image\x18\x02 \x01(\x0c\"\'\n\x16GetItemsForUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"P\n\x17GetItemsForUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails\"1\n\x19GetItemsForNetworkRequest\x12\x14\n\x0cnetwork_name\x18\x01 \x01(\t\"S\n\x1aGetItemsForNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12$\n\x05items\x18\x02 \x03(\x0b\x32\x15.protobuf.ItemDetails\"9\n\x12JoinNetworkRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x14\n\x0cnetwork_name\x18\x02 \x01(\t\"&\n\x13JoinNetworkResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"-\n\x1cGetOffersForUserItemsRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"U\n\x1dGetOffersForUserItemsResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12#\n\x06offers\x18\x02 \x03(\x0b\x32\x13.protobuf.ItemOffer\"+\n\x1aGetOffersMadeByUserRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"S\n\x1bGetOffersMadeByUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12#\n\x06offers\x18\x02 \x03(\x0b\x32\x13.protobuf.ItemOffer\"=\n\x12\x41\x63\x63\x65ptOfferRequest\x12\x12\n\nitem_title\x18\x01 \x01(\t\x12\x13\n\x0boffer_email\x18\x02 \x01(\t\"&\n\x13\x41\x63\x63\x65ptOfferResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\x8e\t\n\x07Network\x12\x44\n\tSaveImage\x12\x1a.protobuf.SaveImageRequest\x1a\x1b.protobuf.SaveImageResponse\x12\x41\n\x08GetImage\x12\x19.protobuf.GetImageRequest\x1a\x1a.protobuf.GetImageResponse\x12G\n\nCreateUser\x12\x1b.protobuf.CreateUserRequest\x1a\x1c.protobuf.CreateUserResponse\x12>\n\x07GetUser\x12\x18.protobuf.GetUserRequest\x1a\x19.protobuf.GetUserResponse\x12G\n\nSubmitItem\x12\x1b.protobuf.SubmitItemRequest\x1a\x1c.protobuf.SubmitItemResponse\x12V\n\x0fSubmitItemOffer\x12 .protobuf.SubmitItemOfferRequest\x1a!.protobuf.SubmitItemOfferResponse\x12P\n\rCreateNetwork\x12\x1e.protobuf.CreateNetworkRequest\x1a\x1f.protobuf.CreateNetworkResponse\x12_\n\x12GetNetworksForUser\x12#.protobuf.GetNetworksForUserRequest\x1a$.protobuf.GetNetworksForUserResponse\x12V\n\x0fGetItemsForUser\x12 .protobuf.GetItemsForUserRequest\x1a!.protobuf.GetItemsForUserResponse\x12_\n\x12GetItemsForNetwork\x12#.protobuf.GetItemsForNetworkRequest\x1a$.protobuf.GetItemsForNetworkResponse\x12J\n\x0bJoinNetwork\x12\x1c.protobuf.JoinNetworkRequest\x1a\x1d.protobuf.JoinNetworkResponse\x12h\n\x15GetOffersForUserItems\x12&.protobuf.GetOffersForUserItemsRequest\x1a\'.protobuf.GetOffersForUserItemsResponse\x12\x62\n\x13GetOffersMadeByUser\x12$.protobuf.GetOffersMadeByUserRequest\x1a%.protobuf.GetOffersMadeByUserResponse\x12J\n\x0b\x41\x63\x63\x65ptOffer\x12\x1c.protobuf.AcceptOfferRequest\x1a\x1d.protobuf.AcceptOfferResponseb\x06proto3'
 )
 
 
@@ -1199,23 +1199,23 @@ _GETOFFERSMADEBYUSERRESPONSE = _descriptor.Descriptor(
 )
 
 
-_REPLYTOOFFERREQUEST = _descriptor.Descriptor(
-  name='ReplyToOfferRequest',
-  full_name='protobuf.ReplyToOfferRequest',
+_ACCEPTOFFERREQUEST = _descriptor.Descriptor(
+  name='AcceptOfferRequest',
+  full_name='protobuf.AcceptOfferRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='item_title', full_name='protobuf.ReplyToOfferRequest.item_title', index=0,
+      name='item_title', full_name='protobuf.AcceptOfferRequest.item_title', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='offer_status', full_name='protobuf.ReplyToOfferRequest.offer_status', index=1,
+      name='offer_email', full_name='protobuf.AcceptOfferRequest.offer_email', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1234,20 +1234,20 @@ _REPLYTOOFFERREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=1974,
-  serialized_end=2037,
+  serialized_end=2035,
 )
 
 
-_REPLYTOOFFERRESPONSE = _descriptor.Descriptor(
-  name='ReplyToOfferResponse',
-  full_name='protobuf.ReplyToOfferResponse',
+_ACCEPTOFFERRESPONSE = _descriptor.Descriptor(
+  name='AcceptOfferResponse',
+  full_name='protobuf.AcceptOfferResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='success', full_name='protobuf.ReplyToOfferResponse.success', index=0,
+      name='success', full_name='protobuf.AcceptOfferResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -1265,8 +1265,8 @@ _REPLYTOOFFERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2039,
-  serialized_end=2078,
+  serialized_start=2037,
+  serialized_end=2075,
 )
 
 _CREATEUSERREQUEST.fields_by_name['user'].message_type = _USERDETAILS
@@ -1310,8 +1310,8 @@ DESCRIPTOR.message_types_by_name['GetOffersForUserItemsRequest'] = _GETOFFERSFOR
 DESCRIPTOR.message_types_by_name['GetOffersForUserItemsResponse'] = _GETOFFERSFORUSERITEMSRESPONSE
 DESCRIPTOR.message_types_by_name['GetOffersMadeByUserRequest'] = _GETOFFERSMADEBYUSERREQUEST
 DESCRIPTOR.message_types_by_name['GetOffersMadeByUserResponse'] = _GETOFFERSMADEBYUSERRESPONSE
-DESCRIPTOR.message_types_by_name['ReplyToOfferRequest'] = _REPLYTOOFFERREQUEST
-DESCRIPTOR.message_types_by_name['ReplyToOfferResponse'] = _REPLYTOOFFERRESPONSE
+DESCRIPTOR.message_types_by_name['AcceptOfferRequest'] = _ACCEPTOFFERREQUEST
+DESCRIPTOR.message_types_by_name['AcceptOfferResponse'] = _ACCEPTOFFERRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 UserDetails = _reflection.GeneratedProtocolMessageType('UserDetails', (_message.Message,), {
@@ -1531,19 +1531,19 @@ GetOffersMadeByUserResponse = _reflection.GeneratedProtocolMessageType('GetOffer
   })
 _sym_db.RegisterMessage(GetOffersMadeByUserResponse)
 
-ReplyToOfferRequest = _reflection.GeneratedProtocolMessageType('ReplyToOfferRequest', (_message.Message,), {
-  'DESCRIPTOR' : _REPLYTOOFFERREQUEST,
+AcceptOfferRequest = _reflection.GeneratedProtocolMessageType('AcceptOfferRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ACCEPTOFFERREQUEST,
   '__module__' : 'network_pb2'
-  # @@protoc_insertion_point(class_scope:protobuf.ReplyToOfferRequest)
+  # @@protoc_insertion_point(class_scope:protobuf.AcceptOfferRequest)
   })
-_sym_db.RegisterMessage(ReplyToOfferRequest)
+_sym_db.RegisterMessage(AcceptOfferRequest)
 
-ReplyToOfferResponse = _reflection.GeneratedProtocolMessageType('ReplyToOfferResponse', (_message.Message,), {
-  'DESCRIPTOR' : _REPLYTOOFFERRESPONSE,
+AcceptOfferResponse = _reflection.GeneratedProtocolMessageType('AcceptOfferResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ACCEPTOFFERRESPONSE,
   '__module__' : 'network_pb2'
-  # @@protoc_insertion_point(class_scope:protobuf.ReplyToOfferResponse)
+  # @@protoc_insertion_point(class_scope:protobuf.AcceptOfferResponse)
   })
-_sym_db.RegisterMessage(ReplyToOfferResponse)
+_sym_db.RegisterMessage(AcceptOfferResponse)
 
 
 
@@ -1554,8 +1554,8 @@ _NETWORK = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=2081,
-  serialized_end=3171,
+  serialized_start=2078,
+  serialized_end=3244,
   methods=[
   _descriptor.MethodDescriptor(
     name='SaveImage',
@@ -1684,6 +1684,16 @@ _NETWORK = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETOFFERSMADEBYUSERREQUEST,
     output_type=_GETOFFERSMADEBYUSERRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='AcceptOffer',
+    full_name='protobuf.Network.AcceptOffer',
+    index=13,
+    containing_service=None,
+    input_type=_ACCEPTOFFERREQUEST,
+    output_type=_ACCEPTOFFERRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

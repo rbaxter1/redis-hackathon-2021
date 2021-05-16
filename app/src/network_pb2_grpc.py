@@ -79,6 +79,11 @@ class NetworkStub(object):
                 request_serializer=network__pb2.GetOffersMadeByUserRequest.SerializeToString,
                 response_deserializer=network__pb2.GetOffersMadeByUserResponse.FromString,
                 )
+        self.AcceptOffer = channel.unary_unary(
+                '/protobuf.Network/AcceptOffer',
+                request_serializer=network__pb2.AcceptOfferRequest.SerializeToString,
+                response_deserializer=network__pb2.AcceptOfferResponse.FromString,
+                )
 
 
 class NetworkServicer(object):
@@ -162,6 +167,12 @@ class NetworkServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AcceptOffer(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_NetworkServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -229,6 +240,11 @@ def add_NetworkServicer_to_server(servicer, server):
                     servicer.GetOffersMadeByUser,
                     request_deserializer=network__pb2.GetOffersMadeByUserRequest.FromString,
                     response_serializer=network__pb2.GetOffersMadeByUserResponse.SerializeToString,
+            ),
+            'AcceptOffer': grpc.unary_unary_rpc_method_handler(
+                    servicer.AcceptOffer,
+                    request_deserializer=network__pb2.AcceptOfferRequest.FromString,
+                    response_serializer=network__pb2.AcceptOfferResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -458,5 +474,22 @@ class Network(object):
         return grpc.experimental.unary_unary(request, target, '/protobuf.Network/GetOffersMadeByUser',
             network__pb2.GetOffersMadeByUserRequest.SerializeToString,
             network__pb2.GetOffersMadeByUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AcceptOffer(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/protobuf.Network/AcceptOffer',
+            network__pb2.AcceptOfferRequest.SerializeToString,
+            network__pb2.AcceptOfferResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

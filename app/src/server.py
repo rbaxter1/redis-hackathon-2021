@@ -132,7 +132,7 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         query = """MATCH (i:item {title:'%s'})
         MATCH (u:user {email:'%s'})
-        MERGE (u)-[:OFFER {offer:'%.2f', time:'%s'}]->(i)""" % (itemName, buyerEmail, offerPrice, datetime.now())
+        MERGE (u)-[:OFFER {offer:'%.2f', time:'%s', status:'pending'}]->(i)""" % (itemName, buyerEmail, offerPrice, datetime.now())
         log.info(query)
         self.ExecuteQueryOnNetwork(query)
 
@@ -256,7 +256,7 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         query = """MATCH (:user {email:'%s'})-[:SELLER]->(i:item)
         MATCH (buyer:user)-[o:OFFER]->(i)
-        RETURN buyer.email, i.title, o.offer, o.time""" % email
+        RETURN buyer.email, i.title, o.offer, o.time, o.status""" % email
 
         result = self.ExecuteQueryOnNetwork(query)
         response = network_pb2.GetOffersForUserItemsResponse()
@@ -266,6 +266,7 @@ class Network(network_pb2_grpc.NetworkServicer):
             itemOffer.title = record[1]
             itemOffer.offer = float(record[2])
             itemOffer.time = record[3]
+            itemOffer.status = record[4]
             response.offers.append(itemOffer)
 
         return response
@@ -274,7 +275,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         email = self.Sanitize(request.email)
 
         query = """MATCH (:user {email:'%s'})-[o:OFFER]->(i:item)
-        RETURN i.title, o.offer, o.time""" % email
+        RETURN i.title, o.offer, o.time, o.status""" % email
 
         result = self.ExecuteQueryOnNetwork(query)
         response = network_pb2.GetOffersMadeByUserResponse()
@@ -284,9 +285,24 @@ class Network(network_pb2_grpc.NetworkServicer):
             itemOffer.title = record[0]
             itemOffer.offer = float(record[1])
             itemOffer.time = record[2]
+            itemOffer.status = record[3]
             response.offers.append(itemOffer)
 
         return response
+
+    def AcceptOffer(self, request, context):
+
+        item_title = self.Sanitize(request.item_title)
+        offer_email = self.Sanitize(request.offer_email)
+
+        query = """MATCH (:user {email:'%s'} )-[goodOffer:OFFER]->(:item {title:'%s'})
+                   MATCH (:user)-[anyOffer:OFFER]->(:item {title:'%s'})
+                   SET anyOffer.status = 'rejected'
+                   SET goodOffer.status = 'accepted'"""  % (offer_email, item_title, item_title)
+
+        self.ExecuteQueryOnNetwork(query)
+
+        return network_pb2.AcceptOfferResponse(success=True)
 
     def GetRedisConnection(self):
         return redis.Redis(connection_pool=self.redis_pool)

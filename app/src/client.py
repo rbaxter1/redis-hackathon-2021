@@ -228,6 +228,32 @@ def run(cmd):
                 network_pb2.GetOffersMadeByUserRequest(email=userDetails2.email))
             print(MessageToJson(response))
 
+            response = stub.GetOffersMadeByUser(
+                network_pb2.GetOffersMadeByUserRequest(email=userDetails3.email))
+            print(MessageToJson(response))
+
+
+            response = stub.GetOffersForUserItems(
+                network_pb2.GetOffersForUserItemsRequest(email=userDetails.email))
+            print(MessageToJson(response))
+
+
+            response = stub.AcceptOffer(network_pb2.AcceptOfferRequest(item_title=item.title, offer_email=userDetails3.email))
+            print(MessageToJson(response))
+
+            response = stub.GetOffersMadeByUser(
+            network_pb2.GetOffersMadeByUserRequest(email=userDetails2.email))
+            print(MessageToJson(response))
+
+            response = stub.GetOffersMadeByUser(
+                network_pb2.GetOffersMadeByUserRequest(email=userDetails3.email))
+            print(MessageToJson(response))
+
+
+            response = stub.GetOffersForUserItems(
+                network_pb2.GetOffersForUserItemsRequest(email=userDetails.email))
+            print(MessageToJson(response))
+
         else:
             print("Unknown command.")
 

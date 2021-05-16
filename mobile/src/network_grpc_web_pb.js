@@ -1110,5 +1110,85 @@ proto.protobuf.NetworkPromiseClient.prototype.getOffersMadeByUser =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.protobuf.AcceptOfferRequest,
+ *   !proto.protobuf.AcceptOfferResponse>}
+ */
+const methodDescriptor_Network_AcceptOffer = new grpc.web.MethodDescriptor(
+  '/protobuf.Network/AcceptOffer',
+  grpc.web.MethodType.UNARY,
+  proto.protobuf.AcceptOfferRequest,
+  proto.protobuf.AcceptOfferResponse,
+  /**
+   * @param {!proto.protobuf.AcceptOfferRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.AcceptOfferResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.protobuf.AcceptOfferRequest,
+ *   !proto.protobuf.AcceptOfferResponse>}
+ */
+const methodInfo_Network_AcceptOffer = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.protobuf.AcceptOfferResponse,
+  /**
+   * @param {!proto.protobuf.AcceptOfferRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.protobuf.AcceptOfferResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.protobuf.AcceptOfferRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.protobuf.AcceptOfferResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.protobuf.AcceptOfferResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.protobuf.NetworkClient.prototype.acceptOffer =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/protobuf.Network/AcceptOffer',
+      request,
+      metadata || {},
+      methodDescriptor_Network_AcceptOffer,
+      callback);
+};
+
+
+/**
+ * @param {!proto.protobuf.AcceptOfferRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.protobuf.AcceptOfferResponse>}
+ *     Promise that resolves to the response
+ */
+proto.protobuf.NetworkPromiseClient.prototype.acceptOffer =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/protobuf.Network/AcceptOffer',
+      request,
+      metadata || {},
+      methodDescriptor_Network_AcceptOffer);
+};
+
+
 module.exports = proto.protobuf;
 

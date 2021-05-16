@@ -151,12 +151,12 @@ message GetOffersMadeByUserResponse {
   repeated ItemOffer offers = 2;
 }
 
-message ReplyToOfferRequest {
+message AcceptOfferRequest {
   string item_title = 1;
-  string offer_status =2;
+  string offer_email = 2;
 }
 
-message ReplyToOfferResponse {
+message AcceptOfferResponse {
   bool success = 1;
 }
 
@@ -175,4 +175,5 @@ service Network {
   rpc JoinNetwork(JoinNetworkRequest) returns (JoinNetworkResponse);
   rpc GetOffersForUserItems(GetOffersForUserItemsRequest) returns (GetOffersForUserItemsResponse);
   rpc GetOffersMadeByUser(GetOffersMadeByUserRequest) returns (GetOffersMadeByUserResponse);
+  rpc AcceptOffer(AcceptOfferRequest) returns (AcceptOfferResponse);
 }
