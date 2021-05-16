@@ -206,22 +206,22 @@ def run(cmd):
             response = stub.GetItemsForNetwork(getItemsForNetworkRequest)
             print(MessageToJson(response))
 
-            item = network_pb2.ItemOffer()
-            item.email = userDetails2.email
-            item.title = item.title
-            item.offer = 12
+            itemOffer = network_pb2.ItemOffer()
+            itemOffer.email = userDetails2.email
+            itemOffer.title = item.title
+            itemOffer.offer = 12
 
             response = stub.SubmitItemOffer(
-                network_pb2.SubmitItemOfferRequest(item_offer=item))
+                network_pb2.SubmitItemOfferRequest(item_offer=itemOffer))
             print(MessageToJson(response))
 
-            item = network_pb2.ItemOffer()
-            item.email = userDetails3.email
-            item.title = item.title
-            item.offer = 121234
+            itemOffer = network_pb2.ItemOffer()
+            itemOffer.email = userDetails3.email
+            itemOffer.title = item.title
+            itemOffer.offer = 121234
 
             response = stub.SubmitItemOffer(
-                network_pb2.SubmitItemOfferRequest(item_offer=item))
+                network_pb2.SubmitItemOfferRequest(item_offer=itemOffer))
             print(MessageToJson(response))
 
             response = stub.GetOffersMadeByUser(
