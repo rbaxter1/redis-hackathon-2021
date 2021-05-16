@@ -3,6 +3,7 @@ from google.protobuf.json_format import MessageToJson, Parse
 import grpc
 import network_pb2
 import network_pb2_grpc
+import os
 import json
 import random
 
@@ -78,6 +79,13 @@ def run(cmd):
                 userDetails = Parse(json.dumps(u), network_pb2.UserDetails())
                 stub.CreateUser(
                     network_pb2.CreateUserRequest(user=userDetails))
+
+            # prepare list of item image filenames
+            item_image_filenames = []
+            for root, dirs, files in os.walk(f'{client_data_path}/images/items'):
+                item_image_filenames = list(
+                    filter(lambda f: f.endswith('.jpg'), files))
+
             # create all networks
             print("Creating %d networks" % len(data['networks']))
             for n in data['networks']:
@@ -100,10 +108,10 @@ def run(cmd):
                 newNetwork.description = n['description']
                 newNetwork.owner_id = n['owner_id']
 
-                # Get image
-                image_name = n['image']
-                image_path = f'{client_data_path}/images/{image_name}'
-                newNetwork.image = GetImageData(image_path)
+                # Get network image
+                network_image_name = n['image']
+                network_image_path = f'{client_data_path}/images/{network_image_name}'
+                newNetwork.image = GetImageData(network_image_path)
                 CreateNetwork(stub, newNetwork)
 
                 # Add users to network
@@ -118,6 +126,9 @@ def run(cmd):
                     item.network_name = n['name']
                     email = n['owner_id'] if alreadyOwned else (
                         random.choice(users)['email'])
+                    item_image_name = random.choice(item_image_filenames)
+                    item_image_path = f'{client_data_path}/images/items/{item_image_name}'
+                    item.image = GetImageData(item_image_path)
                     SubmitItem(stub, item, email)
 
         # SubmitItemOffer endpoint
