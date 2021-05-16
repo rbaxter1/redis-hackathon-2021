@@ -233,8 +233,9 @@ After running `expo start`, you are presented with the following options:
 
 > **Tip**: When running in the browser, you can to see debugger output from the React Native app by opening your browser's developer tools window ([Firefox](https://developer.mozilla.org/en-US/docs/Tools) | [Chrome](https://developer.chrome.com/docs/devtools/open/))
 
-Optional:
+## Optional
 
+### Preload Graph Data
 You can interact with a fresh, clean version of *The Network*, or you can see how it looks as a fully loaded system. A script is available to puplate a set of users, networks, and over 100 items for sale.
 
     cd app/src
@@ -244,6 +245,8 @@ You can interact with a fresh, clean version of *The Network*, or you can see ho
 When prompted, enter the following command:
 
     LoadTestData
+
+### RedisInsight
 
 The `docker compose up` command you ran above starts a RedisInsight server. To use RedisInight, open your favorite web browser and go to http://localhost:8001.
 
