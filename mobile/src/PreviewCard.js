@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     nameContainer: {
         height: '35%',
-        backgroundColor: '#3f51b5',
+        backgroundColor: '#5496ff',
         justifyContent: 'center'
     },
     title: {

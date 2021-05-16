@@ -4,12 +4,14 @@ import {
     View,
     StyleSheet,
     Button,
-    Platform
+    Platform,
+    Text
   } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
+import DropDownPicker from 'react-native-dropdown-picker';
 
-const {CreateNetworkRequest, CreateNetworkResponse, NetworkDetails, SubmitItemRequest, SubmitItemResponse, ItemDetails} = require('./network_pb.js');
+const {CreateNetworkRequest, GetNetworksForUserRequest, NetworkDetails, SubmitItemRequest, ItemDetails} = require('./network_pb.js');
 const {NetworkPromiseClient} = require('./network_grpc_web_pb.js');
 
 import globals from './global.js'
@@ -34,14 +36,39 @@ const styles = StyleSheet.create({
 class CreateScreen extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             name: "",
             description: "",
             allowPublicPosting: true,
             askingPrice: "",
             image: null,
-            network: this.props.network
-        }
+            network: this.props.network,
+            open: false,
+            value: null,
+            items: []
+        };
+        this.setValue = this.setValue.bind(this);
+        this.setOpen = this.setOpen.bind(this);
+        this.setItems = this.setItems.bind(this);
+    }
+
+    setOpen(open) {
+        this.setState({
+          open
+        });
+      }
+    
+    setValue(callback) {
+    this.setState(state => ({
+        value: callback(state.value)
+    }));
+    }
+
+    setItems(callback) {
+    this.setState(state => ({
+        items: callback(state.items)
+    }));
     }
 
     componentDidMount () {
@@ -53,6 +80,44 @@ class CreateScreen extends Component {
               }
             }
           })();
+
+          var server = new NetworkPromiseClient('http://localhost:8080');
+          var request = new GetNetworksForUserRequest();
+          request.setEmail(globals.user);
+
+          const fetch = async () => {
+              try {
+                  const response = await server.getNetworksForUser(request, {});
+                  
+                    console.log(response);
+                    const list = response.getNetworksList();
+                    console.log(list);
+
+                    // put networks list into data array
+                    //this.setState({data: list})
+                    // string name = 1;
+                    // string owner_id = 2;
+                    // string description = 3;
+                    // bytes image = 4;
+                    // bool is_member = 5;
+                    var networks = [];
+                    for (const net of list) {
+                        networks.push({
+                            label: net.array[0],
+                            value: net.array[0]
+                        })
+                    }
+                    console.log("setting dropdown items to: " + networks)
+                    this.setState({items: networks})
+                  
+              }
+              catch (err) {
+                  console.log(`Unexpected error for getNetworksForUser: code = ${err.code}` + `, message = "${err.message}"`);
+                  
+              }
+          }
+
+          fetch();
     }
 
     pickImage = async () => {
@@ -69,8 +134,9 @@ class CreateScreen extends Component {
     }   
 
     render () {
+        DropDownPicker.setTheme("LIGHT");
         const {navigation} = this.props;
-
+        const {open, value, items} = this.state;
         const elements = [];
         elements.push(<Input
             key="1"
@@ -105,13 +171,22 @@ class CreateScreen extends Component {
                 onChangeText={text => this.setState({askingPrice: text})}
                 keyboardType="numeric"
             />);
-            elements.push(<Input
-                key="5"
-                style={styles.input}
-                placeholder='Network'
-                value={this.state.network}
-                onChangeText={text => this.setState({network: text})}
-            />);
+            elements.push(
+                
+            );
+            elements.push(
+            <View key="5">
+                <Text>Network:</Text>
+                <DropDownPicker 
+                    open={open}
+                    value={value}
+                    items={items}
+                    setOpen={this.setOpen}
+                    setValue={this.setValue}
+                    setItems={this.setItems}
+                />
+            </View>
+            )
         }
         elements.push(<Button key="6" title="Pick an image from camera roll" onPress={() => {this.pickImage()}} />)
 
@@ -132,8 +207,6 @@ class CreateScreen extends Component {
                             var enc = new TextEncoder();
                             const encoded = enc.encode(this.state.image);
                             networkDeets.setImage(encoded);
-                            // const reqimage = networkDeets.getImage();
-                            // console.log("on req: " + reqimage);
                             networkDeets.setIsMember(true);
                             var request = new CreateNetworkRequest();
                             request.setNetwork(networkDeets);
@@ -156,17 +229,6 @@ class CreateScreen extends Component {
                             
                             fetch();
                 
-                            // server.createNetwork(request, {}, (err, response) => {
-                            //     if (err) {
-                            //         console.log(`Unexpected error for createNetwork: code = ${err.code}` +
-                            //                     `, message = "${err.message}"`);
-                            //     } else {
-                            //         if (response) {
-                            //             console.log(response);
-                            //             console.log(response.getNetworkName());
-                            //         }
-                            //     }
-                            // });
                         }
 
                         if (this.props.context === "item") {
@@ -180,7 +242,7 @@ class CreateScreen extends Component {
                             itemDeets.setTitle(this.state.name);
                             itemDeets.setDescription(this.state.description);
                             itemDeets.setAskingPrice(parseFloat(this.state.askingPrice));
-                            itemDeets.setNetworkName(this.state.network);
+                            itemDeets.setNetworkName(this.state.value);
                             var enc = new TextEncoder();
                             const encoded = enc.encode(this.state.image);
                             itemDeets.setImage(encoded);
@@ -207,17 +269,6 @@ class CreateScreen extends Component {
                             
                             fetch();
 
-                            // server.submitItem(request, {}, (err, response) => {
-                            //     if (err) {
-                            //         console.log(`Unexpected error for submitItem: code = ${err.code}` +
-                            //                     `, message = "${err.message}"`);
-                            //     } else {
-                            //         if (response) {
-                            //             console.log(response);
-                            //             console.log(response.getSuccess());
-                            //         }
-                            //     }
-                            // });
                         }
 
                         
