@@ -10,11 +10,6 @@ message UserDetails {
   repeated string friend_ids = 5;
 }
 
-message UserFriendship {
-  string user1 = 1;
-  string user2 = 2;
-}
-
 message CreateUserRequest {
   UserDetails user = 1;
 }
@@ -30,33 +25,6 @@ message GetUserRequest {
 
 message GetUserResponse {
   UserDetails user = 1;
-}
-
-message SearchForUserRequest {
-  string first_name = 1;
-  string last_name = 2;
-}
-
-message SearchForUserResponse {
-  repeated UserDetails users = 1;
-}
-
-message CreateFriendshipRequest {
-  UserFriendship friendship = 1;
-}
-
-message CreateFriendshipResponse {
-  bool success = 1;
-}
-
-message ReplyToFriendshipRequest {
-  string email_1 = 1;
-  string email_2 = 2;
-  bool accepted = 3;
-}
-
-message ReplyToFriendshipResponse {
-  bool success = 1;
 }
 
 message ItemDetails {
@@ -82,6 +50,7 @@ message ItemOffer {
   string title = 2;
   double offer = 3;
   string time = 4;
+  string status = 5;
 }
 
 message SubmitItemOfferRequest {
@@ -119,30 +88,6 @@ message GetNetworksForUserResponse {
 message SearchForNetworksRequest {
   string network_name = 1;
 }
-
-message SearchForNetworksResponse {
-  repeated NetworkDetails networks = 1;
-}
-
-message InviteUserToNetworkRequest {
-  string network_name = 1;
-  string email = 2;
-}
-
-message InviteUserToNetworkResponse {
-  bool success = 1;
-}
-
-message ReplyToNetworkInviteRequest {
-  string network_name = 1;
-  string email = 2;
-  bool accepted = 3;
-}
-
-message ReplyToNetworkInviteResponse {
-  bool success = 1;
-}
-
 message SaveImageRequest {
   bytes image = 1;
 }
@@ -206,25 +151,28 @@ message GetOffersMadeByUserResponse {
   repeated ItemOffer offers = 2;
 }
 
+message ReplyToOfferRequest {
+  string item_title = 1;
+  string offer_status =2;
+}
+
+message ReplyToOfferResponse {
+  bool success = 1;
+}
+
+
 service Network {
   rpc SaveImage(SaveImageRequest) returns (SaveImageResponse);
   rpc GetImage(GetImageRequest) returns (GetImageResponse);
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
   rpc GetUser(GetUserRequest) returns (GetUserResponse);
-  rpc SearchForUser(SearchForUserRequest) returns (SearchForUserResponse);
-  rpc CreateFriendship(CreateFriendshipRequest) returns (CreateFriendshipResponse);
-  rpc ReplyToFriendship(ReplyToFriendshipRequest) returns (ReplyToFriendshipResponse);
   rpc SubmitItem(SubmitItemRequest) returns (SubmitItemResponse);
   rpc SubmitItemOffer(SubmitItemOfferRequest) returns (SubmitItemOfferResponse);
   rpc CreateNetwork(CreateNetworkRequest) returns (CreateNetworkResponse);
   rpc GetNetworksForUser(GetNetworksForUserRequest) returns (GetNetworksForUserResponse);
   rpc GetItemsForUser(GetItemsForUserRequest) returns (GetItemsForUserResponse);
   rpc GetItemsForNetwork(GetItemsForNetworkRequest) returns (GetItemsForNetworkResponse);
-  rpc SearchForNetworks(SearchForNetworksRequest) returns (SearchForNetworksResponse);
-  rpc InviteUserToNetwork(InviteUserToNetworkRequest) returns (InviteUserToNetworkResponse);
-  rpc ReplyToNetworkInvite(ReplyToNetworkInviteRequest) returns (ReplyToNetworkInviteResponse);
   rpc JoinNetwork(JoinNetworkRequest) returns (JoinNetworkResponse);
   rpc GetOffersForUserItems(GetOffersForUserItemsRequest) returns (GetOffersForUserItemsResponse);
   rpc GetOffersMadeByUser(GetOffersMadeByUserRequest) returns (GetOffersMadeByUserResponse);
-
 }

@@ -109,8 +109,8 @@ def run(cmd):
         elif cmd == "SubmitItemOffer":
             item = network_pb2.ItemOffer()
             item.email = 'twoods@gmail.com'
-            item.title = 'Electric kettle'
-            item.offer = 12
+            item.title = 'Through the Looking Glass'
+            item.offer = 175
 
             stub.SubmitItemOffer(
                 network_pb2.SubmitItemOfferRequest(item_offer=item))
@@ -121,6 +121,12 @@ def run(cmd):
                 network_pb2.GetOffersMadeByUserRequest(email='twoods@gmail.com'))
             print(MessageToJson(response))
 
+        # GetOffersForUserItems endpoint
+        elif cmd == "GetOffersForUserItems":
+            response = stub.GetOffersForUserItems(
+                network_pb2.GetOffersForUserItemsRequest(email='a.nunes@gmail.com'))
+            print(MessageToJson(response))
+
         # Test to create user and get user
         elif cmd == "test":
             userDetails = network_pb2.UserDetails()
@@ -128,6 +134,22 @@ def run(cmd):
             userDetails.last_name = "Smith"
             userDetails.email = "JohnSmith@test.com"
             userRequest = network_pb2.CreateUserRequest(user=userDetails)
+            response = stub.CreateUser(userRequest)
+            print(MessageToJson(response))
+
+            userDetails2 = network_pb2.UserDetails()
+            userDetails2.first_name = "John"
+            userDetails2.last_name = "White"
+            userDetails2.email = "JohnWhite@test.com"
+            userRequest = network_pb2.CreateUserRequest(user=userDetails2)
+            response = stub.CreateUser(userRequest)
+            print(MessageToJson(response))
+
+            userDetails3 = network_pb2.UserDetails()
+            userDetails3.first_name = "Jimmy"
+            userDetails3.last_name = "White"
+            userDetails3.email = "JimmyWhite@test.com"
+            userRequest = network_pb2.CreateUserRequest(user=userDetails3)
             response = stub.CreateUser(userRequest)
             print(MessageToJson(response))
 
@@ -182,6 +204,28 @@ def run(cmd):
             getItemsForNetworkRequest = network_pb2.GetItemsForNetworkRequest(
                 network_name=newNetwork.name)
             response = stub.GetItemsForNetwork(getItemsForNetworkRequest)
+            print(MessageToJson(response))
+
+            item = network_pb2.ItemOffer()
+            item.email = userDetails2.email
+            item.title = item.title
+            item.offer = 12
+
+            response = stub.SubmitItemOffer(
+                network_pb2.SubmitItemOfferRequest(item_offer=item))
+            print(MessageToJson(response))
+
+            item = network_pb2.ItemOffer()
+            item.email = userDetails3.email
+            item.title = item.title
+            item.offer = 121234
+
+            response = stub.SubmitItemOffer(
+                network_pb2.SubmitItemOfferRequest(item_offer=item))
+            print(MessageToJson(response))
+
+            response = stub.GetOffersMadeByUser(
+                network_pb2.GetOffersMadeByUserRequest(email=userDetails2.email))
             print(MessageToJson(response))
 
         else:
