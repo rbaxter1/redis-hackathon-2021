@@ -1,6 +1,7 @@
 # The Network
-## A 2021 Redis Hackathon Project
 
+![](./images/the_network_logo.png)
+## A 2021 Redis Hackathon Project
 
 ## Team:
 
