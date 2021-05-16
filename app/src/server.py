@@ -117,7 +117,6 @@ class Network(network_pb2_grpc.NetworkServicer):
             image_id = 'image:{0}'.format(str(uuid.uuid4()))
             query += ("""SET i.image_id = '%s'""" % image_id)
             self.GetRedisConnection().set(image_id, img)
-        log.info(query)
 
         self.ExecuteQueryOnNetwork(query)
 
@@ -133,7 +132,6 @@ class Network(network_pb2_grpc.NetworkServicer):
         query = """MATCH (i:item {title:'%s'})
         MATCH (u:user {email:'%s'})
         MERGE (u)-[:OFFER {offer:'%.2f', time:'%s', status:'pending'}]->(i)""" % (itemName, buyerEmail, offerPrice, datetime.now())
-        log.info(query)
         self.ExecuteQueryOnNetwork(query)
 
         response = network_pb2.SubmitItemOfferResponse()
@@ -293,7 +291,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         query = """MATCH (:user {email:'%s'} )-[goodOffer:OFFER]->(:item {title:'%s'})
                    MATCH (:user)-[anyOffer:OFFER]->(:item {title:'%s'})
                    SET anyOffer.status = 'rejected'
-                   SET goodOffer.status = 'accepted'"""  % (offer_email, item_title, item_title)
+                   SET goodOffer.status = 'accepted'""" % (offer_email, item_title, item_title)
 
         self.ExecuteQueryOnNetwork(query)
 
@@ -308,6 +306,8 @@ class Network(network_pb2_grpc.NetworkServicer):
         return redis_graph
 
     def ExecuteQueryOnNetwork(self, query):
+        log.info("Executing redis graph query:")
+        log.info(query)
         redis_graph = self.GetNetworkGraph()
         return redis_graph.query(query)
 
