@@ -176,6 +176,13 @@ The *My Offers* screen shows the properties of any **offer** edge connected to a
 
 ## Utility & Usefulness
 
+The Network fills a gap in online, peer-to-peer transaction platforms between eBay, Facebook Marketplace, and Craigslist.
+
+Users can create public or private networks specific to their business, industry, or area of interest. It could be as casual as friends trading pokemon cards or as formal as producers distributing their products to a network of retailers.
+
+The selling process is intentionally simple. A user lists an item for sale on a network with a recommended price and users in the network submit offers. The user that listed the item can accept any offer at any time. 
+
+Saving the data in a graph allows for easy profiling of user to make recommendations about networks to join or items for sales. For example, since each item is tagged with descriptive labels, we can easily identify which items a user would like, based on the items they bought or made offers on.
 
 ## UX and DX
 The following table shows iPhone and Android screenshots for each page in the mobile application. 
