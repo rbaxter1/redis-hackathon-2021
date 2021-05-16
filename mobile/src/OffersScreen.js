@@ -55,100 +55,104 @@ const styles = StyleSheet.create({
     }
 });
 
+function reloadData(context, onUpdate, isActive) {
+    var server = new NetworkPromiseClient('http://localhost:8080');
+
+    if (context === "my offers") {
+        var req = new GetOffersMadeByUserRequest();
+        req.setEmail(globals.user);
+
+        const fetch = async () => {
+            try {
+                const response = await server.getOffersMadeByUser(req, {});
+                
+                if (isActive) {
+                    console.log(response);
+
+                    console.log(response.getSuccess());
+                    const list = response.getOffersList();
+                    console.log(list)
+
+                    //   string email = 1;
+                    //   string title = 2;
+                    //   double offer = 3;
+                    //   string time = 4;
+                    //   string status = 5;
+                    var data = [];
+                    for (const offer of list) {
+
+                        data.push({
+                            email: offer.array[0],
+                            title: offer.array[1],
+                            offer: offer.array[2],
+                            time: offer.array[3],
+                            status: offer.array[4]
+                        })
+                        
+                    }
+                    onUpdate(data);
+                }
+            }
+            catch (err) {
+                console.log(`Unexpected error for getOffersMadeByUser: code = ${err.code}` + `, message = "${err.message}"`);
+                
+            }
+        }
+        
+        fetch();
+    }
+
+    if (context === "received") {
+        var req = new GetOffersForUserItemsRequest();
+        req.setEmail(globals.user);
+
+        const fetch = async () => {
+            try {
+                const response = await server.getOffersForUserItems(req, {});
+                
+                if (isActive) {
+                    console.log(response);
+
+                    console.log(response.getSuccess());
+                    const list = response.getOffersList();
+                    console.log(list)
+
+                    //   string email = 1;
+                    //   string title = 2;
+                    //   double offer = 3;
+                    //   string time = 4;
+                    //   string status = 5;
+                    var data = [];
+                    for (const offer of list) {
+
+                        data.push({
+                            email: offer.array[0],
+                            title: offer.array[1],
+                            offer: offer.array[2],
+                            time: offer.array[3],
+                            status: offer.array[4]
+                        })
+                        
+                    }
+                    onUpdate(data);
+                }
+            }
+            catch (err) {
+                console.log(`Unexpected error for getOffersForUserItems: code = ${err.code}` + `, message = "${err.message}"`);
+                
+            }
+        }
+        
+        fetch();
+    }
+}
+
 function FetchData({context, onUpdate}) {
     useFocusEffect(
         React.useCallback(() => {
-            var server = new NetworkPromiseClient('http://localhost:8080');
             let isActive = true;
 
-            if (context === "my offers") {
-                var req = new GetOffersMadeByUserRequest();
-                req.setEmail(globals.user);
-
-                const fetch = async () => {
-                    try {
-                        const response = await server.getOffersMadeByUser(req, {});
-                        
-                        if (isActive) {
-                            console.log(response);
-        
-                            console.log(response.getSuccess());
-                            const list = response.getOffersList();
-                            console.log(list)
-
-                            //   string email = 1;
-                            //   string title = 2;
-                            //   double offer = 3;
-                            //   string time = 4;
-                            //   string status = 5;
-                            var data = [];
-                            for (const offer of list) {
-
-                                data.push({
-                                    email: offer.array[0],
-                                    title: offer.array[1],
-                                    offer: offer.array[2],
-                                    time: offer.array[3],
-                                    status: offer.array[4]
-                                })
-                                
-                            }
-                            onUpdate(data);
-                        }
-                    }
-                    catch (err) {
-                        console.log(`Unexpected error for getOffersMadeByUser: code = ${err.code}` + `, message = "${err.message}"`);
-                        
-                    }
-                }
-                
-                fetch();
-            }
-
-            if (context === "received") {
-                var req = new GetOffersForUserItemsRequest();
-                req.setEmail(globals.user);
-
-                const fetch = async () => {
-                    try {
-                        const response = await server.getOffersForUserItems(req, {});
-                        
-                        if (isActive) {
-                            console.log(response);
-        
-                            console.log(response.getSuccess());
-                            const list = response.getOffersList();
-                            console.log(list)
-
-                            //   string email = 1;
-                            //   string title = 2;
-                            //   double offer = 3;
-                            //   string time = 4;
-                            //   string status = 5;
-                            var data = [];
-                            for (const offer of list) {
-
-                                data.push({
-                                    email: offer.array[0],
-                                    title: offer.array[1],
-                                    offer: offer.array[2],
-                                    time: offer.array[3],
-                                    status: offer.array[4]
-                                })
-                                
-                            }
-                            onUpdate(data);
-                        }
-                    }
-                    catch (err) {
-                        console.log(`Unexpected error for getOffersForUserItems: code = ${err.code}` + `, message = "${err.message}"`);
-                        
-                    }
-                }
-                
-                fetch();
-            }
-            
+            reloadData(context, onUpdate, isActive);
 
             return () => { isActive = false }
         }, [])
@@ -157,7 +161,7 @@ function FetchData({context, onUpdate}) {
     return null;
 }
 
-function Buttons ({item, context}) {
+function Buttons ({item, context, onUpdate}) {
     if (context === "received" && item.status === "pending") {
         return <View>
             <Button title="Accept" onPress={() => {
@@ -174,6 +178,8 @@ function Buttons ({item, context}) {
                         console.log(response);
     
                         console.log(response.getSuccess());
+
+                        reloadData(context, onUpdate, true)
                         
                     }
                     catch (err) {
@@ -238,7 +244,7 @@ export default class OffersScreen extends Component {
                         <Text style={styles.title}>Item: {item.title}</Text>
                         <Text style={styles.title}>Offered Price: {item.offer}</Text>
                         <Text style={styles.title}>From User: {item.email}</Text>
-                        <Buttons item={item} context={this.props.context} />
+                        <Buttons item={item} context={this.props.context} onUpdate={this.handleUpdate} />
                     </View>
                     
                 </View>
