@@ -117,7 +117,7 @@ class Network(network_pb2_grpc.NetworkServicer):
             image_id = 'image:{0}'.format(str(uuid.uuid4()))
             query += ("""SET i.image_id = '%s'""" % image_id)
             self.GetRedisConnection().set(image_id, img)
-        print(query)
+        log.info(query)
 
         self.ExecuteQueryOnNetwork(query)
 
@@ -133,7 +133,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         query = """MATCH (i:item {title:'%s'})
         MATCH (u:user {email:'%s'})
         MERGE (u)-[:OFFER {offer:'%.2f', time:'%s'}]->(i)""" % (itemName, buyerEmail, offerPrice, datetime.now())
-        print(query)
+        log.info(query)
         self.ExecuteQueryOnNetwork(query)
 
         response = network_pb2.SubmitItemOfferResponse()

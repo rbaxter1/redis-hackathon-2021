@@ -104,11 +104,16 @@ class PreviewCard extends Component {
             button = <Button style={styles.button} title="Join" onPress={() => {this.handleJoinButtonClick()}}/>
         }
 
+
+        var enc = new TextDecoder("utf-8");
+        const b64image = enc.decode(this.props.item.image);
+        //`data:image/png;base64,${this.props.item.image}`
+
         return (
             <TouchableHighlight onPress={() => {this.onPressItem()}}>
                 <View style={styles.cardContainer}>
                     <View style={styles.imageContainer}>
-                        <ItemImage style={styles.image} source={{uri: `data:image/png;base64,${this.props.item.image}`}}/>
+                        <ItemImage style={styles.image} source={{uri: b64image}}/>
                     </View>
                     <View style={styles.nameContainer}>
                         <Text style={styles.title} align="center">

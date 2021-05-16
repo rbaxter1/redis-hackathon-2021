@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 
 const {CreateNetworkRequest, CreateNetworkResponse, NetworkDetails, SubmitItemRequest, SubmitItemResponse, ItemDetails} = require('./network_pb.js');
-const {NetworkClient} = require('./network_grpc_web_pb.js');
+const {NetworkPromiseClient} = require('./network_grpc_web_pb.js');
 
 import globals from './global.js'
 
@@ -63,10 +63,8 @@ class CreateScreen extends Component {
           aspect: [4, 3],
           quality: 1,
         });
-        console.log(result);
-
         if (!result.cancelled) {
-            this.setState({image:result.base64})
+            this.setState({image:result.uri})
         }
     }   
 
@@ -124,29 +122,51 @@ class CreateScreen extends Component {
                     title='Create'
                     onPress={() => {
                         //todo: submit data to backend
-                        var server = new NetworkClient('http://localhost:8080');
+                        var server = new NetworkPromiseClient('http://localhost:8080');
 
                         if (this.props.context === "network") {
                             var networkDeets = new NetworkDetails();
                             networkDeets.setName(this.state.name);
                             networkDeets.setOwnerId(globals.user);
                             networkDeets.setDescription(this.state.description);
-                            networkDeets.setImage(this.state.image);
+                            var enc = new TextEncoder();
+                            const encoded = enc.encode(this.state.image);
+                            networkDeets.setImage(encoded);
+                            // const reqimage = networkDeets.getImage();
+                            // console.log("on req: " + reqimage);
                             networkDeets.setIsMember(true);
                             var request = new CreateNetworkRequest();
                             request.setNetwork(networkDeets);
-                
-                            server.createNetwork(request, {}, (err, response) => {
-                                if (err) {
-                                    console.log(`Unexpected error for createNetwork: code = ${err.code}` +
-                                                `, message = "${err.message}"`);
-                                } else {
-                                    if (response) {
-                                        console.log(response);
-                                        console.log(response.getNetworkName());
-                                    }
+
+                            const fetch = async () => {
+                                try {
+                                    const response = await server.createNetwork(request, {});
+                                    
+                                    console.log(response);
+                                    console.log(response.getNetworkName());
+                                    console.log("goin back")
+
+                                    navigation.goBack();
                                 }
-                            });
+                                catch (err) {
+                                    console.log(`Unexpected error for createNetwork: code = ${err.code}` + `, message = "${err.message}"`);
+                                    
+                                }
+                            }
+                            
+                            fetch();
+                
+                            // server.createNetwork(request, {}, (err, response) => {
+                            //     if (err) {
+                            //         console.log(`Unexpected error for createNetwork: code = ${err.code}` +
+                            //                     `, message = "${err.message}"`);
+                            //     } else {
+                            //         if (response) {
+                            //             console.log(response);
+                            //             console.log(response.getNetworkName());
+                            //         }
+                            //     }
+                            // });
                         }
 
                         if (this.props.context === "item") {
@@ -161,26 +181,46 @@ class CreateScreen extends Component {
                             itemDeets.setDescription(this.state.description);
                             itemDeets.setAskingPrice(parseFloat(this.state.askingPrice));
                             itemDeets.setNetworkName(this.state.network);
-                            itemDeets.setImage(this.state.image);
+                            var enc = new TextEncoder();
+                            const encoded = enc.encode(this.state.image);
+                            itemDeets.setImage(encoded);
                             itemDeets.setLabelsList([]);
                             var request = new SubmitItemRequest();
                             request.setItemDetails(itemDeets);
                             request.setEmail(globals.user);
 
-                            server.submitItem(request, {}, (err, response) => {
-                                if (err) {
-                                    console.log(`Unexpected error for submitItem: code = ${err.code}` +
-                                                `, message = "${err.message}"`);
-                                } else {
-                                    if (response) {
-                                        console.log(response);
-                                        console.log(response.getSuccess());
-                                    }
+                            const fetch = async () => {
+                                try {
+                                    const response = await server.submitItem(request, {});
+                                    
+                                    console.log(response);
+                                    console.log(response.getSuccess());
+                                    console.log("goin back")
+
+                                    navigation.goBack();
                                 }
-                            });
+                                catch (err) {
+                                    console.log(`Unexpected error for submitItem: code = ${err.code}` + `, message = "${err.message}"`);
+                                    
+                                }
+                            }
+                            
+                            fetch();
+
+                            // server.submitItem(request, {}, (err, response) => {
+                            //     if (err) {
+                            //         console.log(`Unexpected error for submitItem: code = ${err.code}` +
+                            //                     `, message = "${err.message}"`);
+                            //     } else {
+                            //         if (response) {
+                            //             console.log(response);
+                            //             console.log(response.getSuccess());
+                            //         }
+                            //     }
+                            // });
                         }
 
-                        navigation.goBack();
+                        
                     }}
                 />
             </View>
