@@ -96,18 +96,6 @@ class Network(network_pb2_grpc.NetworkServicer):
         response = network_pb2.GetUserResponse(user=userDetails)
         return response
 
-    def SearchForUser(self, request, context):
-        response = network_pb2.SearchForUserResponse()
-        return response
-
-    def CreateFriendship(self, request, context):
-        response = network_pb2.CreateFriendshipResponse()
-        return response
-
-    def ReplyToFriendship(self, request, context):
-        response = network_pb2.ReplyToFriendshipResponse()
-        return response
-
     def SubmitItem(self, request, context):
 
         itemTitle = self.Sanitize(request.item_details.title)
@@ -145,7 +133,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         query = """MATCH (i:item {title:'%s'})
         MATCH (u:user {email:'%s'})
         MERGE (u)-[:OFFER {offer:'%.2f', time:'%s'}]->(i)""" % (itemName, buyerEmail, offerPrice, datetime.now())
-
+        print(query)
         self.ExecuteQueryOnNetwork(query)
 
         response = network_pb2.SubmitItemOfferResponse()
@@ -200,10 +188,6 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         return response
 
-    def SearchForNetworks(self, request, context):
-        response = network_pb2.SearchForNetworksResponse()
-        return response
-
     def JoinNetwork(self, request, context):
         userEmail = request.email
         networkName = request.network_name
@@ -215,14 +199,6 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         response = network_pb2.JoinNetworkResponse()
         response.success = True
-        return response
-
-    def InviteUserToNetwork(self, request, context):
-        response = network_pb2.InviteUserToNetworkResponse()
-        return response
-
-    def ReplyToNetworkInvite(self, request, context):
-        response = network_pb2.ReplyToNetworkInviteResponse()
         return response
 
     def GetItemsForUser(self, request, context):
