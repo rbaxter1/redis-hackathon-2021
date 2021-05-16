@@ -53,7 +53,7 @@ The merge is used to make sure no duplicate users are created for a given email 
 
 ### Creating Networks
 
-When a user creates a network, a **netowrk** node is created, and both an **owner** edge and a **member** created between the user and the network.
+When a user creates a network, a **network** node is created, and both an **owner** and a **member** edge is created between the **user** and the **network** nodes.
 
     GRAPH.QUERY THE_NETWORK_GRAPH 
     "MATCH (u:user {email:'emusk@tesla.com'})
@@ -62,13 +62,13 @@ When a user creates a network, a **netowrk** node is created, and both an **owne
     MERGE (u)-[:MEMBER]->(n)
     SET n.image_id = 'image:3261'"
 
-    The image associated with the network is stored in its own key. In the graph, the key is stored as a property on the network.
+The image associated with the network is stored in its own key. In the graph, the key is stored as a property on the network.
     
-    SET image:46 ajsdkjashdkjhaskdjhasd
+    SET image:3261 <b64_encoded_image_data>
 
 ### Joining Networks
 
-When a user joins a network, a **member** edge is created between the **user** node and the **network** node.
+When a user joins a network, a **member** edge is created between the **user** and **network** nodes.
 
     GRAPH.QUERY THE_NETWORK_GRAPH 
     "MATCH (u:user {email:'emusk@tesla.com'})
@@ -88,16 +88,13 @@ When a user lists an item for sale in a network, an **item** node is created and
 
 When an item is created, the image associated with the item is stored in its own key. In the graph, the key is stored as a property on the item.
 
-    SET image:4986 ajsdkjashdkjhaskdjhasd
+    SET image:3261 <b64_encoded_image_data>
 
 ### Making an Offer
 
 When a user makes an offer for a listed item, an **offer** edge is created between the user and the item. The edge has a property for offer status which could be one of the following: `active`, `accepted`, `rejected`. When an **offer** edge is created, the **status** property is initialized to `active`. In the event that an offer is made on a item already having an `accepted` offer, the offer is initialized to `rejected`.
 
-GRAPH.QUERY THE_NETWORK_GRAPH
-"MATCH (i:item {title:'Spare rocket booster'})
-MATCH (u:user {email:'corporatepurchasing@nasa.org'})
-MERGE (u)-[:OFFER {offer:'4500000', time:'2021-05-15 12:00:00.000000'}]->(i)"
+    GRAPH.QUERY THE_NETWORK_GRAPH "MATCH (i:item {title:'Spare rocket booster'})MATCH (u:user {email: 'corporatepurchasing@nasa.org'}) MERGE (u)-[:OFFER {offer:'4500000' time:'2021-05-15 12:00:00.000000'}]->(i)"
 
 ### Accepting an Offer
 
@@ -132,14 +129,9 @@ TODO: Command Details
 
 ### List All Available Networks
 
-The *All Networks* screen shows all networks in a graph.
+The *All Networks* screen shows all network nodes in a graph.
 
-GRAPH.QUERY THE_NETWORK_GRAPH
-"MATCH (n:network)
-MATCH (owner:user)-[:OWNER]->(n)
-OPTIONAL MATCH (u:user {email: 'emusk@tesla.com'})
-OPTIONAL MATCH (u)-[m:MEMBER]->(n)
-RETURN n.name, n.description, owner.email, n.image_id, exists(m)"
+    GRAPH.QUERY THE_NETWORK_GRAPH "MATCH (n:network) MATCH (owner:user)-[:OWNER]->(n) OPTIONAL MATCH (u:user {email: 'emusk@tesla.com'}) OPTIONAL MATCH (u)-[m:MEMBER]->(n) RETURN n.name, n.description, owner.email, n.image_id, exists(m)"
 
 This query returns a list of all networks, with a boolean value representing whether the user is a member of each given network.
 
@@ -153,9 +145,7 @@ TODO: Command Details
 
 The *My Offers* screen shows the properties of any **offer** edge connected to a specified user.
 
-GRAPH.QUERY THE_NETWORK_GRAPH
-"MATCH (:user {email:'emusk@tesla.com'})-[o:OFFER]->(i:item)
-RETURN i.title, o.offer, o.time"
+    GRAPH.QUERY THE_NETWORK_GRAPH "MATCH (:user {email:'emusk@tesla.com'})-[o:OFFER]->(i:item) RETURN i.title, o.offer, o.time"
 
 #### All Item Tags that a User Has Made Offers on (Analytics)
 
@@ -171,16 +161,16 @@ RETURN i.title, o.offer, o.time"
 ## UX and DX
 The following table shows iPhone and Android screenshots for each page in the mobile application. 
 
-|Page |iPhone | Android|
---- | --- | --- 
-|Main Menu|![](./images/menu_iphone.jpg)|![](./images/menu_android.jpg)|
-|All Networks|![](./images/networks_iphone.jpg)|![](./images/networks_android.jpg)|
-|My Networks|![](./images/my_networks_iphone.jpg)|![](./images/my_networks_android.jpg)|
-|My Items|![](./images/items_iphone.jpg)|![](./images/items_android.jpg)|
+|Page |Screen |
+--- | ---  
+|Main Menu|![](./images/menu_iphone.jpg)|
+|All Networks|![](./images/networks_iphone.jpg)
+|My Networks|![](./images/my_networks_iphone.jpg)|
+|My Items|![](./images/items_iphone.jpg)|
 
 ## Installation Instructions
 
-### Prerequisites:
+### Prerequisites
 
 - Must have Docker ([Windows](https://docs.docker.com/docker-for-windows/install/) |  [Ubuntu](https://docs.docker.com/engine/install/ubuntu/))
 
