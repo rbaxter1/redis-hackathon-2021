@@ -108,7 +108,7 @@ When a user accepts an offer on a listed item, the **status** property on the **
 
     GRAPH.QUERY THE_NETWORK_GRAPH
     "MATCH (:user {email:'corporatepurchasing@nasa.org'} )-[goodOffer:OFFER]->(i:item {title:'Spare rocket booster'})
-    MATCH (:user)-[anyOffer:OFFER]->(i})
+    MATCH (:user)-[anyOffer:OFFER]->(i)
     SET anyOffer.status = 'rejected'
     SET goodOffer.status = 'accepted'"
 
