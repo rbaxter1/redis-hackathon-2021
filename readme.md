@@ -106,13 +106,11 @@ When a user makes an offer for a listed item, an **offer** edge is created betwe
 
 When a user accepts an offer on a listed item, the **status** property on the **offer** edge updates to `accepted`. All other offers with a status property of `active` are updated to `rejected`.
 
-TODO: Command Details
-
-### Rejecting an Offer
-
-When a user rejects an offer on a listed item, the **status** property on the **offer** edge updates to `rejected`.
-
-TODO: Command Details
+    GRAPH.QUERY THE_NETWORK_GRAPH
+    "MATCH (:user {email:'corporatepurchasing@nasa.org'} )-[goodOffer:OFFER]->(i:item {title:'Spare rocket booster'})
+    MATCH (:user)-[anyOffer:OFFER]->(i})
+    SET anyOffer.status = 'rejected'
+    SET goodOffer.status = 'accepted'"
 
 ## How the Data is Accessed
 

@@ -205,6 +205,7 @@
         {
             "name": "Boston sports tickets",
             "description": "Buy and sell trips to the next big game in title town",
+            "image": "boston.jpeg",
             "items": [
                 {
                     "title": "Sox vs. TOR 5/20, 2 tickets",
@@ -311,6 +312,7 @@
         {
             "name": "Furniture",
             "description": "Find the perfect \"piece\" to make your house a home",
+            "image": "furniture.jpeg",
             "items": [
                 {
                     "title": "Green armchair",
@@ -373,6 +375,7 @@
             "name": "Art by Amanda",
             "description": "Unique prints and paintings by MMA champion Amanda Nunes",
             "owner_id": "a.nunes@gmail.com",
+            "image": "art.jpeg",
             "items": [
                 {
                     "title": "Self Portrait",
@@ -429,6 +432,7 @@
         {
             "name": "Video games",
             "description": "Games, systems, accessories. Retro, modern, everywhere in between. Come find your next game!",
+            "image": "video-games.jpeg",
             "items": [
                 {
                     "title": "Nintendo 64 full system w/ 2 games",
@@ -500,6 +504,7 @@
         {
             "name": "Kitchen tools",
             "description": "Clean out your cabinets and pick up fun new appliances",
+            "image": "kitchen.jpeg",
             "items": [
                 {
                     "title": "Magic Bullet blender",
@@ -546,11 +551,44 @@
         {
             "name": "Vinyl",
             "description": "Find new-to-you tunes",
-            "items": []
+            "image": "vinyl.jpeg",
+            "items": [
+                {
+                    "title": "Prince - Purple Rain",
+                    "description": "All-time classic, great condition",
+                    "asking_price": "15"
+                },
+                {
+                    "title": "Crosby-Stills-Nash Live in concert",
+                    "description": "Fun listen, sounds great!",
+                    "asking_price": "10"
+                },
+                {
+                    "title": "Business as Usual, by Men at Work",
+                    "description": "Cover and album both in good shape",
+                    "asking_price": "5"
+                },
+                {
+                    "title": "Night Moves by Bob Seager",
+                    "description": "Great listen",
+                    "asking_price": "10"
+                },
+                {
+                    "title": "J. Geils band - Freeze Frame",
+                    "description": "Some awesome tracks on here, in good condition",
+                    "asking_price": "5"
+                },
+                {
+                    "title": "Almond Brothers, Brothers and Sisters",
+                    "description": "Great throwback in great shape",
+                    "asking_price": "5"
+                }
+            ]
         },
         {
             "name": "Vintage clothing",
             "description": "Get some new retro threads!",
+            "image": "vintage.jpeg",
             "items": [
                 {
                     "title": "Bomber jacket, size L",
@@ -607,6 +645,7 @@
         {
             "name": "Designer clothing",
             "description": "Your new favorite piece from your favorite brand",
+            "image": "designer.jpeg",
             "items": [
                 {
                     "title": "Gucci GG belt",
@@ -668,6 +707,7 @@
         {
             "name": "Collectible coins",
             "description": "Add to your collection today!",
+            "image": "coins.jpeg",
             "items": [
                 {
                     "title": "Zimbabwe 100 trillion dollar bill",
@@ -750,7 +790,34 @@
             "name": "Bryce's Hand-Built Bikes",
             "description": "Get a new unique classic ride, fully restored to perfect riding condition by MLB star Bryce Harper",
             "owner_id": "hairflipbryce@gmail.com",
-            "items": []
+            "image": "bicycle.jpeg",
+            "items": [
+                {
+                    "title": "1978 Schwinn Varsity",
+                    "description": "Retro 10 speed, great for getting around town",
+                    "asking_price": "250"
+                },
+                {
+                    "title": "1997 LeMond Alp d'Huez",
+                    "description": "Perfect road bike for a beginner-intermediate cyclist",
+                    "asking_price": "400"
+                },
+                {
+                    "title": "1992 GT Timberline",
+                    "description": "Retro rigid mountain bike adapted with drop bars, ready for gravel riding!",
+                    "asking_price": "350"
+                },
+                {
+                    "title": "1995 Specialized Rockhopper",
+                    "description": "Smaller bike, perfect for commuting and some occasional off-road riding",
+                    "asking_price": "325"
+                },
+                {
+                    "title": "Trek single speed/fixie",
+                    "description": "Flip flop hub so you can change your riding style, ready to rip through the city!",
+                    "asking_price": "200"
+                }
+            ]
         }
     ]
 }

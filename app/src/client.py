@@ -1,7 +1,9 @@
+import base64
 from google.protobuf.json_format import MessageToJson, Parse
 import grpc
 import network_pb2
 import network_pb2_grpc
+import os
 import json
 import random
 
@@ -30,7 +32,16 @@ def SubmitItem(stub, itemDetails, userEmail):
     )
 
 
+def GetImageData(path):
+    image = open(path, 'rb').read()
+    image_data = str(base64.b64encode(image))
+    image_data_str = "data:image/jpeg;base64,{0}".format(
+        image_data[2:-1])
+    return image_data_str.encode('UTF-8')
+
+
 def run(cmd):
+    client_data_path = '../client_data'
     # NOTE(gRPC Python Team): .close() is possible on a channel and should be
     # used in circumstances in which the with statement does not fit the needs
     # of the code.
@@ -60,7 +71,7 @@ def run(cmd):
         elif cmd == "LoadTestData":
             print("Loading test data...")
             data = ''
-            with open('./client_data/client_data.json') as f:
+            with open(f'{client_data_path}/client_data.json') as f:
                 data = json.load(f)
             # create all users
             print("Creating %d users" % len(data['users']))
@@ -68,6 +79,13 @@ def run(cmd):
                 userDetails = Parse(json.dumps(u), network_pb2.UserDetails())
                 stub.CreateUser(
                     network_pb2.CreateUserRequest(user=userDetails))
+
+            # prepare list of item image filenames
+            item_image_filenames = []
+            for root, dirs, files in os.walk(f'{client_data_path}/images/items'):
+                item_image_filenames = list(
+                    filter(lambda f: f.endswith('.jpg'), files))
+
             # create all networks
             print("Creating %d networks" % len(data['networks']))
             for n in data['networks']:
@@ -89,6 +107,11 @@ def run(cmd):
                 newNetwork.name = n['name']
                 newNetwork.description = n['description']
                 newNetwork.owner_id = n['owner_id']
+
+                # Get network image
+                network_image_name = n['image']
+                network_image_path = f'{client_data_path}/images/{network_image_name}'
+                newNetwork.image = GetImageData(network_image_path)
                 CreateNetwork(stub, newNetwork)
 
                 # Add users to network
@@ -103,12 +126,15 @@ def run(cmd):
                     item.network_name = n['name']
                     email = n['owner_id'] if alreadyOwned else (
                         random.choice(users)['email'])
+                    item_image_name = random.choice(item_image_filenames)
+                    item_image_path = f'{client_data_path}/images/items/{item_image_name}'
+                    item.image = GetImageData(item_image_path)
                     SubmitItem(stub, item, email)
 
         # SubmitItemOffer endpoint
         elif cmd == "SubmitItemOffer":
             item = network_pb2.ItemOffer()
-            item.email = 'twoods@gmail.com'
+            item.email = 'serena.w@gmail.com'
             item.title = 'Through the Looking Glass'
             item.offer = 175
 
@@ -132,6 +158,12 @@ def run(cmd):
             response = stub.GetItemsForUser(
                 network_pb2.GetItemsForUserRequest(email='a.nunes@gmail.com')
             )
+            print(MessageToJson(response))
+
+        # AcceptOffer endpoint
+        elif cmd == "AcceptOffer":
+            response = stub.AcceptOffer(network_pb2.AcceptOfferRequest(
+                item_title='Through the Looking Glass', offer_email='twoods@gmail.com'))
             print(MessageToJson(response))
 
         # Test to create user and get user
@@ -239,23 +271,21 @@ def run(cmd):
                 network_pb2.GetOffersMadeByUserRequest(email=userDetails3.email))
             print(MessageToJson(response))
 
-
             response = stub.GetOffersForUserItems(
                 network_pb2.GetOffersForUserItemsRequest(email=userDetails.email))
             print(MessageToJson(response))
 
-
-            response = stub.AcceptOffer(network_pb2.AcceptOfferRequest(item_title=item.title, offer_email=userDetails3.email))
+            response = stub.AcceptOffer(network_pb2.AcceptOfferRequest(
+                item_title=item.title, offer_email=userDetails3.email))
             print(MessageToJson(response))
 
             response = stub.GetOffersMadeByUser(
-            network_pb2.GetOffersMadeByUserRequest(email=userDetails2.email))
+                network_pb2.GetOffersMadeByUserRequest(email=userDetails2.email))
             print(MessageToJson(response))
 
             response = stub.GetOffersMadeByUser(
                 network_pb2.GetOffersMadeByUserRequest(email=userDetails3.email))
             print(MessageToJson(response))
-
 
             response = stub.GetOffersForUserItems(
                 network_pb2.GetOffersForUserItemsRequest(email=userDetails.email))
