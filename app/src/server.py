@@ -275,6 +275,25 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         return response
 
+    def GetOffersForUserItems(self, request, context):
+        email = self.Sanitize(request.email)
+
+        query = """MATCH (:user {email:'%s'})-[:SELLER]->(i:item)
+        MATCH (buyer:user)-[o:OFFER]->(i)
+        RETURN buyer.email, i.title, o.offer, o.time""" % email
+
+        result = self.ExecuteQueryOnNetwork(query)
+        response = network_pb2.GetOffersForUserItemsResponse()
+        for record in result.result_set:
+            itemOffer = network_pb2.ItemOffer()
+            itemOffer.email = record[0]
+            itemOffer.title = record[1]
+            itemOffer.offer = float(record[2])
+            itemOffer.time = record[3]
+            response.offers.append(itemOffer)
+
+        return response
+
     def GetOffersMadeByUser(self, request, context):
         email = self.Sanitize(request.email)
 

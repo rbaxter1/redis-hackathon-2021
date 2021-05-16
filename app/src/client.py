@@ -109,8 +109,8 @@ def run(cmd):
         elif cmd == "SubmitItemOffer":
             item = network_pb2.ItemOffer()
             item.email = 'twoods@gmail.com'
-            item.title = 'Electric kettle'
-            item.offer = 12
+            item.title = 'Through the Looking Glass'
+            item.offer = 175
 
             stub.SubmitItemOffer(
                 network_pb2.SubmitItemOfferRequest(item_offer=item))
@@ -119,6 +119,12 @@ def run(cmd):
         elif cmd == "GetOffersMadeByUser":
             response = stub.GetOffersMadeByUser(
                 network_pb2.GetOffersMadeByUserRequest(email='twoods@gmail.com'))
+            print(MessageToJson(response))
+
+        # GetOffersForUserItems endpoint
+        elif cmd == "GetOffersForUserItems":
+            response = stub.GetOffersForUserItems(
+                network_pb2.GetOffersForUserItemsRequest(email='a.nunes@gmail.com'))
             print(MessageToJson(response))
 
         # Test to create user and get user
