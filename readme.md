@@ -1,6 +1,7 @@
 # The Network
-## A 2021 Redis Hackathon Project
 
+![](./images/the_network_logo.png)
+## A 2021 Redis Hackathon Project
 
 ## Team:
 
@@ -37,7 +38,9 @@ All data for *The Network* is stored in a graph. **Users**, **Networks**, and **
 |User | Network | Member |
 |Item | Tags | Label |
 
-TODO: Screenshot of a graph from RedisInsight
+The following is an actual graph from The Network. The image was generated using RedisInsight.
+
+![](./images/the_network_graph.png)
 
 ### Creating Users
 
@@ -94,7 +97,10 @@ When an item is created, the image associated with the item is stored in its own
 
 When a user makes an offer for a listed item, an **offer** edge is created between the user and the item. The edge has a property for offer status which could be one of the following: `active`, `accepted`, `rejected`. When an **offer** edge is created, the **status** property is initialized to `active`. In the event that an offer is made on a item already having an `accepted` offer, the offer is initialized to `rejected`.
 
-    GRAPH.QUERY THE_NETWORK_GRAPH "MATCH (i:item {title:'Spare rocket booster'})MATCH (u:user {email: 'corporatepurchasing@nasa.org'}) MERGE (u)-[:OFFER {offer:'4500000' time:'2021-05-15 12:00:00.000000'}]->(i)"
+    GRAPH.QUERY THE_NETWORK_GRAPH
+    "MATCH (i:item {title:'Spare rocket booster'})
+    MATCH (u:user {email: 'corporatepurchasing@nasa.org'})
+    MERGE (u)-[:OFFER {offer:'4500000' time:'2021-05-15 12:00:00.000000'}]->(i)"
 
 ### Accepting an Offer
 
@@ -119,7 +125,9 @@ TODO: Command Details
 
 The *Browse Items* screen shows all items for sale in all networks the user is a member.
 
-TODO: Command Details
+    GRAPH.QUERY THE_NETWORK_GRAPH
+    "MATCH (:user {email: '%s'})-[:MEMBER]->(n:network)
+    MATCH (i:item)-[:SALE]->(n) return i.title, i.description, i.asking_price, i.image_id"
 
 ### Find a User's Listed Items
 
@@ -131,21 +139,31 @@ TODO: Command Details
 
 The *All Networks* screen shows all network nodes in a graph.
 
-    GRAPH.QUERY THE_NETWORK_GRAPH "MATCH (n:network) MATCH (owner:user)-[:OWNER]->(n) OPTIONAL MATCH (u:user {email: 'emusk@tesla.com'}) OPTIONAL MATCH (u)-[m:MEMBER]->(n) RETURN n.name, n.description, owner.email, n.image_id, exists(m)"
+    GRAPH.QUERY THE_NETWORK_GRAPH
+    "MATCH (n:network)
+    MATCH (owner:user)-[:OWNER]->(n)
+    OPTIONAL MATCH (u:user {email: 'emusk@tesla.com'})
+    OPTIONAL MATCH (u)-[m:MEMBER]->(n)
+    RETURN n.name, n.description, owner.email, n.image_id, exists(m)"
 
 This query returns a list of all networks, with a boolean value representing whether the user is a member of each given network.
 
-### Find All Offers for Any Item Being Sold by a User
+### Find All Offers for All Items Being Sold by a User
 
 The *Review Offers* screen shows the properties of any **offer** edge for all items for sale by a specified user.
 
-TODO: Command Details
+    GRAPH.QUERY THE_NETWORK_GRAPH
+    "MATCH (:user {email:'emusk@tesla.com'})-[:SELLER]->(i:item)
+    MATCH (buyer:user)-[o:OFFER]->(i)
+    RETURN buyer.email, i.title, o.offer, o.time"
 
 ### Find All Offers Submitted by a User
 
 The *My Offers* screen shows the properties of any **offer** edge connected to a specified user.
 
-    GRAPH.QUERY THE_NETWORK_GRAPH "MATCH (:user {email:'emusk@tesla.com'})-[o:OFFER]->(i:item) RETURN i.title, o.offer, o.time"
+    GRAPH.QUERY THE_NETWORK_GRAPH
+    "MATCH (:user {email:'corporatepurchasing@nasa.org'})-[o:OFFER]->(i:item)
+    RETURN i.title, o.offer, o.time"
 
 #### All Item Tags that a User Has Made Offers on (Analytics)
 
