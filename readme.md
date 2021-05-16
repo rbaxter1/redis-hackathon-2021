@@ -13,7 +13,7 @@
 
 ## What is *The Network*?
 
-*The Network* is a mobile application that enables you to build your own personal buying and selling network for whatever you like. When you meet people you want transact with, tell them to "join my network". Whether your an artist building a distribution network for your creations, or a group of sports fans coordinating ticket sales, *The Network* is a space that makes transacting easy.
+*The Network* is a technology platform that enables you to build your own personal buying and selling network. When you meet people you want transact with, tell them to "join my network". Whether you are an artist building a distribution network for your creations, or a group of sports fans coordinating ticket sales, *The Network* is a space that makes building networks and transacting easy.
 
 ## Use of Redis
 
@@ -21,9 +21,9 @@ This project uses RedisGraph to store and retrieve data. In the setup described 
 
 ## How the data is stored
 
-All data for *The Network* is stored in a graph. Users, networks, and items are nodes. Edges between nodes represent relationships. For example, an edge between two users indicates friendship. An edge between a user and an item indicates listing an items for sale. An edge between a user and a network indicates membership.
+All data for *The Network* is stored in a graph. **Users**, **Networks**, and **Items** are nodes. Edges between nodes represent relationships. For example, an edge between two **Users** indicates friendship. An edge between a **User** and an **Item** indicates a listing for sale. An edge between a **User** and a **Network** indicates membership.
 
-### Overview of Graph Structure:
+### Overview of Graph Structure
 
 **Nodes**:
 - Users, Networks, Items, Tags
