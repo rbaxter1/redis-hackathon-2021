@@ -151,7 +151,6 @@ class Network(network_pb2_grpc.NetworkServicer):
         MERGE (u)-[:MEMBER]->(n)""" % (owner, networkName, desc)
 
         if len(img) > 0:
-            log.info(img)
             image_id = 'image:{0}'.format(str(uuid.uuid4()))
             query += ("""SET n.image_id = '%s'""" % image_id)
             self.GetRedisConnection().set(image_id, img)
@@ -288,8 +287,8 @@ class Network(network_pb2_grpc.NetworkServicer):
         item_title = self.Sanitize(request.item_title)
         offer_email = self.Sanitize(request.offer_email)
 
-        query = """MATCH (:user {email:'%s'} )-[goodOffer:OFFER]->(:item {title:'%s'})
-                   MATCH (:user)-[anyOffer:OFFER]->(:item {title:'%s'})
+        query = """MATCH (:user {email:'%s'} )-[goodOffer:OFFER]->(i:item {title:'%s'})
+                   MATCH (:user)-[anyOffer:OFFER]->(i})
                    SET anyOffer.status = 'rejected'
                    SET goodOffer.status = 'accepted'""" % (offer_email, item_title, item_title)
 
