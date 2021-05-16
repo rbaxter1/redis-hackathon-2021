@@ -5,7 +5,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import PreviewCard from './PreviewCard'
 
 const {GetItemsForUserRequest, GetItemsForUserResponse, GetNetworksForUserRequest, ItemDetails, GetItemsForNetworkRequest} = require('./network_pb.js');
-const {NetworkClient} = require('./network_grpc_web_pb.js');
+const {NetworkClient, NetworkPromiseClient} = require('./network_grpc_web_pb.js');
 
 import globals from './global.js'
 
@@ -127,19 +127,19 @@ const NETWORKDATA = [
 function FetchData({context, network, onUpdate}) {
     useFocusEffect(
         React.useCallback(() => {
-            var server = new NetworkClient('http://localhost:8080');
+            var server = new NetworkPromiseClient('http://localhost:8080');
+            let isActive = true;
 
         if (context === "my networks") {
             var request = new GetNetworksForUserRequest();
             request.setEmail(globals.user);
             console.log("sending req: " + globals.user)
 
-            server.getNetworksForUser(request, {}, (err, response) => {
-                if (err) {
-                    console.log(`Unexpected error for getNetworksForUser: code = ${err.code}` +
-                                `, message = "${err.message}"`);
-                } else {
-                    if (response) {
+            const fetch = async () => {
+                try {
+                    const response = await server.getNetworksForUser(request, {});
+                    
+                    if (isActive) {
                         console.log(response);
                         const list = response.getNetworksList();
                         console.log(list);
@@ -168,28 +168,28 @@ function FetchData({context, network, onUpdate}) {
                         onUpdate(data);
                     }
                 }
-            });
-            // this.setState(() => ({
-            //     data: NETWORKDATA,
-            //     loading: false
-            // }));
+                catch (err) {
+                    console.log(`Unexpected error for getNetworksForUser: code = ${err.code}` + `, message = "${err.message}"`);
+                    
+                }
+            }
+            
+            fetch();
         }
         if (context === "my items") {
             var request = new GetItemsForUserRequest();
             request.setEmail(globals.user);
-    
-            server.getItemsForUser(request, {}, (err, response) => {
-                if (err) {
-                    console.log(`Unexpected error for getItemsForUser: code = ${err.code}` +
-                                `, message = "${err.message}"`);
-                } else {
-                    if (response) {
+
+            const fetch = async () => {
+                try {
+                    const response = await server.getItemsForUser(request, {});
+                    
+                    if (isActive) {
                         console.log(response);
                         const list = response.getItemsList();
                         console.log(list);
 
                         // put items list into data array
-                        //this.setState({data: list})
                         var data = [];
                         for (const it of list) {
                             data.push({
@@ -203,23 +203,23 @@ function FetchData({context, network, onUpdate}) {
                         onUpdate(data);
                     }
                 }
-            });
-            
-            // this.setState(() => ({
-            //     data: ITEMDATA,
-            //     loading: false
-            // }));
+                catch (err) {
+                    console.log(`Unexpected error for getItemsForUser: code = ${err.code}` + `, message = "${err.message}"`);
+                    
+                }
+            }
+
+            fetch();
         }
         if (context === "all networks") {
             var request = new GetNetworksForUserRequest();
             request.setEmail(globals.user);
 
-            server.getNetworksForUser(request, {}, (err, response) => {
-                if (err) {
-                    console.log(`Unexpected error for getNetworksForUser: code = ${err.code}` +
-                                `, message = "${err.message}"`);
-                } else {
-                    if (response) {
+            const fetch = async () => {
+                try {
+                    const response = await server.getNetworksForUser(request, {});
+                    
+                    if (isActive) {
                         console.log(response);
                         const list = response.getNetworksList();
                         console.log(list);
@@ -244,18 +244,23 @@ function FetchData({context, network, onUpdate}) {
                         onUpdate(data);
                     }
                 }
-            });
+                catch (err) {
+                    console.log(`Unexpected error for getNetworksForUser: code = ${err.code}` + `, message = "${err.message}"`);
+                    
+                }
+            }
+
+            fetch();
         }
         if (context === "network items") {
             var request = new GetItemsForNetworkRequest();
             request.setNetworkName(network);
     
-            server.getItemsForNetwork(request, {}, (err, response) => {
-                if (err) {
-                    console.log(`Unexpected error for getItemsForNetwork: code = ${err.code}` +
-                                `, message = "${err.message}"`);
-                } else {
-                    if (response) {
+            const fetch = async () => {
+                try {
+                    const response = await server.getItemsForNetwork(request, {});
+                    
+                    if (isActive) {
                         console.log(response);
                         const list = response.getItemsList();
                         console.log(list);
@@ -279,15 +284,16 @@ function FetchData({context, network, onUpdate}) {
                         onUpdate(data);
                     }
                 }
-            });
+                catch (err) {
+                    console.log(`Unexpected error for getItemsForNetwork: code = ${err.code}` + `, message = "${err.message}"`);
+                    
+                }
+            }
 
-            // this.setState(() => ({
-            //     data: ITEMDATA,
-            //     loading: false
-            // }));
+            fetch();
         }
 
-        return () => {/*can do stuff when we lose focus here*/}
+        return () => { isActive = false }
 
         }, [context, network, onUpdate])
     );
