@@ -288,7 +288,7 @@ class Network(network_pb2_grpc.NetworkServicer):
         offer_email = self.Sanitize(request.offer_email)
 
         query = """MATCH (:user {email:'%s'} )-[goodOffer:OFFER]->(i:item {title:'%s'})
-                   MATCH (:user)-[anyOffer:OFFER]->(i})
+                   MATCH (:user)-[anyOffer:OFFER]->(i)
                    SET anyOffer.status = 'rejected'
                    SET goodOffer.status = 'accepted'""" % (offer_email, item_title)
 
