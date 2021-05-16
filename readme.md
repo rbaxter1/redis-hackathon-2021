@@ -236,7 +236,17 @@ After running `expo start`, you are presented with the following options:
 
 Optional:
 
-The `docker compose up` command you ran in a above starts a RedisInsight server. To use RedisInight, open your favorite web browser and go to http://localhost:8001.
+You can interact with a fresh, clean version of *The Network*, or you can see how it looks as a fully loaded system. A script is available to puplate a set of users, networks, and over 100 items for sale.
+
+    cd app/src
+
+    python client.py
+
+When prompted, enter the following command:
+
+    LoadTestData
+
+The `docker compose up` command you ran above starts a RedisInsight server. To use RedisInight, open your favorite web browser and go to http://localhost:8001.
 
 After accepting the EULA agreement, click the "I already have a database" button. Then "Connect to a Redis Database". In the host field enter `redis`. The port is 6379. Enter anything you like for the name. Click "Add Redis Database"
 
