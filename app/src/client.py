@@ -127,6 +127,13 @@ def run(cmd):
                 network_pb2.GetOffersForUserItemsRequest(email='a.nunes@gmail.com'))
             print(MessageToJson(response))
 
+        # GetItemsForUser endpoint
+        elif cmd == "GetItemsForUser":
+            response = stub.GetItemsForUser(
+                network_pb2.GetItemsForUserRequest(email='a.nunes@gmail.com')
+            )
+            print(MessageToJson(response))
+
         # Test to create user and get user
         elif cmd == "test":
             userDetails = network_pb2.UserDetails()

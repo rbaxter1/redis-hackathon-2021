@@ -205,10 +205,8 @@ class Network(network_pb2_grpc.NetworkServicer):
 
         email = self.Sanitize(request.email)
 
-        query = """MATCH (u:user {email: '%s'})
-        MATCH (i:item)
-        MATCH (u:user)-[:SELLER]->(i)
-        RETURN i.title, i.description, i.asking_price, i.image_id""" % email
+        query = """MATCH (:user {email: '%s'})-[:MEMBER]->(n:network)
+        MATCH (i:item)-[:SALE]->(n) return i.title, i.description, i.asking_price, i.image_id""" % email
 
         result = self.ExecuteQueryOnNetwork(query)
 
@@ -218,7 +216,6 @@ class Network(network_pb2_grpc.NetworkServicer):
             itemDetail.title = record[0]
             itemDetail.description = record[1]
             itemDetail.asking_price = float(record[2])
-
             image_id = record[3]
             if image_id is not None:
                 itemDetail.image = self.GetRedisConnection().get(image_id)
