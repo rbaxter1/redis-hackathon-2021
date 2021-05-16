@@ -187,10 +187,9 @@ The following table shows iPhone and Android screenshots for each page in the mo
 
 |Page |Screen |
 --- | ---  
-|Main Menu|![](./images/menu_iphone.jpg)|
-|All Networks|![](./images/networks_iphone.jpg)
-|My Networks|![](./images/my_networks_iphone.jpg)|
-|My Items|![](./images/items_iphone.jpg)|
+|Main Menu|![](./images/menu.png)|
+|All Networks|![](./images/networks.png)
+|My Networks|![](./images/my_networks.png)|
 
 ## Installation Instructions
 
